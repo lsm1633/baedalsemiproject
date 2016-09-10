@@ -28,5 +28,12 @@
     <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 </div>
 
+<div class="container" role="main">
+</div>
+
+<div>
+    <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
+</div>
+
 </body>
 </html>

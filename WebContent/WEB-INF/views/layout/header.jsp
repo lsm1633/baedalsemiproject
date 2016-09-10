@@ -6,15 +6,15 @@
 	String cp=request.getContextPath();
 %>
 
-<div class="container">
-	<div id ="page-haeder">
-		<div class="header-brand"><a href="<%=cp%>"><span class="logo">배달의 나라</span></a></div>
-		<div class="login header-login">
+<div class ="container">
+	<div class ="page-header">
+		<div align="right" style="margin: 10px">
 			<c:if test="${empty sessionScope.member}">
 				<a href="<%=cp%>/"><span class="glyphicon glyphicon-log-in">로그인</span></a> <i></i>
-				<a href="<%=cp%>/"><span class="glyphicon glyphicon-user"></span>회원가입</a>
-				<a href="<%=cp%>/"><span class="glyphicon glyphicon-bbs"></span>고객센터</a>
+				<a href="<%=cp%>/"><span class="glyphicon glyphicon-user"></span>회원가입 </a> <i></i>
+				<a href="<%=cp%>/"><span class="glyphicon glyphicon-volume-down"></span>고객센터 </a>
 			</c:if>
+		<div class="header-brand" align="center"><a href="<%=cp%>"><span class="logo"><img alt="배달의 나라" src="<%=cp%>/res/images/logo.png"></span></a></div>
 			
 			<c:if test="${not empty sessionScope.member}">
                 <span style="color:green;">${sessionScope.member.userName}</span>님 <i></i>
