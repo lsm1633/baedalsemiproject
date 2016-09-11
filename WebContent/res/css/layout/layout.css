@@ -4,7 +4,8 @@
 #page-header {
 	    margin:10px 0 12px 0;
 	    font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", sans-serif;
-	    min-height: 44px;
+	    min-height: 50px;
+	    line-height: 300px;
 }
 #page-header .header-brand { 
     float:left;
@@ -35,12 +36,26 @@
 	width:1px; height:11px; background: #c0c0c0;
 }
 #page-header .header-search {
-	float:right; position:relative; top:10px; margin:1px 10px 20px 20px; max-width:226px;
+	float:right; 
+	position:relative; 
+	top:10px; 
+	margin:1px 10px 20px 20px; 
+	max-width:500px;
+	height: 40px;
+	line-height: 50px;
+	
 }
 #page-header .header-search * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+#page-header .header-search{
+	text-align: center;
+	color: silver;
+	font-size: 8pt;
+	
 }
 
 
@@ -106,19 +121,30 @@
 }
 
 .body-title {
-    color: #424951;
+    color: #808080;
     padding-bottom: 5px;
     margin: 10px 0 20px 0;
     border-bottom: 1px solid #dddddd;
 }
 .body-title h3{
-	min-width:300px;
+	min-width:567px;
     font-family: "Malgun Gothic", "Nanum Gothic", "Dotum";
     font-weight: bold;
     margin: 0 0 -5px 0;
     padding-bottom: 5px;
     display: inline-block;
-    border-bottom: 3px solid #424951;
+    border-bottom: 3px solid #000000;
+}
+
+.body-menu {
+	max-width:580px;
+	padding-bottom: 5px;
+	margin: 0 0 -5px 0;
+}
+
+.body-menu input {
+	padding-bottom: ;
+	margin: 0 0 -5px 0;
 }
     
 /** Footer **/
