@@ -13,7 +13,7 @@
 				<a href="<%=cp%>/member/login.do"><span class="glyphicon glyphicon-log-in">로그인  </span></a> | <i></i>
 				<a href="<%=cp%>/member/join.do"><span class="glyphicon glyphicon-user"></span>회원가입 </a> | <i></i>
 				<a href="<%=cp%>/"><span class="glyphicon glyphicon-volume-down"></span>고객센터 </a> |
-				<a href="<%=cp%>/"><span class="glyphicon glyphicon-piggy-bank"></span>사장님싸이트 </a>
+				<a href="<%=cp%>/ceo/ceoMain.jsp"><span class="glyphicon glyphicon-piggy-bank"></span>사장님싸이트 </a>
 			</c:if>
 			<c:if test="${not empty sessionScope.member}">
 				<span style="color: green;">${sessionScope.member.userName}</span>님 <i></i>

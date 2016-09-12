@@ -41,6 +41,9 @@
 		<input type="checkbox" name="menu"><img src="<%=cp%>/res/images/jokbal.png" class="img-circle">
 		<input type="checkbox" name="menu"><img src="<%=cp%>/res/images/hansik.jpg" class="img-circle">
 	</div>
+	<div class="body-region">
+		
+	</div>
 </div>
 
 <div>
