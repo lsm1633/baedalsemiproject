@@ -8,9 +8,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap-theme.min.css" type="text/css"/>
+
+<link rel="stylesheet" href="<%=cp%>/res/css/style.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css" type="text/css"/>
+
+<script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
 
 
 <title>배달의 나라_회원가입</title>
@@ -34,7 +39,7 @@
 
 	<div class="container">
 
-	<div class="layoutHeader">
+	<div>
 		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	</div>
 
@@ -129,7 +134,7 @@
 
 	</div>  <!--  -->
 
-	<div class="layoutFooter">
+	<div>
 		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 	</div>
 
