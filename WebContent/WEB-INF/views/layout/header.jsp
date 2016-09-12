@@ -12,7 +12,7 @@
 			<c:if test="${empty sessionScope.member}">
 				<a href="<%=cp%>/"><span class="glyphicon glyphicon-log-in">로그인 | </span></a> <i></i>
 				<a href="<%=cp%>/"><span class="glyphicon glyphicon-user"></span>회원가입 | </a> <i></i>
-				<a href="<%=cp%>/"><span class="glyphicon glyphicon-volume-down"></span>고객센터 </a>
+				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-volume-down"></span>고객센터 </a>
 			</c:if>
 			<c:if test="${not empty sessionScope.member}">
 				<span style="color: green;">${sessionScope.member.userName}</span>님 <i></i>
@@ -22,7 +22,7 @@
 				</c:if>
 				<a href="<%=cp%>/"><span class="glyphicon glyphicon-log-out"></span>
 					로그아웃</a>
-				<a href="<%=cp%>/"><span class="glyphicon glyphicon-bbs"></span>고객센터</a>
+				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-bbs"></span>고객센터</a>
 			</c:if>
 			<div class="header-brand" align="center">
 				<a href="<%=cp%>"> <span class="logo"><img alt="배달의 나라"

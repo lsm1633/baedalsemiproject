@@ -1,4 +1,4 @@
-package com.main;
+package com.qna;
 
 import java.io.IOException;
 
@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.util.MyServlet;
 
-@WebServlet("/main.do")
-public class MainServlet extends MyServlet {
+@WebServlet("/qna/*")
+public class QnaServlet extends MyServlet{
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String uri = req.getRequestURI();
-		
-		if(uri.indexOf("main.do")!=-1) {
+		if(uri.indexOf("qna.do")!=-1) {
 			
-			forward(req, resp, "/WEB-INF/views/main/main.jsp");
+			forward(req, resp, "/WEB-INF/views/qna/qna.jsp");
 		}
 		
-		
 	}
-	
+
 }
