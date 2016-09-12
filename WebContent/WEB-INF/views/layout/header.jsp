@@ -10,8 +10,8 @@
 	<div class="page-header">
 		<div align="right" style="margin: 10px">
 			<c:if test="${empty sessionScope.member}">
-				<a href="<%=cp%>/"><span class="glyphicon glyphicon-log-in">로그인 | </span></a> <i></i>
-				<a href="<%=cp%>/"><span class="glyphicon glyphicon-user"></span>회원가입 | </a> <i></i>
+				<a href="<%=cp%>/member/login.do"><span class="glyphicon glyphicon-log-in">로그인 | </span></a> <i></i>
+				<a href="<%=cp%>/member/join.do"><span class="glyphicon glyphicon-user"></span>회원가입 | </a> <i></i>
 				<a href="<%=cp%>/"><span class="glyphicon glyphicon-volume-down"></span>고객센터 </a>
 			</c:if>
 			<c:if test="${not empty sessionScope.member}">
