@@ -31,7 +31,8 @@
 						alt="Responsive image"></span></a>
 			</div>
 			<div class="row" style="margin: 10px auto;">
-				<div class="col-lg-6 col-md-offset-3">
+				<div class="col-lg-6 col-md-offset-3" align="left">
+					<input>
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="업소명을 검색해주세요">
 						<span class="input-group-btn">
