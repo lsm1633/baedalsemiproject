@@ -6,6 +6,7 @@
 %>
 
 <footer class="bs-docs-footer" role="contentinfo">
+<hr>
     <div class="container">
         <ul class="bs-docs-footer-links text-muted">
             <li><a href="#">배달의 나라 정책 및 약관</a></li>
@@ -23,7 +24,6 @@
             <li><a href="#">가맹문의</a></li>
             <li>&middot;</li>
             <li>© 배달의나라 Corp.</li>
-            
         </ul>
-    </div>        
+    </div>      
 </footer>
