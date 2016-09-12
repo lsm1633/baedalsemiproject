@@ -27,19 +27,16 @@
 <div>
     <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 </div>
+<div class="container">
 
-
-	<ul class="nav nav-tabs">
-  	<li><a href="<%=cp%>/notice/notice.do" data-toggle="tab">공지사항</a></li>
-  	<li><a href="<%=cp%>/freeboard/freeboard.do" data-toggle="tab">자유게시판</a></li>
-  	<li><a href="<%=cp%>/qna/qna.do" data-toggle="tab">질문과답변</a></li>
-  	<li class="active"><a href="<%=cp%>/faq/faq.do" data-toggle="tab">자주묻는질문</a></li>
+	<ul class="nav nav-tabs nav-justified">
+  	<li><a href="<%=cp%>/notice/notice.do">공지사항</a></li>
+  	<li><a href="<%=cp%>/freeboard/freeboard.do">자유게시판</a></li>
+  	<li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li>
+  	<li class="active"><a href="<%=cp%>/faq/faq.do">자주묻는질문</a></li>
 	</ul>
 
 	<div class="tab-content">
-	  <div class="tab-pane" id="notice">공지사항</div>
-	  <div class="tab-pane" id="freeboard">자유게시판</div>
-	  <div class="tab-pane" id="qna">질문과답변</div>
 	  <div class="tab-pane active" id="faq">자주묻는질문</div>
 	</div>
 	
@@ -47,6 +44,6 @@
 <div>
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>
-
+</div>
 </body>
 </html>

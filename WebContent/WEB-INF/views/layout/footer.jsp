@@ -20,7 +20,10 @@
             <li>&middot;</li>
             <li><a href="#">고객센터</a></li>
             <li>&middot;</li>
+            <li><a href="#">가맹문의</a></li>
+            <li>&middot;</li>
             <li>© 배달의나라 Corp.</li>
+            
         </ul>
     </div>        
 </footer>
