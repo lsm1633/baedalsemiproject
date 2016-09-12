@@ -32,13 +32,13 @@
 	<div class="body-title">
 		<h3 align="center">MENU 선택</h3>
 	</div>
-	<div class="body-menu" style="margin: 30px;">
-		<input type="checkbox" name="menu"><img src="<%=cp%>/res/images/chicken.png" class="img-circle">
-		<input type="checkbox" name="menu"><img src="<%=cp%>/res/images/pizza.png" class="img-circle">
-		<input type="checkbox" name="menu"><img src="<%=cp%>/res/images/jungkukzip.png" class="img-circle">
-		<input type="checkbox" name="menu"><img src="<%=cp%>/res/images/bunsik.png" class="img-circle">
-		<input type="checkbox" name="menu"><img src="<%=cp%>/res/images/jokbal.png" class="img-circle">
-		<input type="checkbox" name="menu"><img src="<%=cp%>/res/images/hansik.jpg" class="img-circle">
+	<div class="body-menu" style="margin: 30px;" align="center";>
+		<input type="checkbox" name="menu"> <img src="<%=cp%>/res/images/chicken.png" class="img-circle"> 
+		<input type="checkbox" name="menu"> <img src="<%=cp%>/res/images/pizza.png" class="img-circle"> 
+		<input type="checkbox" name="menu"> <img src="<%=cp%>/res/images/jungkukzip.png" class="img-circle"> 
+		<input type="checkbox" name="menu"> <img src="<%=cp%>/res/images/bunsik.png" class="img-circle"> 
+		<input type="checkbox" name="menu"> <img src="<%=cp%>/res/images/jokbal.png" class="img-circle"> 
+		<input type="checkbox" name="menu"> <img src="<%=cp%>/res/images/hansik.jpg" class="img-circle"> 
 	</div>
 </div>
 
