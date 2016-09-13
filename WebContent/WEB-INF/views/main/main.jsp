@@ -59,14 +59,15 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox" align="center">
 			<div class="item active">
-				<img data-src="<%=cp%>/res/images/banner1.jpg" alt="배너1">
-				<div class="carousel-caption"><img data-src="<%=cp%>/res/images/banner1.jpg" alt="배너1"></div>
+				<img src="<%=cp%>/res/images/banner3.png" alt="배너1">
+				<div class="carousel-caption">
+				</div>
 			</div>
 			<div class="item">
-				<img data-src="<%=cp%>/res/images/banner2.jpg" alt="배너2">
+				<img src="<%=cp%>/res/images/banner4.png" alt="배너2">
 			</div>
 			<div class="item">
-				<img data-src="<%=cp%>/res/images/banner3.jpg" alt="배너3">
+				<img src="<%=cp%>/res/images/banner5.png" alt="배너3">
 			</div>
 		</div>
 
