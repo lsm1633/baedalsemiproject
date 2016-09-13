@@ -82,9 +82,12 @@
 		</a>
 	</div>
 </div>
+	<div style="margin: 120px 30px 30px 100px">
+		<a><img src="<%=cp%>/res/images/game.png"></a>
+	</div>
 
 
-	<div>
+	<div style="clear: both;">
 		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 	</div>
 

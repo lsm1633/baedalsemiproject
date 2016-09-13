@@ -152,7 +152,8 @@
 .main-carousel {
 	width :600px;
 	height : 350px;
-	margin: 150px 30px 30px 300px;
+	margin: 150px 80px 30px 350px;
+	float: left;
 }
 
     
