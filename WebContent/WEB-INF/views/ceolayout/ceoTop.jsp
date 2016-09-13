@@ -39,12 +39,13 @@
 
   <div id="main_header">
     <h1 class="logo">
-      <a href="<%=cp%>/ceomain/ceomain.do"><img src="<%=cp%>/res/images/logo1.JPG" width="250" height="80"/></a>
+      <a href="<%=cp%>/ceomain/ceomain.do"><img src="<%=cp%>/res/images/logo.png" width="250" height="80"/></a>
     </h1>
     <div class="login_menu">
       <span><a href="#">가게관리</a></span> ㅣ
       <span><a href="#">서비스 소개</a></span> ㅣ
       <span><a href="#">주문 내역</a></span> ㅣ
-      <span><a href="<%=cp%>/faq/faq.do">고객 센터</a></span>
+      <span><a href="<%=cp%>">고객 사이트</a></span>
+
     </div>
   </div>

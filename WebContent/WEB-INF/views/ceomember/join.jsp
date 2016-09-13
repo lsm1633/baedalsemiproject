@@ -41,7 +41,7 @@ function setEmail() {
 #category {
 	float: left;
 	width: 200px;
-	height: 755px;
+	height: 905px;
 	background: #DCDCDC;
 	font-size: 13pt;
 	font-weight: 500;
@@ -51,7 +51,7 @@ function setEmail() {
 #item {
 	float: left;
 	width: 200px;
-	height: 770px;
+	height: 900px;
 	font-size: 10pt;
 	font-weight: 500;
 	text-align: center;
@@ -60,14 +60,14 @@ function setEmail() {
 #input {
 	float: left;
 	width: 600px;
-	height: 77px;
+	height: 900px;
 	font-size: 10pt;
 }
 
 #footer {
 	clear: both;
 	width: 1000px;
-	height: 100px;
+	height: 200px;	
 	text-align: center;
 }
 
@@ -77,7 +77,7 @@ function setEmail() {
 }
 
 #myStore {
-	height:200px; line-height: 200px;
+	height:350px; line-height: 350px;
 	margin: 0px; padding: 0px;
 }
 
@@ -151,6 +151,7 @@ select {
 </style>
 </head>
 <body>
+
 <div>
 <dl style="height: 150px">
     <dd>
@@ -167,7 +168,7 @@ select {
 		 	<dl class=row01 style="border-top: 3px solid DarkSlateGrey ;">
 		 		<dd id=personal>사장님 정보</dd>
 		 		<dd id=myStore>내 업소 정보</dd>
-		 		<dd id=accountInfo>계정 정보</dd> 		
+		 		<dd id=accountInfo>계정 정보</dd>
 		 	</dl>
 		</div>
 		
@@ -182,8 +183,11 @@ select {
 		 		<dd style="border-bottom: 1px solid silver;"></dd>
 		 		
 		 		<dd></dd>
+		 		<dd>점포명</dd>
 		 		<dd>사업자 등록번호</dd>
 		 		<dd>사업자 등록증 첨부</dd>
+		 		<dd>점포 전화번호</dd>
+		 		<dd>카테고리</dd>
 		 		<dd style="border-bottom: 1px solid silver;"></dd>
 		 		
 		 		<dd></dd>
@@ -201,7 +205,7 @@ select {
 		 		<dd></dd>
 		 		<dd>
 		 			<%/* 사장성명 */%>	 			
-		 			<input type="text" name="businessName" size="28">		 			
+		 			<input type="text" name="businessmanName" size="28">		 			
 		 		</dd>
 		 				 		
 		 		<dd>
@@ -262,6 +266,12 @@ select {
 		 		
 		 		
 		 		<dd></dd>
+		 		
+		 		<dd>
+		 			<%/* 업소명 */%> 			
+					<input type="text" name="businessName" size="40">&nbsp;
+				</dd>
+		 		
 		 		<dd>
 		 			<%/* 사업자등록번호 */%> 			
 					<input type="text" name="businessNum" size="40">&nbsp;
@@ -274,6 +284,22 @@ select {
 		 			<input type="text" name="licenceUpload" size="40">&nbsp;
 					<input type="button" name="check_bNum" class="chBtn" value=" 첨부하기 ">
 				</dd>
+				
+				<dd>
+		 			<%/* 점포 전화번호 */%> 			
+					<input type="text" name="businessPhonenum" size="40">&nbsp;
+				</dd>
+		 		
+		 		<dd>
+		 			<%/* 카테고리 */%>
+		 			<select name="bcategory">
+		 				<option value="" selected="selected">선택&nbsp;&nbsp;</option>
+		 				<option value="중식">중식</option>
+		 				<option value="치킨">치킨</option>
+		 				<option value="분식">분식</option>
+		 				<option value="피자">피자</option>	 			
+		 			</select>
+		 		</dd>
 		 		
 		 		<dd style="border-bottom: 1px solid silver;"></dd>
 		 		
@@ -315,7 +341,6 @@ select {
     </dd>
   </dl>
 </div>
-
 
 
 </body>
