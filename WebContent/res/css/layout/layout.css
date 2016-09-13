@@ -139,14 +139,20 @@
 	max-width: 1100px;
 	padding-bottom: 5px;
 	margin: 30px auto;
-	align="center";
+	
 }
 
 .body-menu dd {
 	min-width:250px;
 	padding-bottom: 5px;
-	margin: 20px 35px 20px;	
+	margin: 50px 35px 20px;	
 	float: left;
+}
+
+.main-carousel {
+	width :600px;
+	height : 400px;
+	margin: 150px 30px 30px 300px;
 }
 
     
