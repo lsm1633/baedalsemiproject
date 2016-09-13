@@ -138,15 +138,15 @@
 .body-menu {
 	max-width: 1100px;
 	padding-bottom: 5px;
-	margin: 0 0 -5px 0;
-	
+	margin: 30px auto;
+	align="center";
 }
 
-.body-menu input {
-	min-width:80px;
+.body-menu dd {
+	min-width:250px;
 	padding-bottom: 5px;
-	margin: 30px auto;	
-	text-align: center;
+	margin: 20px 35px 20px;	
+	float: left;
 }
 
     
