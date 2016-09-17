@@ -47,7 +47,7 @@
 		</div>
 	</div>
 	
-	<div class = "main-carousel">
+	<div class = "main-carousel" align="center">
 	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
@@ -82,7 +82,7 @@
 		</a>
 	</div>
 </div>
-	<div style="margin: 120px 30px 30px 100px">
+	<div style="margin: 120px auto 30px" align="center">
 		<a><img src="<%=cp%>/res/images/game.png"></a>
 	</div>
 

@@ -76,6 +76,7 @@
 										<td class="text-center">2016-09-16</td>
 										<td class="text-center">1</td>
 										<td class="text-center">첨부파일</td>
+								</tr>
 								</tbody>
 							</table>
 						</div>
@@ -101,9 +102,7 @@
 	        		    		 </form>
 	        				</div>
 	        				<div style="float: left; width: 20%; min-width: 85px; text-align: right;">
-	        		   			 <c:if test="${sessionScope.member.userId=='admin'}">
 	        		        <button type="button" class="btn btn-primary btn-sm bbtn" onclick="javascript:location.href='<%=cp%>/notice/created.do';"><span class="glyphicon glyphicon glyphicon-pencil"></span> 글쓰기</button>
-	        		   			 </c:if>
 	        			</div>
 					</div>
 				</div>
@@ -113,6 +112,7 @@
 		<div>
 			<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 		</div>
+	</div>
 	</div>
 
 
