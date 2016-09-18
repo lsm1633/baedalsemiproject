@@ -129,7 +129,9 @@ function deleteNotice(num) {
 	                              <c:if test="${not empty preReadDto }">
 	                              	<a href="<%=cp%>/notice/article.do?${params}&num=${preReadDto.num}">${preReadDto.subject}</a>
 	                              </c:if>
+	                              <c:if test="${! not empty preReadDto }">
 	                             	 등록된 게시물이 없습니다.
+	                              </c:if>
 	                         </td>
 	                     </tr>
 	                     <tr>
@@ -138,7 +140,9 @@ function deleteNotice(num) {
 	                              <c:if test="${not empty nextReadDto }">
 								      <a href="<%=cp%>/notice/article.do?${params}&num=${nextReadDto.num}">${nextReadDto.subject}</a>
 							       </c:if>
-							     	등록된 게시물이 없습니다.
+							     <c:if test="${! not empty nextReadDto }">
+	                             	 등록된 게시물이 없습니다.
+	                              </c:if>
 	                         </td>
 	                     </tr>                                          
 	                </tbody>
