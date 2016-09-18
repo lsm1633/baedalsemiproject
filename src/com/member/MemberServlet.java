@@ -55,6 +55,7 @@ public class MemberServlet extends MyServlet{
 	        	return;
 	        	
 	        }
+	        System.out.println("왜안되지?");
 	        
 	        StringBuffer sb = new StringBuffer();
 	        sb.append("<b>"+dto.getUserName()+"</b>님 회원가입이 완료되었습니다.<br>");

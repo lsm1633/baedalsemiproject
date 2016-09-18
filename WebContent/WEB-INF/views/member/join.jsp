@@ -8,6 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <link rel="stylesheet" href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
 <link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap.min.css" type="text/css"/>
 <link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap-theme.min.css" type="text/css"/>
@@ -103,6 +104,8 @@ function memberOk(){
     var mode="${mode}";
     if(mode == "created"){
     	f.action = "<%=cp%>/member/join_ok.do";
+    }else if(mode == "update"){
+    	f.action = "<%=cp%>/member/update_ok.do";
     }
     
     f.submit();
@@ -147,8 +150,10 @@ function memberOk(){
 			<div class="form-group">
 				<label for="InputId"> ID </label>
 				<div class="input-group">
-					<input type="text" class="form-control" id="userId"
-						placeholder="ID를 입력해 주세요" > <span class="input-group-btn">
+					<input type="text" class="form-control" id="userId" name="userId"
+						placeholder="ID를 입력해 주세요"
+						value="${dto.userId}" ${mode=="update" ? "readonly='readonly' style='border:none;'":"" }>
+					<span class="input-group-btn">
 						<button class="btn btn-success">
 							중복확인<i class="fa fa-mail-forward spaceLeft"></i>
 						</button>
@@ -215,19 +220,16 @@ function memberOk(){
 				</div>
 			</div>
 			<div class="form-group text-center">
-				<button type="submit" class="btn btn-info" onclick="memberOk();">
-					회원가입<i class="fa fa-check spaceLeft"></i>
-				</button>
-				<button type="submit" class="btn btn-warning" onclick="javascript:location.href='<%=cp%>';">
-					가입취소<i class="fa fa-times spaceLeft"></i>
-				</button>
-			</div>
-			<div class="form-group text-center">
 				<c:if test="${mode=='created'}">
-				<input type="button" value=" 회원가입  " class ="btn btn-info" onclick="memberOk();">
+					<input type="button" value=" 회원가입  " class ="btn btn-info" onclick="memberOk();">
+					<input type="reset" value=" 다시입력  "  class="btn" onclick="document.memberForm.userId">
+					<input type="button" value=" 가입취소  " class ="btn btn-warning" onclick="javascript:location.href='<%=cp%>/';">
 				</c:if>
 				<c:if test="${mode=='update'}">
-				<input type="button" value=" 정보수정 " class="btn" onclick="memberOk();"/>
+					<input type="hidden" name="enabled" value="${dto.enabled}">
+					<input type="button" value=" 정보수정 " class="btn btn-info" onclick="memberOk();"/>
+					<input type="reset" value=" 다시입력 " class="btn" onclick="document.memberForm.userId"/>
+					<input type="button" value=" 수정취소  " class ="btn btn-warning" onclick="javascript:location.href='<%=cp%>/';">
 				</c:if>
 			</div>
 			

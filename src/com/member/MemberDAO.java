@@ -30,6 +30,7 @@ public class MemberDAO {
 	        pstmt.close();
 	        pstmt=null;
 	        
+	        
 	        //member2 테이블 입력
 	        sb = new StringBuffer();      //스트링 버퍼 초기화
 			sb.append("INSERT INTO member2(userId, email, tel, addr1, addr2)");
