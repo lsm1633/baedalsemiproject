@@ -21,8 +21,7 @@
 <link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css"
 	type="text/css" />
 
-<script type="text/javascript"
-	src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
 
 </head>
 <body>
@@ -52,7 +51,7 @@
 					
 					<div>
 						<div style="clear: both; height: 25px; line-height: 25px">
-							<div style="float: left;">데이터 개수(현재페이지/전체페이지)</div>
+							<div style="float: left;">${dataCount}개(${page}/${total_page} 페이지)</div>
 							<div style="float: right;">&nbsp;</div>
 						</div>
 						
@@ -69,20 +68,50 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="text-center">1</td>
-										<td>테스트</td>
-										<td class="text-center">홍길동</td>
-										<td class="text-center">2016-09-16</td>
-										<td class="text-center">1</td>
-										<td class="text-center">첨부파일</td>
-								</tr>
+					<c:forEach var="dto" items="${listNotice}">
+	                    <tr>
+                            <td class="text-center"><span style="display: inline-block;width: 28px;height:18px;line-height:18px; background: #ED4C00;color: #FFFFFF">공지</span></td>
+                            <td><a href="${articleUrl}&num=${dto.num}">${dto.subject}</a></td>
+                            <td class="text-center">${dto.userName}</td>
+                            <td class="text-center">${dto.created}</td>
+                            <td class="text-center">${dto.hitCount}</td>
+							<td class="text-center">
+							      <c:if test="${not empty dto.saveFilename}">
+							          <a href="<%=cp%>/notice/download.do?num=${dto.num}"><img src="<%=cp%>/res/images/disk.gif" border="0" style="margin-top: 1px;"></a>
+							      </c:if>
+                            </td>
+	                    </tr>
+    			  </c:forEach>
+    			  <c:forEach var="dto" items="${list}">
+						<tr>
+							<td class="text-center">${dto.listNum}</td>
+							<td>
+								<a href="${articleUrl}&num=${dto.num}">${dto.subject}</a>
+									<c:if test="${dto.gap < 1}">
+										<img alt="" src="<%=cp%>/res/images/new.gif">
+									</c:if>
+							</td>
+							<td class="text-center">${dto.userName}</td>
+							<td class="text-center">${dto.created}</td>
+							<td class="text-center">${dto.hitCount}</td>
+							<td class="text-center">
+								<c:if test="${not empty dto.saveFilename}">
+							         	 <a href="<%=cp%>/notice/download.do?num=${dto.num}"><img src="<%=cp%>/res/images/disk.gif" border="0" style="margin-top: 1px;"></a>
+								</c:if>
+							</td>
+						</tr>
+    			  </c:forEach>
 								</tbody>
 							</table>
 						</div>
 						
 						<div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
-							1 2 3 .. 
+							<c:if test="${dataCount==0 }">
+			                  	 등록된 게시물이 없습니다.
+			        		</c:if>
+			       			<c:if test="${dataCount!=0 }">
+			             	  ${paging}
+			        		</c:if>
 						</div>
 						
 						 <div style="clear: both;">
@@ -102,7 +131,9 @@
 	        		    		 </form>
 	        				</div>
 	        				<div style="float: left; width: 20%; min-width: 85px; text-align: right;">
-	        		        <button type="button" class="btn btn-primary btn-sm bbtn" onclick="javascript:location.href='<%=cp%>/notice/created.do';"><span class="glyphicon glyphicon glyphicon-pencil"></span> 글쓰기</button>
+	        				 <c:if test="${sessionScope.member.userId=='admin'}">
+	        		        	<button type="button" class="btn btn-primary btn-sm bbtn" onclick="javascript:location.href='<%=cp%>/notice/created.do';"><span class="glyphicon glyphicon glyphicon-pencil"></span> 글쓰기</button>
+	        				 </c:if>
 	        			</div>
 					</div>
 				</div>

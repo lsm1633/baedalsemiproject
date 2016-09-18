@@ -22,8 +22,7 @@
 					<a href="<%=cp%>/admin/main.do">관리자</a>
 					<i></i>
 				</c:if>
-				<a href="<%=cp%>/"><span class="glyphicon glyphicon-log-out"></span>
-					로그아웃</a>
+				<a href="<%=cp%>/member/logout.do"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a>
 				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-bbs"></span>고객센터</a>
 			</c:if>
 			<div class="header-brand" align="center">

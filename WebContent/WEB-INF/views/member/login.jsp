@@ -22,6 +22,28 @@
 <link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css" type="text/css"/>
 
 <script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+function sendLogin(){
+	var f = document.loginForm;
+	
+	var str = f.userId.value;
+    if(!str) {
+        alert("아이디를 입력하세요. ");
+        f.userId.focus();
+        return;
+    }
+
+    str = f.userPwd.value;
+    if(!str) {
+        alert("패스워드를 입력하세요. ");
+        f.userPwd.focus();
+        return;
+    }
+
+    f.action = "<%=cp%>/member/login_ok.do";
+    f.submit();
+}
+</script>
 </head>
 <body>
 
@@ -37,22 +59,22 @@
 			</div>
 			<div class="col-md-5 col-md-offset-3">
 				<div class="login-box well">
-					<form accept-charset="UTF-8" role="form" method="post" action="">
+					<form name="loginForm" accept-charset="UTF-8" role="form" method="post" action="">
 						<legend>로그인</legend>
 						<div class="form-group">
-							<label for="username-email">아이디</label> <input name="user_id"
-								value='' id="username-email" placeholder="UserId" type="text"
+							<label for="username-email">아이디</label> <input name="userId"
+								value='' id="userId" placeholder="UserId" type="text"
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<label for="password">비밀번호</label> <input name="password"
-								id="password" value='' placeholder="Password" type="password"
+							<label for="password">비밀번호</label> <input name="userPwd"
+								id="userPwd" value='' placeholder="Password" type="password"
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<input type="submit"
+							<input type="button"
 								class="btn btn-default btn-login-submit btn-block m-t-md"
-								value="Login" />
+								value="Login" onclick="sendLogin();"/>
 						</div>
 						<div class="form-group">
 						<span class='text-center'>
