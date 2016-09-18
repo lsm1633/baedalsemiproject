@@ -207,6 +207,50 @@ public class NoticeServlet extends MyServlet{
 			}
 			dao.insertNotice(dto);
 			resp.sendRedirect(cp+"/notice/notice.do");
+		} else if(uri.indexOf("article.do") != -1) {
+			// 글보기
+			
+			int num = Integer.parseInt(req.getParameter("num"));
+			String page = req.getParameter("page");
+			
+			String searchKey = req.getParameter("searchKey");
+			String searchValue = req.getParameter("searchValue");
+			if(searchKey==null) {
+				searchKey="subject";
+				searchValue="";
+			}
+			searchValue=URLDecoder.decode(searchValue, "utf-8");
+			
+			// 조회수 증가
+			dao.updateHitCount(num);
+			
+			// 게시물 가져오기
+			NoticeDTO dto = dao.readNotice(num);
+			if(dto==null) {
+				resp.sendRedirect(cp+"/notice/notice.do?page=" + page);
+				return;
+			}
+			
+			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+			
+			// 이전, 다음글
+			NoticeDTO preReadDTO = dao.preReadNotice(dto.getNum(), searchKey, searchValue);
+			NoticeDTO nextReadDTO = dao.nextReadNotice(dto.getNum(), searchKey, searchValue);
+			
+			String params = "page=" + page;
+			if(searchValue.length() != 0) {
+				params+="&searchKey="+searchKey;
+				params+="&searchValue="+URLEncoder.encode(searchValue, "utf-8");
+			}
+			
+			// 전송값 포워딩
+			req.setAttribute("dto", dto);
+			req.setAttribute("preReadDto", preReadDTO);
+			req.setAttribute("nextReadDto", nextReadDTO);
+			req.setAttribute("params", params);
+			req.setAttribute("page", page);
+			
+			forward(req, resp, "/WEB-INF/views/notice/article.jsp");		
 		}
 		
 		

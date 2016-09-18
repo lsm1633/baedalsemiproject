@@ -258,4 +258,169 @@ List<NoticeDTO> list = new ArrayList<>();
 		return dto;
 	}
 	
+	//이전 글
+	public NoticeDTO preReadNotice(int num, String searchKey, String searchValue){
+		NoticeDTO dto = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuffer sb = new StringBuffer();
+		
+		try {
+			if(searchValue.length() != 0) {
+				sb.append("SELECT ROWNUM, tb.* FROM ( ");
+				sb.append("		SELECT num, subject From notice n ");
+				sb.append("		JOIN member1 m ON n.userId = m.userId ");
+				 if(searchKey.equalsIgnoreCase("created"))
+	                sb.append("     WHERE (TO_CHAR(created, 'YYYY-MM-DD') = ?)  ");
+	             else
+	                sb.append("     WHERE (INSTR(" + searchKey + ", ?) >= 1)  ");
+				 sb.append("			AND(num > ?)");
+				 sb.append("			ORDER BY num ASC ");
+				 sb.append("		) tb WHERE ROWNUM=1 ");
+				 
+				 pstmt=conn.prepareStatement(sb.toString());
+				 pstmt.setString(1, searchValue);
+				 pstmt.setInt(2, num);
+			} else {
+				sb.append("SELECT ROWNUM, tb.* FROM ( ");
+                sb.append("     SELECT num, subject FROM notice n JOIN member1 m ON n.userId=m.userId ");                
+                sb.append("     WHERE num > ? ");
+                sb.append("         ORDER BY num ASC ");
+                sb.append("      ) tb WHERE ROWNUM=1 ");
+
+                pstmt=conn.prepareStatement(sb.toString());
+                pstmt.setInt(1, num);
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new NoticeDTO();
+				dto.setNum(rs.getInt("num"));
+				dto.setSubject(rs.getString("subject"));
+			}
+			rs.close();
+			pstmt.close();
+			rs = null;
+			pstmt = null;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return dto;
+	}
+	
+	 // 다음글
+    public NoticeDTO nextReadNotice(int num, String searchKey, String searchValue) {
+    	NoticeDTO dto=null;
+
+        PreparedStatement pstmt=null;
+        ResultSet rs=null;
+        StringBuffer sb = new StringBuffer();
+
+        try {
+            if(searchValue.length() != 0) {
+                sb.append("SELECT ROWNUM, tb.* FROM ( ");
+                sb.append("     SELECT num, subject FROM notice n JOIN member1 m ON n.userId=m.userId ");
+                if(searchKey.equalsIgnoreCase("created"))
+                	sb.append("     WHERE (TO_CHAR(created, 'YYYY-MM-DD') = ?)  ");
+                else
+                	sb.append("     WHERE (INSTR(" + searchKey + ", ?) >= 1)  ");
+                sb.append("         AND (num < ? ) ");
+                sb.append("         ORDER BY num DESC ");
+                sb.append("      ) tb WHERE ROWNUM=1 ");
+
+                pstmt=conn.prepareStatement(sb.toString());
+                pstmt.setString(1, searchValue);
+                pstmt.setInt(2, num);
+			} else {
+                sb.append("SELECT ROWNUM, tb.* FROM ( ");
+                sb.append("     SELECT num, subject FROM notice n JOIN member1 m ON n.userId=m.userId ");
+                sb.append("     WHERE num < ? ");
+                sb.append("         ORDER BY num DESC ");
+                sb.append("      ) tb WHERE ROWNUM=1 ");
+
+                pstmt=conn.prepareStatement(sb.toString());
+                pstmt.setInt(1, num);
+			}
+
+            rs=pstmt.executeQuery();
+
+            if(rs.next()) {
+                dto=new NoticeDTO();
+                dto.setNum(rs.getInt("num"));
+                dto.setSubject(rs.getString("subject"));
+            }
+            rs.close();
+            pstmt.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return dto;
+    }
+    
+    public int updateHitCount(int num) {
+    	int result = 0;
+    	PreparedStatement pstmt = null;
+    	String sql;
+    	
+    	try { 
+    		sql = "UPDATE notice SET hitCount = hitCount+1 WHERE num = ?";
+    		
+    		pstmt = conn.prepareStatement(sql);
+    		pstmt.setInt(1, num);
+    		result = pstmt.executeUpdate();
+    		
+    		pstmt.close();
+    	} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+    	return result;
+    }
+    
+    public int updateNotice(NoticeDTO dto) {
+    	int result = 0;
+    	PreparedStatement pstmt = null;
+    	String sql;
+    	
+    	try {
+			sql = "UPDATE notice SET notice = ?, subejct = ?, content = ?, saveFilename = ?, originalFilename = ?, filesize = ? ";
+			sql += " WHERE num = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNotice());
+			pstmt.setString(2, dto.getSubject());
+			pstmt.setString(3, dto.getContent());
+			pstmt.setString(4, dto.getSaveFilename());
+			pstmt.setString(5, dto.getOriginalFilename());
+			pstmt.setLong(6, dto.getFilesize());
+			pstmt.setInt(7, dto.getNum());
+			result = pstmt.executeUpdate();
+			
+			pstmt.close();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+    	return result;
+    }
+    
+    public int deleteNotice(int num) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		try {
+			sql="DELETE FROM notice WHERE num = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			result = pstmt.executeUpdate();
+			
+			pstmt.close();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
 }

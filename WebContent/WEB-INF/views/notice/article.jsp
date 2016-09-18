@@ -51,6 +51,17 @@
 </style>
 
 <script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+<c:if test="${sessionScope.member.userId=='admin'}">
+function deleteNotice(num) {
+	if(confirm("게시물을 삭제 하시겠습니까 ?")) {
+		var url="<%=cp%>/notice/delete.do?num="+num;
+		url+="&page=${page}";
+		location.href=url;
+	}
+}
+</c:if>
+</script>
 
 </head>
 <body>
@@ -59,16 +70,25 @@
     <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 </div>
 
-<div class="container" role="main">
-    <div class="bodyFrame col-sm-10"  style="float:none; margin-left: auto; margin-right: auto;">
-
-	    <div class="body-title">
-	          <h3><span class="glyphicon glyphicon-book"></span> 게시판 </h3>
-	    </div>
-	    
-	    <div class="alert alert-info">
-	        <i class="glyphicon glyphicon-info-sign"></i> 회원과 자유로이 토론할 수 있는 공간입니다.
-	    </div>
+<div class="container">
+		<ul class="nav nav-tabs nav-justified">
+			<li class="active"><a href="<%=cp%>/notice/notice.do"
+				data-toggle="tab">공지사항</a></li>
+			<li><a href="<%=cp%>/freeboard/freeboard.do" data-toggle="tab">자유게시판</a></li>
+			<li><a href="<%=cp%>/qna/qna.do" data-toggle="tab">질문과답변</a></li>
+			<li><a href="<%=cp%>/faq/faq.do" data-toggle="tab">자주묻는질문</a></li>
+		</ul>
+		
+		<div class="tab-content">
+			<div class="tab-pane active" id="notice">
+				<div class="bodyFrame col-sm-10" style="float: none; margin: 30px auto;">
+					<div class="body-title">
+						<h3><span class="glyphicon glyphicon-book"></span>공지사항</h3>
+					</div>
+					
+					<div class="alert alert-info">
+						<i class="glyphicon glyphicon-pencil"> 배달의 나라의 중요한 이벤트와 공지사항을 확인 하세요!!</i>
+					</div>
 	    
 	    <div class="table-responsive" style="clear: both;">
 	        <div class="bbs-article">
@@ -76,57 +96,73 @@
 	                 <thead>
 	                     <tr>
 	                         <th colspan="2" style="text-align: center;">
-	                                 제목..
+	                              	${dto.subject}
 	                         </th>
 	                     </tr>
-	                <thead>
+	                </thead>
 	                 <tbody>
 	                     <tr>
 	                         <td style="text-align: left;">
-	                             이름 : 홍길동
+	                             	이름 : ${dto.userName }
 	                         </td>
 	                         <td style="text-align: right;">
-	                          2015-02-02 10:10 <i></i>조회 : 100
+	                          ${dto.created } <i></i>조회 : ${dto.hitCount }
 	                         </td>
 	                     </tr>
 	                     <tr>
 	                         <td colspan="2" style="height: 230px;">
-	                              내용 ...
+	                        	      ${dto.content }
 	                         </td>
 	                     </tr>
 	                     <tr>
 	                      <td colspan="2">
 		                        <span style="display: inline-block; min-width: 45px;">첨부</span> :
+		                        <c:if test="${not empty dto.saveFilename }">
+		                        	<a href="<%=cp %>/notice/download.do?num=${dto.num}">${dto.originalFilename}</a>
+		                        	
+		                        </c:if>
 		                  </td>
 		               </tr>
 	                     <tr>
 	                         <td colspan="2">
 	                              <span style="display: inline-block; min-width: 45px;">이전글</span> :
-	                              작업중
+	                              <c:if test="${not empty preReadDto }">
+	                              	<a href="<%=cp%>/notice/article.do?${params}&num=${preReadDto.num}">${preReadDto.subject}</a>
+	                              </c:if>
+	                             	 등록된 게시물이 없습니다.
 	                         </td>
 	                     </tr>
 	                     <tr>
 	                         <td colspan="2" style="border-bottom: #d5d5d5 solid 1px;">
 	                              <span style="display: inline-block; min-width: 45px;">다음글</span> :
-	                              작업중
+	                              <c:if test="${not empty nextReadDto }">
+								      <a href="<%=cp%>/notice/article.do?${params}&num=${nextReadDto.num}">${nextReadDto.subject}</a>
+							       </c:if>
+							     	등록된 게시물이 없습니다.
 	                         </td>
 	                     </tr>                                          
 	                </tbody>
 	                <tfoot>
 	                	<tr>
 	                		<td>
-	                		    <button type="button" class="btn btn-default btn-sm wbtn">수정</button>
-	                		    <button type="button" class="btn btn-default btn-sm wbtn">삭제</button>
+	                		    <c:if test="${sessionScope.member.userId==dto.userId}">		                		
+	                		        <button type="button" class="btn btn-default btn-sm wbtn"
+	                		                    onclick="javascript:location.href='<%=cp%>/notice/update.do?num=${dto.num}&page=${page}';">수정</button>
+	                		    </c:if>
+		                        <c:if test="${sessionScope.member.userId==dto.userId || sessionScope.member.userId=='admin'}">    
+	                		        <button type="button" class="btn btn-default btn-sm wbtn" onclick="deleteNotice('${dto.num}');">삭제</button>
+	                		    </c:if>
 	                		</td>
 	                		<td align="right">
-	                		    <button type="button" class="btn btn-default btn-sm wbtn"> 목록으로 </button>
+	                		    <button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/notice/notice.do?${params}';"> 목록으로 </button>
 	                		</td>
 	                	</tr>
 	                </tfoot>
 	            </table>
 	       </div>
 	   </div>
-
+	</div>
+	</div>	
     </div>
 </div>
 
