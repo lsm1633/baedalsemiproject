@@ -179,7 +179,7 @@ function updateBoard() {
 	                		        <button type="button" class="btn btn-default btn-sm wbtn"
 	                		                    onclick="javascript:location.href='<%=cp%>/freeboard/update.do?boardNum=${dto.boardNum}&page=${page}';">수정</button>
 	                		    </c:if> 
-	                		        <button type="button" class="btn btn-default btn-sm wbtn" onclick="deleteNotice('${dto.boardNum}');">삭제</button>
+	                		        <button type="button" class="btn btn-default btn-sm wbtn" onclick="deleteBoard('${dto.boardNum}');">삭제</button>
 	                		</td>
 	                		<td align="right">
 	                		    <button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/freeboard/freeboard.do?${params}';"> 목록으로 </button>
