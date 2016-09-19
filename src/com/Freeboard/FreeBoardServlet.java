@@ -12,9 +12,11 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-/*import javax.servlet.http.HttpSession;*/
 
-/*import com.member.SessionInfo;*/
+import javax.servlet.http.HttpSession;
+
+import com.member.SessionInfo;
+
 import com.util.MyServlet;
 import com.util.MyUtil;
 
@@ -26,12 +28,12 @@ public class FreeBoardServlet extends MyServlet {
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		
-		/*HttpSession session=req.getSession();
+		HttpSession session=req.getSession();
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		if(info==null) {
 			forward(req, resp, "/WEB-INF/views/member/login.jsp");
 			return;
-		}*/
+		}
 		
 		String uri=req.getRequestURI();
 		String cp=req.getContextPath();
@@ -96,14 +98,11 @@ public class FreeBoardServlet extends MyServlet {
 				try {
 					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Date beginDate = formatter.parse(dto.getCreated());
-	/*            
+	            
 	            	// 날짜차이(일)
 	            	gap=(endDate.getTime() - beginDate.getTime()) / (24 * 60 * 60* 1000);
 	            	dto.setGap(gap);
-	*/
-					// 날짜차이(시간)
-					gap=(endDate.getTime() - beginDate.getTime()) / (60*60* 1000);
-					dto.setGap(gap);
+	
 				}catch(Exception e) {
 				}
 	            
@@ -148,7 +147,7 @@ public class FreeBoardServlet extends MyServlet {
 			// 글 저장
 			FreeBoardDTO dto=new FreeBoardDTO();
 			
-			/*dto.setUserId(info.getUserId());*/
+			dto.setUserId(info.getUserId());
 			dto.setSubject(req.getParameter("subject"));
 			dto.setContent(req.getParameter("content"));
 			
@@ -229,7 +228,7 @@ public class FreeBoardServlet extends MyServlet {
 		} else if(uri.indexOf("reply_ok.do")!=-1) {
 			// 답변 완료
 			FreeBoardDTO dto=new FreeBoardDTO();
-			/*dto.setUserId(info.getUserId());*/
+			dto.setUserId(info.getUserId());
 			dto.setSubject(req.getParameter("subject"));
 			dto.setContent(req.getParameter("content"));
 			dto.setGroupNum(Integer.parseInt(req.getParameter("groupNum")));
@@ -256,10 +255,10 @@ public class FreeBoardServlet extends MyServlet {
 			}
 			
 			// 게시물을 올린 사용자가 아니면
-			/*if(! dto.getUserId().equals(info.getUserId())) {
-				resp.sendRedirect(cp+"/board/list.do?page="+page);
+			if(! dto.getUserId().equals(info.getUserId())) {
+				resp.sendRedirect(cp+"/freeboard/freeboard.do?page="+page);
 				return;
-			}*/
+			}
 			
 			req.setAttribute("dto", dto);
 			req.setAttribute("page", page);
@@ -296,10 +295,10 @@ public class FreeBoardServlet extends MyServlet {
 			}
 			
 			// 게시물을 올린 사용자나 admin이 아니면
-			/*if(! dto.getUserId().equals(info.getUserId()) && ! info.getUserId().equals("admin")) {
+			if(! dto.getUserId().equals(info.getUserId()) && ! info.getUserId().equals("admin")) {
 				resp.sendRedirect(cp+"/board/list.do?page="+page);
 				return;
-			}*/
+			}
 			
 			dao.deleteBoard(boardNum);
 			resp.sendRedirect(cp+"/freeboard/freeboard.do?page="+page);

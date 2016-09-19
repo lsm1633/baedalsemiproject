@@ -13,9 +13,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>배달의 나라</title>
-<style>
-@import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
-</style>
+
 <script type="text/javascript">
 function deleteBoard() {
 <c:if test="${sessionScope.member.userId=='admin' || sessionScope.member.userId==dto.userId}">
@@ -56,6 +54,38 @@ function updateBoard() {
 
 <script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
 
+<style type="text/css">
+.bbs-article .table {
+    margin-top: 15px;
+}
+.bbs-article .table thead tr, .bbs-article .table tbody tr {
+    height: 30px;
+}
+.bbs-article .table thead tr th, .bbs-article .table tbody tr td {
+    font-weight: normal;
+    border-top: none;
+    border-bottom: none;
+}
+.bbs-article .table thead tr {
+    border-top: #d5d5d5 solid 1px;
+    border-bottom: #dfdfdf solid 1px;
+} 
+.bbs-article .table tbody tr {
+    border-bottom: #dfdfdf solid 1px;
+}
+.bbs-article .table i {
+    background: #424951;
+    display: inline-block;
+    margin: 0 7px 0 7px;
+    position: relative;
+    top: 2px;
+    width: 1px;
+    height: 13px;    
+}
+</style>
+
+
+
 </head>
 <body>
 <div>
@@ -72,100 +102,103 @@ function updateBoard() {
 
 	<div class="tab-content">
 	  <div class="tab-pane active" id="freeboard">
-	      <div style="min-height: 450px;">
-				<div style="width:100%;	height: 40px; line-height:40px;clear: both;">
-				    <div style="width:600px; height:30px; line-height:30px; margin:5px auto;">
-				        <img src="<%=cp%>/res/images/board.jpg" width="50px" alt="" style="padding-left: 5px; padding-right: 5px;">
-				        <span style="font-weight: bold;font-size:13pt;font-family: 'Jeju Hallasan', serif;">자유 게시판</span>
-				    </div>
+	      <div class="bodyFrame col-sm-10" style="float: none; margin: 30px auto;">
+	         
+	        <div class="body-title">
+						<h3><span class="glyphicon glyphicon-book"></span>자유 게시판</h3>
 				</div>
 				
-				<div style="margin: 10px auto; margin-top: 20px; width:600px; min-height: 400px;">
-					<table style="width: 600px; margin: 0px auto; border-spacing: 0px;">
-					<tr><td colspan="4" height="3" bgcolor="#507CD1"></td></tr>
-					
-					<tr height="35">
-					    <td colspan="4" align="center">
+				<div class="alert alert-info">
+						<i class="glyphicon glyphicon-pencil"> 욕설은 삼가해주세요!!</i>
+				</div>
+				
+				
+				<div class="table-responsive" style="clear: both;">
+				   <div class="bbs-article">
+				   			
+					<table class="table">
+					  <thead>
+					   <tr>
+					    <th colspan="2" style="text-align: center;">
 						     <c:if test="${dto.depth!=0}">
 	                              [Re]
 	                         </c:if>
 	                         ${dto.subject}
+					    </th>
+					 </tr>
+					</thead>
+				
+				
+				
+					<tbody>
+					<tr>
+					    <td style="text-align: left;">
+					                이름 : ${dto.userName}
 					    </td>
+					    <td style="text-align: right;">
+	                          ${dto.created } <i></i>조회 : ${dto.hitCount }
+	                     </td>
 					</tr>
-					<tr><td colspan="4" height="1" bgcolor="#507CD1" ></td></tr>
+					<tr>
+	                         <td colspan="2" style="height: 230px;">
+	                        	      ${dto.content }
+	                         </td>
+	                </tr>
 					
-					<tr height="30">
-					    <td width="80" bgcolor="#EEEEEE" align="center">작성자</td>
-					    <td width="220" align="left" style="padding-left:10px;">
-					         ${dto.userName}
-					    </td>
-					    <td width="80" height="30" bgcolor="#EEEEEE" align="center">줄&nbsp;&nbsp;수</td>
-					    <td width="220" align="left" style="padding-left:10px;">
-					         ${linesu}
-					     </td>
-					</tr>
-					<tr><td colspan="4" height="1" bgcolor="#DBDBDB"></td></tr>
-					
-					<tr height="30" >
-					    <td width="80" bgcolor="#EEEEEE" align="center">등록일</td>
-					    <td width="220" align="left" style="padding-left:10px;">
-					        ${dto.created}
-					    </td>
-					    <td width="80" bgcolor="#EEEEEE" align="center">조회수</td>
-					    <td width="220" align="left" style="padding-left:10px;">
-					        ${dto.hitCount}
-					    </td>
-					</tr>
-					<tr><td colspan="4" height="1" bgcolor="#507CD1"></td></tr>
 					
 					<tr>
-					  <td colspan="4" align="left" style="padding: 15px 30px 15px 30px;" valign="top" height="150">
-					       ${dto.content}
-					   </td>
-					</tr>
-					<tr><td colspan="4" height="1" bgcolor="#507CD1"></td></tr>
+	                       <td colspan="2">
+	                            <span style="display: inline-block; min-width: 45px;">이전글</span> :
+	                            <c:if test="${not empty preReadDto }">
+	                            	<a href="<%=cp%>/freeboard/article.do?${params}&boardNum=${preReadDto.boardNum}">${preReadDto.subject}</a>
+	                            </c:if>
+	                            <c:if test="${! not empty preReadDto }">
+	                           	 등록된 게시물이 없습니다.
+	                            </c:if>
+	                       </td>
+	                </tr>
+								
+					<tr>
+	                      <td colspan="2" style="border-bottom: #d5d5d5 solid 1px;">
+	                           <span style="display: inline-block; min-width: 45px;">다음글</span> :
+	                           <c:if test="${not empty nextReadDto }">
+								   <a href="<%=cp%>/freeboard/article.do?${params}&boardNum=${nextReadDto.boardNum}">${nextReadDto.subject}</a>
+							    </c:if>
+							  <c:if test="${! not empty nextReadDto }">
+	                          	 등록된 게시물이 없습니다.
+	                           </c:if>
+	                      </td>
+	                 </tr>
+					</tbody>
 					
-					<tr height="30">
-					    <td width="80" bgcolor="#EEEEEE" align="center">이전글</td>
-					    <td width="520" align="left" style="padding-left:10px;" colspan="3">
-							<c:if test="${not empty preReadDto }">
-								   <a href="<%=cp%>/board/article.do?${params}&boardNum=${preReadDto.boardNum}">${preReadDto.subject}</a>
-							 </c:if>		
-						</td>
-					</tr>
-					<tr><td colspan="4" height="1" bgcolor="#DBDBDB"></td></tr>
 					
-					<tr height="30">
-					    <td width="80" bgcolor="#EEEEEE" align="center">다음글</td>
-					    <td width="520" align="left" style="padding-left:10px;" colspan="3">
-							<c:if test="${not empty nextReadDto }">
-							     <a href="<%=cp%>/board/article.do?${params}&boardNum=${nextReadDto.boardNum}">${nextReadDto.subject}</a>
-							</c:if>
-					    </td>
-					</tr>
-					<tr><td colspan="4" height="3" bgcolor="#507CD1" align="center"></td></tr>
-					</table>
-					
-					<table style="width: 600px; margin: 0px auto; border-spacing: 0px;">
-					<tr height="35">
-					    <td width="50%" align="left">
-					          <input type="image" src="<%=cp%>/res/images/btn_reply.gif" onclick="javascript:location.href='<%=cp%>/board/reply.do?boardNum=${dto.boardNum}&page=${page}';">
-					          
-					          <c:if test="${sessionScope.member.userId==dto.userId}">
-					              <input type="image" src="<%=cp%>/res/images/btn_modify.gif" onclick="updateBoard();">
-					          </c:if>
-					          <c:if test="${sessionScope.member.userId==dto.userId || sessionScope.member.userId=='admin'}">
-					              <input type="image" src="<%=cp%>/res/images/btn_delete.gif" onclick="deleteBoard();">
-					          </c:if>
-					    </td>
-					
-					    <td align="right">
-					           <input type="image"  src="<%=cp%>/res/images/btn_list.gif" onclick="javascript:location.href='<%=cp%>/board/list.do?${params}';">
-					    </td>
-					</tr>
-					</table>
+					<tfoot>
+	                	<tr>
+	                		<td>
+	                		    <c:if test="${sessionScope.member.userId==dto.userId}">		                		
+	                		        <button type="button" class="btn btn-default btn-sm wbtn"
+	                		                    onclick="javascript:location.href='<%=cp%>/freeboard/update.do?boardNum=${dto.boardNum}&page=${page}';">수정</button>
+	                		    </c:if> 
+	                		        <button type="button" class="btn btn-default btn-sm wbtn" onclick="deleteNotice('${dto.boardNum}');">삭제</button>
+	                		</td>
+	                		<td align="right">
+	                		    <button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/freeboard/freeboard.do?${params}';"> 목록으로 </button>
+	                		</td>
+	                	</tr>
+	                </tfoot>
 		
+					
+					
+					
+					</table>
+					
+				
+		       </div>
 				</div>
+				
+				
+				
+				
 		</div>
 	  
 	  </div>

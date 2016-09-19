@@ -71,15 +71,23 @@
 
 	<div class="tab-content">
 	  <div class="tab-pane active" id="freeboard">
-	      <div style="min-height: 450px;">
-			<div style="width:100%;	height: 40px; line-height:40px;clear: both;">
-				    <div style="width:600px; height:30px; line-height:30px; margin:5px auto;">
-				        <img src="<%=cp%>/res/images/board.jpg" width="50px" alt="" style="padding-left: 5px; padding-right: 5px;">
-				        <span style="font-weight: bold;font-size:13pt;font-family: 'Jeju Hallasan', serif;">자유 게시판</span>
-				    </div>
+	      <div class="bodyFrame col-sm-10" style="float: none; margin: 30px auto;">
+	      
+	         <div class="body-title">
+						<h3><span class="glyphicon glyphicon-book"></span>자유 게시판</h3>
+				</div>
+				
+				<div class="alert alert-info">
+						<i class="glyphicon glyphicon-pencil"> 욕설은 삼가해주세요!!</i>
 				</div>
 			
-				<div style="margin: 10px auto; margin-top: 20px; width:600px; min-height: 400px;">
+			
+			
+			
+			
+				<div>
+										
+			
 		
 					<form name="boardForm" method="post" onsubmit="return check();">
 					  <table style="width: 600px; margin: 0px auto; border-spacing: 0px;">
@@ -114,7 +122,7 @@
 					     <tr height="45"> 
 					      <td align="center" >
 						    <input type="image" src="<%=cp%>/res/images/btn_submit.gif" >
-		        		    <a href="javascript:location.href='<%=cp%>/board/list.do';"><img src="<%=cp%>/res/images/btn_cancel.gif" border="0"></a>
+		        		    <a href="javascript:location.href='<%=cp%>/freeboard/freeboard.do';"><img src="<%=cp%>/res/images/btn_cancel.gif" border="0"></a>
 		        		    
 		        		    <c:if test="${mode=='update'}">
 		        		          <input type="hidden" name="boardNum" value="${dto.boardNum}">
