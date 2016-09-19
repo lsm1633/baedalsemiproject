@@ -95,14 +95,14 @@ public class NoticeDAO {
 		
 		try {
 			sb.append("SELECT * FROM (");
-			sb.append("	SELECT ROWNUM rnum, tb.* FROM (	");
-			sb.append("		SELECT num, n.userId, userName, ");
-			sb.append("			subject, TO_CHAR(created, 'YYYY-MM-DD') created, hitCount, saveFilename ");
-			sb.append("			FROM notice n");
-			sb.append("			JOIN member1 m ON n.userId=m.userId");
-			sb.append("			ORDER BY num DESC");
-			sb.append("		) tb WHERE ROWNUM <= ? ");
-			sb.append(" ) WHERE rnum >= ?");
+			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
+			sb.append("        SELECT num, n.userId, userName");
+			sb.append("            ,subject, saveFilename,  hitCount");
+			sb.append("            ,created");
+			sb.append("         FROM notice  n JOIN member1 m ON n.userId=m.userId");
+			sb.append("	       ORDER BY num DESC");
+			sb.append("    ) tb WHERE ROWNUM <= ? ");
+			sb.append(") WHERE rnum >= ? ");
 			
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, end);
@@ -139,21 +139,19 @@ List<NoticeDTO> list = new ArrayList<>();
         StringBuffer sb = new StringBuffer();
         
         try {
-			sb.append("SELECT * FROM (");
-			sb.append("	SELECT ROWNUM rnum, tb.* FROM (	");
-			sb.append("		SELECT num, n.userId, userName, ");
-			sb.append("			subject, TO_CHAR(created, 'YYYY-MM-DD') created, hitCount, saveFilename ");
-			sb.append("			FROM notice n");
-			sb.append("			JOIN member1 m ON n.userId=m.userId");
-			if(searchKey.equals("created"))
-				sb.append("		WHERE TO_CHAR(created, 'YYYY-MM-DD') = ?");
-			else if(searchKey.equals("userName"))
-				sb.append("		WHERE INSTR(userName, ?) = 1");
+        	sb.append("SELECT * FROM (");
+			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
+			sb.append("        SELECT num, n.userId, userName");
+			sb.append("            ,subject, saveFilename,  hitCount");
+			sb.append("            ,created");
+			sb.append("         FROM notice  n JOIN member1 m ON n.userId=m.userId");
+			if(searchKey.equalsIgnoreCase("created"))
+				sb.append("           WHERE TO_CHAR(created, 'YYYY-MM-DD') = ? ");
 			else
-				sb.append("		WHERE INSTR(" + searchKey + ", ?) >= 1 ");
-			sb.append("			ORDER BY num DESC");
-			sb.append("		) tb WHERE ROWNUM <= ? ");
-			sb.append(" ) WHERE rnum >= ?");
+				sb.append("           WHERE INSTR(" + searchKey + ", ?) >= 1 ");
+			sb.append("	       ORDER BY num DESC");
+			sb.append("    ) tb WHERE ROWNUM <= ?");
+			sb.append(") WHERE rnum >= ?");
 			
 			pstmt = conn.prepareStatement(sb.toString());
 			

@@ -91,9 +91,9 @@ function searchList() {
 						<tr>
 							<td class="text-center">${dto.listNum}</td>
 							<td>
-								<a href="${articleUrl}&num=${dto.num}">${dto.subject}</a>
-									<c:if test="${dto.gap < 1}">
-										<img alt="" src="<%=cp%>/res/images/new.gif">
+								<a href='${articleUrl}&num=${dto.num}'>${dto.subject}</a>
+									<c:if test='${dto.gap < 1}'>
+										<img src='<%=cp%>/res/images/new.gif'>
 									</c:if>
 							</td>
 							<td class="text-center">${dto.userName}</td>
