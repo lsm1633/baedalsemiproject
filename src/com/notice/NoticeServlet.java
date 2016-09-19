@@ -251,6 +251,46 @@ public class NoticeServlet extends MyServlet{
 			req.setAttribute("page", page);
 			
 			forward(req, resp, "/WEB-INF/views/notice/article.jsp");		
+		} else if(uri.indexOf("update.do") != -1) {
+			// 수정 폼
+			if(info==null) {
+				resp.sendRedirect(cp+"/member.login.do");
+				return;
+			}
+			
+			String page = req.getParameter("page");
+			int num = Integer.parseInt(req.getParameter("num"));
+			
+			NoticeDTO dto = dao.readNotice(num);
+			if(dto==null) {
+				resp.sendRedirect(cp + "/notice/notice.do?page=" + page);
+				return;
+			}
+			
+			// 관리자만 수정
+			if( ! info.getUserId().equals(dto.getUserId())) {
+				resp.sendRedirect(cp + "notice/notice.do?=page" + page);
+				return;
+			}
+			
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			
+			req.setAttribute("mode", "update");
+			forward(req, resp, "/WEB-INF/views/notice/created/jsp");
+		} else if(uri.indexOf("update_ok.do") != -1) {
+			// 수정 완료
+			if(info==null) {
+				resp.sendRedirect(cp+"/member/login.do");
+				return;
+			}
+			
+			String encType = "utf-8";
+			int maxFilesize = 10*1024*1024;
+			
+			MultipartRequest mreq = new MultipartRequest(req, pathname,
+						maxFilesize, encType, new DefaultFileRenamePolicy());
+			NoticeDTO dto = new NoticeDTO();
 		}
 		
 		

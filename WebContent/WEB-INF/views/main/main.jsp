@@ -82,7 +82,7 @@
 		</a>
 	</div>
 </div>
-	<div style="margin: 120px auto 30px" align="center">
+	<div style="margin: 120px auto  30px" align="center">
 		<a><img src="<%=cp%>/res/images/game.png"></a>
 	</div>
 
