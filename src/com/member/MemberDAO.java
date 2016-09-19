@@ -56,6 +56,36 @@ public class MemberDAO {
 		return result;		//1을 return하면 회원가입폼 정상작성.
 	}
 	
+	//아이디 중복체크
+	public int idChk(String userId){
+		PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    
+	    int check = 0;
+	    
+	    String sql=null;
+	    
+	    try {
+			sql = "SELECT COUNT(userId) as cnt FROM member1 WHERE userId=?";
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+		    rs = pstmt.executeQuery();
+		    
+		    if(rs.next()==true){
+		    	check = rs.getInt("cnt");
+		    }
+		    
+		    rs.close();
+			pstmt.close();
+		    
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	    
+	    return check;
+	}
+	
 	//정보를 가져옴.
 	 public MemberDTO readMember(String userId){
 		 MemberDTO dto = null;

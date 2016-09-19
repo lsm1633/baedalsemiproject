@@ -55,7 +55,6 @@ public class MemberServlet extends MyServlet{
 	        	return;
 	        	
 	        }
-	        System.out.println("왜안되지?");
 	        
 	        StringBuffer sb = new StringBuffer();
 	        sb.append("<b>"+dto.getUserName()+"</b>님 회원가입이 완료되었습니다.<br>");
@@ -67,6 +66,21 @@ public class MemberServlet extends MyServlet{
 	        forward(req, resp, "/WEB-INF/views/member/complete.jsp");
 	        
 	        
+	    }
+	    else if(uri.indexOf("chkId_ok.do")!=-1){
+	    	//아이디중복체크
+	    	String userId = req.getParameter("userId");
+	    	
+	    	int chk = dao.idChk(userId);
+	    	if(chk == 1)
+	    		req.setAttribute("msg","해당아이디는 사용하실 수 없습니다. 다른아이디를 입력해주세요");
+	    	else
+	    		req.setAttribute("msg","해당아이디는 사용가능합니다.");
+	    	
+	    	req.setAttribute("title", "회원가입");
+        	req.setAttribute("mode", "created");
+	    	forward(req, resp, "/WEB-INF/views/member/join.jsp");
+	    	
 	    }
 	    else if(uri.indexOf("login.do")!=-1) {
 	          forward(req, resp, "/WEB-INF/views/member/login.jsp");
@@ -101,6 +115,7 @@ public class MemberServlet extends MyServlet{
 	          resp.sendRedirect(cp+"/");
 	          
 	     }
+	    
 	}
 
 }

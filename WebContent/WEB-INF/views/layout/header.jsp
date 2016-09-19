@@ -17,12 +17,13 @@
 
 			</c:if>
 			<c:if test="${not empty sessionScope.member}">
-				<span style="color: green;">${sessionScope.member.userName}</span>님 <i></i>
+				<span style="color: green;">${sessionScope.member.userName}</span>님 | <i></i>
 				<c:if test="${sessionScope.member.userId=='admin'}">
-					<a href="<%=cp%>/admin/main.do">관리자</a>
+					<a href="<%=cp%>/admin/main.do">관리자</a> | <i></i>
 					<i></i>
 				</c:if>
-				<a href="<%=cp%>/member/logout.do"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a>
+				<a href="<%=cp%>"><span class="glyphicon glyphicon-hand-right"></span>정보수정 </a> | <i></i>
+				<a href="<%=cp%>/member/logout.do"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a> | <i></i>
 				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-bbs"></span>고객센터</a>
 			</c:if>
 			<div class="header-brand" align="center">
