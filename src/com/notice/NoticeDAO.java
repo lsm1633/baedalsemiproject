@@ -383,7 +383,7 @@ List<NoticeDTO> list = new ArrayList<>();
     	String sql;
     	
     	try {
-			sql = "UPDATE notice SET notice = ?, subejct = ?, content = ?, saveFilename = ?, originalFilename = ?, filesize = ? ";
+			sql = "UPDATE notice SET notice = ?, subject = ?, content = ?, saveFilename = ?, originalFilename = ?, filesize = ? ";
 			sql += " WHERE num = ?";
 			
 			pstmt = conn.prepareStatement(sql);

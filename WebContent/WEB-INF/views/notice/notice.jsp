@@ -18,11 +18,16 @@
 <link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap-theme.min.css" type="text/css" />
 
 <link rel="stylesheet" href="<%=cp%>/res/css/style.css" type="text/css" />
-<link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css"
-	type="text/css" />
+<link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css" type="text/css" />
 
 <script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
-
+<script type="text/javascript">
+function searchList() {
+		var f = document.searchForm;
+		f.action = "<%=cp %>/notice/notice.do";
+		f.submit();
+	}
+</script>
 </head>
 <body>
 	<div>
@@ -96,7 +101,7 @@
 							<td class="text-center">${dto.hitCount}</td>
 							<td class="text-center">
 								<c:if test="${not empty dto.saveFilename}">
-							         	 <a href="<%=cp%>/notice/download.do?num=${dto.num}"><img src="<%=cp%>/res/images/disk.gif" border="0" style="margin-top: 1px;"></a>
+									<a href="<%=cp%>/notice/download.do?num=${dto.num}"><img src="<%=cp%>/res/images/disk.gif" border="0" style="margin-top: 1px;"></a>
 								</c:if>
 							</td>
 						</tr>

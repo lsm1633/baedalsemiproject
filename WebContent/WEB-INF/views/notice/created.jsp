@@ -48,7 +48,7 @@
         return true;
     }
 <c:if test="${mode='update'}" >
-	function delteFile(num) {
+	function deleteFile(num) {
 		var url="<%=cp%>/notice/deleteFile.do?num="+num+"&page=${page}";
 		location.href=url;
 	}
@@ -109,7 +109,7 @@
 					  <tr align="left" height="40" style="border-bottom: 1px solid #ccc"> 
 					      <td width="100" bgcolor="#EEEEEE" style="text-align: center;">작 성 자</td>
 					      <td width="300" style="padding-left:10px;"> 
-						       관리자
+					      ${sessionScope.member.userName}
 					      </td>
 					  </tr>
 					  <tr align="left" height="40">
@@ -137,17 +137,37 @@
 		                      <input type="file" name="upload" class="boxTF" size="61" style="height: 35px;">			           
 					       </td>
 					  </tr> 
+					  
+					  <c:if test="${mode=='update'}">
+		                    <tr> 
+		                        <td class="td1">첨부된파일</td>
+		                        <td colspan="3" class="td3"> 
+		                            <c:if test="${not empty dto.saveFilename}">
+		                                ${dto.originalFilename}
+		                                | <a href="javascript:deleteFile('${dto.num}');">삭제</a>
+		                            </c:if>	        
+		                        </td>
+		                    </tr>
+		         	 </c:if>	
+		         	 
+		         	  <tfoot>
+	                        <tr>
+	                            <td colspan="4" style="text-align: center; padding-top: 15px;">
+	                                  <button type="submit" class="btn btn-primary"> 확인 <span class="glyphicon glyphicon-ok"></span></button>
+	                                  <button type="button" class="btn btn-danger" onclick="javascript:location.href='<%=cp%>/notice/notice.do';"> 취소 </button>
+	                                  
+	                                  <c:if test="${mode=='update'}">
+	                                      <input type="hidden" name="num" value="${dto.num}">
+	                                      <input type="hidden" name="filesize" value="${dto.filesize}">
+	                                      <input type="hidden" name="saveFilename" value="${dto.saveFilename}">
+	                                      <input type="hidden" name="originalFilename" value="${dto.originalFilename}">
+	                                      <input type="hidden" name="page" value="${page}">
+	                                  </c:if>
+	                            </td>
+	                        </tr>
+	                    </tfoot>	
 
 					  <tr><td colspan="2" height="3" bgcolor="#507CD1"></td></tr>
-					  </table>
-					
-					  <table style="width: 600px; margin: 0px auto; border-spacing: 0px;">
-					     <tr height="45"> 
-					      <td align="center">
-						    <input type="image" src="<%=cp%>/res/images/btn_submit.gif">
-		        		    <a href="javascript:location.href='<%=cp%>/';"><img src="<%=cp%>/res/images/btn_cancel.gif" border="0"></a>
-					      </td>
-					    </tr>
 					  </table>
 					</form>
 				</div>

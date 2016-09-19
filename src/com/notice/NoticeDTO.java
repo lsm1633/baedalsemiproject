@@ -79,10 +79,6 @@ public class NoticeDTO {
 	public void setCreated(String created) {
 		this.created = created;
 	}
-	
-	public void setFilesize(int filesize) {
-		this.filesize = filesize;
-	}
 	public int getHitCount() {
 		return hitCount;
 	}

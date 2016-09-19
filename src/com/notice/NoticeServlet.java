@@ -2,6 +2,7 @@ package com.notice;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import com.member.SessionInfo;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.util.FileManager;
 import com.util.MyServlet;
 import com.util.MyUtil;
 
@@ -29,8 +31,8 @@ public class NoticeServlet extends MyServlet{
 	@Override
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		String uri = req.getRequestURI();
-		String cp = req.getContextPath();
+		NoticeDAO dao = new NoticeDAO();
+		MyUtil util = new MyUtil();
 		
 		// 로그인 정보
 		HttpSession session = req.getSession();
@@ -39,13 +41,14 @@ public class NoticeServlet extends MyServlet{
 		// 파일저장경로 설정
 		String root = session.getServletContext().getRealPath("/");
 		String pathname = root+File.separator+"uploads"+File.separator+"notice";
+		
 		File f = new File(pathname);
 		if(! f.exists()) {
 			f.mkdirs();
 		}
 		
-		NoticeDAO dao = new NoticeDAO();
-		MyUtil util = new MyUtil();
+		String uri = req.getRequestURI();
+		String cp = req.getContextPath();
 		
 		if(uri.indexOf("notice.do")!=-1) {
 			// 게시물 리스트
@@ -269,7 +272,7 @@ public class NoticeServlet extends MyServlet{
 			
 			// 관리자만 수정
 			if( ! info.getUserId().equals(dto.getUserId())) {
-				resp.sendRedirect(cp + "notice/notice.do?=page" + page);
+				resp.sendRedirect(cp + "/notice/notice.do?=page" + page);
 				return;
 			}
 			
@@ -277,7 +280,7 @@ public class NoticeServlet extends MyServlet{
 			req.setAttribute("page", page);
 			
 			req.setAttribute("mode", "update");
-			forward(req, resp, "/WEB-INF/views/notice/created/jsp");
+			forward(req, resp, "/WEB-INF/views/notice/created.jsp");
 		} else if(uri.indexOf("update_ok.do") != -1) {
 			// 수정 완료
 			if(info==null) {
@@ -291,6 +294,105 @@ public class NoticeServlet extends MyServlet{
 			MultipartRequest mreq = new MultipartRequest(req, pathname,
 						maxFilesize, encType, new DefaultFileRenamePolicy());
 			NoticeDTO dto = new NoticeDTO();
+			
+			int num = Integer.parseInt(mreq.getParameter("num"));
+			String page=mreq.getParameter("page");
+			
+
+			dto.setNum(num);
+		    if(mreq.getParameter("notice")!=null)
+		    	dto.setNotice(Integer.parseInt(mreq.getParameter("notice")));
+			dto.setSubject(mreq.getParameter("subject"));
+			dto.setContent(mreq.getParameter("content"));
+			dto.setSaveFilename(mreq.getParameter("saveFilename"));
+			dto.setOriginalFilename(mreq.getParameter("originalFilename"));
+			dto.setFilesize(Long.parseLong(mreq.getParameter("filesize")));
+
+			if(mreq.getFile("upload")!=null) {
+				// 기존 파일 삭제
+				FileManager.doFiledelete(pathname, mreq.getParameter("saveFilename"));
+				
+		    	dto.setSaveFilename(mreq.getFilesystemName("upload"));
+		    	dto.setOriginalFilename(mreq.getOriginalFileName("upload"));
+			    dto.setFilesize(mreq.getFile("upload").length());
+			}
+			
+			dao.updateNotice(dto);
+			
+			resp.sendRedirect(cp+"/notice/notice.do?page="+page);
+		} else if(uri.indexOf("deleteFile.do")!=-1) {
+			int num  = Integer.parseInt(req.getParameter("num"));
+			String page = req.getParameter("page");
+			
+			NoticeDTO dto = dao.readNotice(num);
+			if(dto==null) {
+				resp.sendRedirect(cp+"/notice/list.do?page="+page);
+				return;
+			}
+			if(info==null || ! info.getUserId().equals(dto.getUserId())) {
+				resp.sendRedirect(cp+"/notice/notice.do?page="+page);
+				return;
+			}
+			
+			FileManager.doFiledelete(pathname, dto.getSaveFilename());
+			dto.setOriginalFilename("");
+			dto.setSaveFilename("");
+			dto.setFilesize(0);
+			
+			dao.updateNotice(dto);
+			
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			
+			req.setAttribute("mode", "update");
+			
+			forward(req, resp, "/WEB-INF/views/notice/created.jsp");	
+		} else if(uri.indexOf("delete.do")!=-1) {
+			// 삭제
+			if(info==null) {
+				resp.sendRedirect(cp+"/member/login.do");
+				return;
+			}
+			
+			int num=Integer.parseInt(req.getParameter("num"));
+			String page=req.getParameter("page");
+			
+			NoticeDTO dto=dao.readNotice(num);
+			if(dto==null) {
+				resp.sendRedirect(cp+"/notice/list.do?page="+page);
+				return;
+			}
+			
+			// 글을 등록한 사람, admin 만 삭제 가능
+			if(! info.getUserId().equals(dto.getUserId()) && ! info.getUserId().equals("admin")) {
+					resp.sendRedirect(cp+"/notice/list.do?page="+page);
+					return;
+			}
+			
+			if(dto.getSaveFilename()!=null && dto.getSaveFilename().length()!=0)
+				   FileManager.doFiledelete(pathname, dto.getSaveFilename());
+				
+				dao.deleteNotice(num);
+				
+				resp.sendRedirect(cp+"/notice/notice.do?page="+page);
+		} else if (uri.indexOf("download.do")!=-1) {
+			// 파일 다운로드
+			int num = Integer.parseInt(req.getParameter("num"));
+			NoticeDTO dto = dao.readNotice(num);
+			
+			if(dto!=null) {
+				boolean b = FileManager.doFiledownload(dto.getSaveFilename(), dto.getOriginalFilename(), pathname, resp);
+				
+				if(b)
+					return;
+			}
+			
+			resp.setContentType("text/html;charset=utf-8");
+			PrintWriter out = resp.getWriter();
+			
+			out.print("<script>");
+			out.print("alert('파일을 다운로드하는데 실패 했습니다.'); history.back();");
+			out.print("</script>");
 		}
 		
 		

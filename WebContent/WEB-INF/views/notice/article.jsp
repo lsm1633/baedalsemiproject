@@ -119,7 +119,6 @@ function deleteNotice(num) {
 		                        <span style="display: inline-block; min-width: 45px;">첨부</span> :
 		                        <c:if test="${not empty dto.saveFilename }">
 		                        	<a href="<%=cp %>/notice/download.do?num=${dto.num}">${dto.originalFilename}</a>
-		                        	
 		                        </c:if>
 		                  </td>
 		               </tr>
