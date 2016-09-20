@@ -328,7 +328,7 @@ select {
   </dl>
 </div>
 
-<form name="ceomemberForm">
+<form name="ceomemberForm" method="post">
 <div>
 <div id=header>사장님 회원가입</div>
 	<div id=formbody>
@@ -445,14 +445,14 @@ select {
 		 		<dd>
 		 			<%/* 사업자등록번호 */%> 			
 					<input type="text" name="ceoCodeNum" size="40">&nbsp;
-					<input type="button" name="check_bNum" class="chBtn" value=" 중복확인 ">
+					<input type="button" name="check_bNum" class="chBtn" value="중복확인 ">
 					
 				</dd>
 		 		
 		 		<dd>
 		 			<%/* 사업자등록증 첨부 */%>
 		 			<input type="text" name="licenceUpload" size="40">&nbsp;
-					<input type="button" name="check_bNum" class="chBtn" value=" 첨부하기 ">
+					<input type="button" name="check_bNum" class="chBtn" value="첨부하기 ">
 				</dd>
 				
 				<dd>

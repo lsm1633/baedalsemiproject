@@ -17,6 +17,15 @@
 <link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css" type="text/css">
 
 <script type="text/javascript" src="<%=cp%>/res/js/util.js"></script>
+<style type="text/css">
+#header {
+	width: 1000px;
+	height: 100px;
+	margin: 15px auto;
+	font-size: 20pt;
+	line-height: 100px;
+}
+</style>
 
 </head>
 <body>
@@ -33,13 +42,8 @@
 	<div class="layoutBody">
 
 		<div style="min-height: 450px;">
-				<div style="width:100%;	height: 40px;  line-height:40px;clear: both; border-top: 1px solid #DAD9FF;border-bottom: 1px solid #DAD9FF;">
-				    <div style="width:600px; height:30px; line-height:30px; margin:5px auto;">
-				        <img src="<%=cp%>/res/images/arrow.gif" alt="" style="padding-left: 5px; padding-right: 5px;" />
-				        <span style="font-weight: bold;font-size:13pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">${title}</span>
-				    </div>
-				</div>
-				
+				<div id=header>${title}</div>
+								
 				<div style="margin: 20px auto; width: 400px; min-height: 400px;">
 					<div style="margin: 0px auto; padding:10px; min-height: 50px; line-height: 130%;  text-align: center;">${message}</div>
 					<div style="height: 50px; text-align: center;">

@@ -2,6 +2,7 @@ package com.ceomember;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.util.DBConn;
 
@@ -58,6 +59,47 @@ public class CeoMemberDAO {
 		}
 				
 		return result;
+	}
+	
+	public CeoMemberDTO readMember(String ceoId){
+		CeoMemberDTO dto=null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuffer sb = new StringBuffer();
+		
+		try {
+			sb.append("SELECT cm1.ceoId,ceoName,ceoPwd,ceoBirth,ceoEmail,ceoTel,storeName,ceoCodeNum,storeTel,storeType "
+					+ "FROM ceomember1 cm1 LEFT OUTER JOIN ceomember2 cm2 ON cm1.ceoId=cm2.ceoId WHERE cm1.ceoId=?");
+			
+			pstmt=conn.prepareStatement(sb.toString());
+			   
+			pstmt.setString(1, ceoId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				dto=new CeoMemberDTO();
+				
+				dto.setCeoId(rs.getString("ceoId"));
+				dto.setCeoName(rs.getString("ceoName"));
+				dto.setCeoPwd(rs.getString("ceoPwd"));
+				dto.setCeoBirth(rs.getString("ceoBirth"));
+				dto.setCeoEmail(rs.getString("ceoEmail"));
+				dto.setCeoTel(rs.getString("ceoTel"));
+				dto.setStoreName(rs.getString("storeName"));
+				dto.setCeoCodeNum(rs.getString("ceoCodeNum"));
+				dto.setStoreTel(rs.getString("storeTel"));
+				dto.setStoreType(rs.getString("storeType"));
+				
+			}
+			rs.close();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dto;
 	}
 
 }

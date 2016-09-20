@@ -72,7 +72,37 @@ public class CeoMemberServlet extends MyServlet{
 			req.setAttribute("message", sb.toString());
 			
 			forward(req,resp,"/WEB-INF/views/ceomember/ceocomplete.jsp");
-	    }
+	    }else if(uri.indexOf("login.do")!=-1){					
+			forward(req, resp, "/WEB-INF/views/ceomember/ceologin.jsp");
+		}else if(uri.indexOf("login_ok.do")!=-1){
+			String ceoId = req.getParameter("ceoId");
+	        String ceoPwd = req.getParameter("ceoPwd");
+	        
+	        CeoMemberDTO dto = dao.readMember(ceoId); 
+	        
+	        if(dto!=null && dto.getCeoPwd().equals(ceoPwd)){
+	        	 //로그인 성공
+	        	
+	        	SessionInfo info = new SessionInfo();
+	        	info.setCeoId(dto.getCeoId());
+	        	info.setCeoName(dto.getCeoName());
+	        	
+	        	session.setAttribute("ceomember", info);
+	        		        	
+	        	resp.sendRedirect(cp+"/ceomain/ceomain.do"); 
+	        	 
+	        	return;
+	        }
+	        req.setAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");	          
+			
+			forward(req, resp, "/WEB-INF/views/ceomember/ceologin.jsp");
+		}else if(uri.indexOf("logout.do")!=-1){
+	          //로그아웃
+	          session.removeAttribute("ceomember");
+	          session.invalidate();
+	          resp.sendRedirect(cp+"/ceomain/ceomain.do");
+	          
+	     }
 	    
 	}
 

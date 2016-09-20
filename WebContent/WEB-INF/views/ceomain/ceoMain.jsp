@@ -26,8 +26,8 @@
 
 <style type="text/css">
 #mainbox{
-   width:800px;
-   height:350px;
+   width:1000px;
+   height:500px;
    margin:10px auto;
    text-align: center;
 }
@@ -36,17 +36,6 @@
 }
 </style>
 
-<script type="text/javascript">
-
-var urlArray01 = new Array(); // 배너를 클릭했을때 옮겨질 주소
-var imgArray01 = new Array(); // 배너의 갯수
-function retImage01(src){
-    imgRet = new Image();
-    imgRet.src = src;
-    return imgRet;
-}
-
-</script> 
 
 </head>
 <body>
@@ -66,9 +55,11 @@ function retImage01(src){
 <div id="mainbox">
   <div>
     <dl class=bannerMain>
+    
       <dd style="width:450px; height : 220px;">
+         
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
+ 
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -94,30 +85,42 @@ function retImage01(src){
     <span class="sr-only">Next</span>
   </a>
 </div> 
-      </dd>
-        
-      <dd style="width:250px; ">
-      <a href="<%=cp%>/ceomember/join.do">
-		  <input type="image" src="<%=cp%>/res/images/ceomemberjoin.PNG" width="200" height="100"/>	 	  
-	  </a>
-	  <br>
-	  <br>
-        &emsp; &emsp; id : <input type="text" style="font-size:10pt; height: 35px; border-radius: 3px;outline-color: SlateGray; border: 1px solid silver; "> <br><br>
-        &emsp;  pwd : <input type="password" style="font-size:10pt; height: 35px; border-radius: 3px;outline-color: SlateGray; border: 1px solid silver; ">
-      </dd> 
-      <dd>
-        
-        
-	  <ul class="nav nav-pills">
-	    <li role="presentation" class="active" style="font-size: 55pt; font-family: 'Nanum Pen Script', serif;">&nbsp;</li>
-        <li role="presentation" class="navbar navbar-default navbar-fixed-top" style="font-size: 45pt; font-family: 'Nanum Pen Script', serif;"><a href="<%=cp%>/business/business.do">가게 관리</a></li>
-        <li role="presentation" class="active" style="font-size: 55pt; font-family: 'Nanum Pen Script', serif;">&nbsp;</li>
-        <li role="presentation" class="navbar navbar-default navbar-fixed-top" style="font-size: 45pt; font-family: 'Nanum Pen Script', serif;" ><a href="<%=cp%>/ceomoney/ceomoney.do">정산 확인</a></li> 
-        <li role="presentation"  style="font-size: 45pt; font-family: 'Nanum Pen Script', serif;">&emsp;&emsp;&ensp;</li>
-        <li role="presentation"  style="font-size: 35pt; font-family: 'Nanum Pen Script', serif;"><a href="#">로그인</a></li>  
-      </ul>
-
-      </dd>       
+      </dd>	  
+			  
+		  <dd>
+			  
+		  	<c:choose>
+			  	
+		  		     <c:when test="${empty sessionScope.ceomember}">
+						<dd style="width:250px; ">
+			     			 <a href="<%=cp%>/ceomember/join.do">
+					  			<input type="image" src="<%=cp%>/res/images/ceomemberjoin.PNG" width="200" height="100"/>	 	  
+				  			 </a>
+			  			</dd>							
+							<ul class="nav nav-pills">
+			  					<li role="presentation"  style="font-size: 45pt; font-family: 'Nanum Pen Script', serif;"><a href="<%=cp%>/ceomember/login.do">&nbsp;&nbsp;로그인</a></li>
+			  				</ul>	
+						  </c:when>
+						  
+						  <c:otherwise>
+						  
+								<span style="color:blue;">${sessionScope.ceomember.ceoName}</span>님 접속중입니다.
+							
+							<ul class="nav nav-pills">
+							
+								<li role="presentation"  style="font-size: 35pt; font-family: 'Nanum Pen Script', serif;"><a href="#">개인 정보수정</a></li>						
+									
+								<li role="presentation"  style="font-size: 35pt; font-family: 'Nanum Pen Script', serif;"><a href="<%=cp%>/ceomember/logout.do">로그아웃</a></li>
+								
+								<li role="presentation"  style="font-size: 35pt; font-family: 'Nanum Pen Script', serif;"><a href="<%=cp%>/business/business.do">가게관리</a></li>
+								<li role="presentation"  style="font-size: 35pt; font-family: 'Nanum Pen Script', serif;"><a href="<%=cp%>/ceomoney/ceomoney.do">정산확인</a></li>
+			        			
+							</ul>
+							
+						   </c:otherwise>
+						   
+					</c:choose>
+			  </dd>                       
     </dl>     
   </div>   
 </div>

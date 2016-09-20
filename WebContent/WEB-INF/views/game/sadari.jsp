@@ -4,6 +4,7 @@
 <%
 	String cp=request.getContextPath();
 	request.setCharacterEncoding("utf-8");
+
 %>
 
 <!DOCTYPE html>
@@ -349,15 +350,20 @@ function dchek() {
         f.money.focus();
         return;
     }
-    
-    
-    
+      
     var out=document.getElementById("output");
     var s="";
     s="약 "+Math.floor(money/num)+"원";
-    out.innerHTML=s;
-    
+    out.innerHTML=s; 
 }
+function regame() {	
+	var out=document.getElementById("output");
+    var s="";
+    out.innerHTML=s;    
+}
+
+
+
 </script>
 </head>
 <body>
@@ -402,6 +408,8 @@ function dchek() {
 			<br><button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/game/sadari.do';">다시하기</button>
       	</div>
       <div role="tabpanel" class="tab-pane fade" id="cal" aria-labelledBy="cal-tab">
+       
+       <br>
         <div class="row">
          <div class="col-lg-6">
           <div class="input-group">
@@ -419,8 +427,13 @@ function dchek() {
          </div><!-- /.col-lg-6 -->
         </div>
         <br><br>
-       <div id="output" style="font-size: 12pt"></div>
+
+        <div id="output" style="font-size: 12pt"></div> 
+
       </div>
+      <br>
+      <button type="reset" class="btn btn-default btn-sm wbtn" onclick="regame()" >다시하기</button>
+      <div style="height: 500px"></div>
     </div>
       </form>
   </div>
