@@ -88,6 +88,11 @@
 	<div style="margin: 120px auto 30px" align="center">
 		<a href="<%=cp%>/game/sadari.do"><img src="<%=cp%>/res/images/game.png"></a>
 	</div>
+	
+	
+	<div class="embed-responsive embed-responsive-4by3">
+	  <iframe width="600" class="embed-responsive-item" src="//www.youtube.com/embed/E_c1ouE2X5E" frameborder="0"></iframe>
+	</div>
 
 
 	<div style="clear: both;">
