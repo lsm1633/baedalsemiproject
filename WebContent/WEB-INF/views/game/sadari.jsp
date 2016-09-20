@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>배달의 나라</title>
 <link rel="stylesheet" href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
 <link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap.min.css" type="text/css"/>
 <link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap-theme.min.css" type="text/css"/>
@@ -322,6 +322,43 @@ document.onkeydown = function(e){
  }
 }
 </script>
+<script type="text/javascript">
+function dchek() {
+	var f = document.gameForm;
+	
+	var num = f.num.value;
+    if(!num) {
+        alert("인원수를 입력하세요. ");
+        f.num.focus();
+        return;
+    }
+    if(isNaN(num)) {
+        alert("숫자만 입력하세요. ");
+        f.num.focus();
+        return;
+    }
+    
+    var money = f.money.value;
+    if(!money) {
+        alert("금액을 입력하세요. ");
+        f.money.focus();
+        return;
+    }
+    if(isNaN(money)) {
+        alert("숫자만 입력하세요. ");
+        f.money.focus();
+        return;
+    }
+    
+    
+    
+    var out=document.getElementById("output");
+    var s="";
+    s="약 "+Math.floor(money/num)+"원";
+    out.innerHTML=s;
+    
+}
+</script>
 </head>
 <body>
 
@@ -336,16 +373,17 @@ document.onkeydown = function(e){
       	<li style="width: 560px" role="presentation"><a href="#cal" role="tab" id="cal-tab" data-toggle="tab" aria-controls="cal">더치페이 계산기</a></li>
       
     	</ul>
+   <form name="gameForm">
     <div id="myTabContent" class="tab-content">
       <div role="tabpanel" class="tab-pane fade in active" id="sadari" aria-labelledBy="sadari-tab">
         <div id="div_step1" style="font-size:12px; width: 800px; margin: 30px auto 30px;">
-			갯수 선택
+			<label><mark>인원 선택</mark></label> 
 			<select id="sel_num">
  			<option value="2">2</option>
  			<option value="3">3</option>
-			 <option value="4">4</option>
-			 <option value="5" selected="selected">5</option>
-			 <option value="6">6</option>
+			<option value="4">4</option>
+			<option value="5" selected="selected">5</option>
+			<option value="6">6</option>
  			<option value="7">7</option>
  			<option value="8">8</option>
  			<option value="9">9</option>
@@ -356,17 +394,35 @@ document.onkeydown = function(e){
 			
 		</div>
 
-		<div id="div_step2" style="font-size:12px;display:none;">
+		<div id="div_step2" style="font-size:12px;display:none; margin: 30px auto 30px;">
 			 입력후 게임 시작 <input type="button" value="시작" onclick="Yl.create();">
 		</div>
  
-		<div id="div_body" style="width:1000px;height:450px;border:1px solid #CCCCCC;position:relative;"></div>
+		<div id="div_body" style=" width:1000px;height:450px;border:1px solid #CCCCCC;position:relative;"></div>
 			<br><button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/game/sadari.do';">다시하기</button>
       	</div>
       <div role="tabpanel" class="tab-pane fade" id="cal" aria-labelledBy="cal-tab">
-        <p>더치페이 계산기</p>
+        <div class="row">
+         <div class="col-lg-6">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="인원수" name="num">
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        
+        <div class="col-lg-6">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="금액" name="money">
+            <span class="input-group-btn">
+             <button class="btn btn-default" type="button" onclick="dchek()">Go!</button>
+            </span>
+          </div><!-- /input-group -->
+         </div><!-- /.col-lg-6 -->
+        </div>
+        <br><br>
+       <div id="output" style="font-size: 12pt"></div>
       </div>
     </div>
+      </form>
   </div>
   </div>
 	
