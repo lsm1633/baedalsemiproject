@@ -21,9 +21,6 @@ public class GameServlet extends MyServlet {
 		if(uri.indexOf("sadari.do")!=-1) {
 			
 			forward(req, resp, "/WEB-INF/views/game/sadari.jsp");
-		} else if(uri.indexOf("cal.do")!=-1) {
-			
-			forward(req, resp, "/WEB-INF/views/game/cal.jsp");
 		}
 	}
 
