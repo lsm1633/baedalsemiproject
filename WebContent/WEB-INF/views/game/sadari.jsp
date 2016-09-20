@@ -29,8 +29,8 @@
 	 <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs"
 	 	align="center" style="max-width: 800px">
     	<ul id="myTab" class="nav nav-tabs" role="tablist">
-     	 <li role="presentation" class="active"><a href="#sadari" id="sadari-tab" role="tab" data-toggle="tab" aria-controls="sadari" aria-expanded="true">사다리 게임</a></li>
-      	<li role="presentation"><a href="#cal" role="tab" id="cal-tab" data-toggle="tab" aria-controls="cal">더치페이 계산기</a></li>
+     	<li style="width: 400px" role="presentation" class="active"><a href="#sadari" id="sadari-tab" role="tab" data-toggle="tab" aria-controls="sadari" aria-expanded="true">사다리 게임</a></li>
+      	<li style="width: 400px" role="presentation"><a href="#cal" role="tab" id="cal-tab" data-toggle="tab" aria-controls="cal">더치페이 계산기</a></li>
       
     	</ul>
     <div id="myTabContent" class="tab-content">
