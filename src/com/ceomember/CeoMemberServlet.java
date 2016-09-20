@@ -30,7 +30,43 @@ public class CeoMemberServlet extends MyServlet{
 	    	req.setAttribute("mode", "created");
 	    	req.setAttribute("title", "회원가입");
 	    	
-	    	forward(req, resp, "/WEB-INF/views/ceomember/join.jsp");
+	    	forward(req, resp, "/WEB-INF/views/ceomember/ceojoin.jsp");
+	    }else if(uri.indexOf("join_idchk.do")!=-1){
+	    	//id중복 확인
+	    	String ceoId = req.getParameter("ceoId");
+	    	
+	    	CeoMemberDTO dto = dao.readMemberid(ceoId); 
+	    	StringBuffer sb=new StringBuffer();
+	    	
+		    if(dto==null)
+		    	sb.append("중복된 아이디가 없습니다.");
+		    else
+		    	sb.append("중복된 아이디가 있습니다.");
+	    	
+	    	req.setAttribute("mode", "created");
+	    	req.setAttribute("title", "회원가입");
+	    	req.setAttribute("message2", sb.toString());
+	    	
+	    	forward(req, resp, "/WEB-INF/views/ceomember/ceojoin.jsp");
+	    	
+	    }else if(uri.indexOf("join_numchk.do")!=-1){
+	    	//사업자번호 중복 확인
+	    	String ceoCodeNum = req.getParameter("ceoCodeNum");
+	    	
+	    	CeoMemberDTO dto = dao.readMembernum(ceoCodeNum); 
+	    	StringBuffer sb=new StringBuffer();
+	    	
+	    	if(dto==null)
+			   	sb.append("중복된 사업자번호가 없습니다.");
+			else
+			  	sb.append("중복된 사업자번호가 있습니다.");
+	    		    	
+	    	req.setAttribute("mode", "created");
+	    	req.setAttribute("title", "회원가입");
+	    	req.setAttribute("message1", sb.toString());
+	    	
+	    	forward(req, resp, "/WEB-INF/views/ceomember/ceojoin.jsp");
+	    	
 	    }else if(uri.indexOf("join_ok.do")!=-1){
 	    	CeoMemberDTO dto=new CeoMemberDTO();
 	    	
@@ -78,7 +114,7 @@ public class CeoMemberServlet extends MyServlet{
 			String ceoId = req.getParameter("ceoId");
 	        String ceoPwd = req.getParameter("ceoPwd");
 	        
-	        CeoMemberDTO dto = dao.readMember(ceoId); 
+	        CeoMemberDTO dto = dao.readMemberid(ceoId); 
 	        
 	        if(dto!=null && dto.getCeoPwd().equals(ceoPwd)){
 	        	 //로그인 성공
