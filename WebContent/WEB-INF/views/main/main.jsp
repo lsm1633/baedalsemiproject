@@ -59,15 +59,18 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox" align="center">
 			<div class="item active">
-				<img src="<%=cp%>/res/images/banner3.png" alt="배너1">
+			    <a href="<%=cp%>/notice/article.do?${params}&num=5">
+				<img src="<%=cp%>/res/images/banner3.png" alt="배너1"></a>
 				<div class="carousel-caption">
 				</div>
 			</div>
 			<div class="item">
-				<img src="<%=cp%>/res/images/banner4.png" alt="배너2">
+			<a href="<%=cp%>/notice/article.do?${params}&num=8">
+				<img src="<%=cp%>/res/images/banner4.png" alt="배너2"></a>
 			</div>
 			<div class="item">
-				<img src="<%=cp%>/res/images/banner5.png" alt="배너3">
+			<a href="<%=cp%>/notice/article.do?${params}&num=11">
+				<img src="<%=cp%>/res/images/banner5.png" alt="배너3"></a>
 			</div>
 		</div>
 
@@ -83,7 +86,7 @@
 	</div>
 </div>
 	<div style="margin: 120px auto  30px" align="center">
-		<a><img src="<%=cp%>/res/images/game.png"></a>
+		<a href="<%=cp%>/game/sadari.do"><img src="<%=cp%>/res/images/game.png"></a>
 	</div>
 
 

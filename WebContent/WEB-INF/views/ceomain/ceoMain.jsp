@@ -46,24 +46,6 @@ function retImage01(src){
     return imgRet;
 }
 
-//각 배너에 대한 링크를 설정 : 여기에 추가/삭제만 하시면 됩니다
-urlArray01[0] = "#";
-imgArray01[0] = retImage01("<%=cp%>/res/images/banner1.PNG");
-urlArray01[1] = "#";
-imgArray01[1] = retImage01("<%=cp%>/res/images/banner2.PNG");
-
-var gCounter01 = 0;
-function rotateBanner01(){ // 배너 로테이트 함수
-    gCounter01++;
-    if(gCounter01 >= urlArray01.length)
-        gCounter01 = 0;
-
-    document.idBanner01.src = imgArray01[gCounter01].src; // 새 배너 이미지
-    // 링크 바꿔주기
-    document.idBanner01.onclick = function(){location.replace(urlArray01[gCounter01]);};
-}
-
-var timer = window.setInterval("rotateBanner01()", 2500); //3000-5초 시간마다 바꾸기꾸기
 </script> 
 
 </head>
@@ -85,7 +67,6 @@ var timer = window.setInterval("rotateBanner01()", 2500); //3000-5초 시간마�
   <div>
     <dl class=bannerMain>
       <dd style="width:450px; height : 220px;">
-         <%-- <img width="450" src="<%=cp%>/res/images/banner1.PNG" name="idBanner01" onClick="location.replace(urlArray01[gCounter01]);" style="cursor:pointer;" />   --%>
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -129,9 +110,9 @@ var timer = window.setInterval("rotateBanner01()", 2500); //3000-5초 시간마�
         
 	  <ul class="nav nav-pills">
 	    <li role="presentation" class="active" style="font-size: 55pt; font-family: 'Nanum Pen Script', serif;">&nbsp;</li>
-        <li role="presentation" class="navbar navbar-default navbar-fixed-top" style="font-size: 45pt; font-family: 'Nanum Pen Script', serif;"><a href="#">가게 관리</a></li>
+        <li role="presentation" class="navbar navbar-default navbar-fixed-top" style="font-size: 45pt; font-family: 'Nanum Pen Script', serif;"><a href="<%=cp%>/business/business.do">가게 관리</a></li>
         <li role="presentation" class="active" style="font-size: 55pt; font-family: 'Nanum Pen Script', serif;">&nbsp;</li>
-        <li role="presentation" class="navbar navbar-default navbar-fixed-top" style="font-size: 45pt; font-family: 'Nanum Pen Script', serif;" ><a href="#">정산 확인</a></li> 
+        <li role="presentation" class="navbar navbar-default navbar-fixed-top" style="font-size: 45pt; font-family: 'Nanum Pen Script', serif;" ><a href="<%=cp%>/ceomoney/ceomoney.do">정산 확인</a></li> 
         <li role="presentation"  style="font-size: 45pt; font-family: 'Nanum Pen Script', serif;">&emsp;&emsp;&ensp;</li>
         <li role="presentation"  style="font-size: 35pt; font-family: 'Nanum Pen Script', serif;"><a href="#">로그인</a></li>  
       </ul>
