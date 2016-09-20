@@ -430,9 +430,9 @@ function regame() {
 
         <div id="output" style="font-size: 12pt"></div> 
 
-      </div>
       <br>
       <button type="reset" class="btn btn-default btn-sm wbtn" onclick="regame()" >다시하기</button>
+      </div>
       <div style="height: 500px"></div>
     </div>
       </form>
