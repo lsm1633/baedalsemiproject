@@ -5,7 +5,13 @@
 <%
 	String cp = request.getContextPath();
 %>
-
+<script type="text/javascript">
+function searchList() {
+		var f = document.searchForm;
+		f.action = "<%=cp %>/store/list.do";
+		f.submit();
+	}
+</script>
 <div class="container">
 	<div class="page-header">
 		<div align="right" style="margin: 10px">
@@ -33,28 +39,30 @@
 			</div>
 			<div class="row" style="margin: 10px auto;">
 				<div class="col-lg-6 col-md-offset-3" align="left">
+					<form name="searchForm" method="post" class="form-inline">
 					<select name = "region" style="height: 30px; width: 100px">
 						<option value="all">전체</option>
 						<option value="seoul">서울</option>
 						<option value="gyeonggi">경기</option>
 						<option value="incheon">인천</option>
 					</select>
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="업소명을 검색해주세요">
+					<div class="input-group" style="width: 600px">
+						<input type="text" class="form-control" placeholder="업소명을 검색해주세요" name="searchValue">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">검색</button>
-						</span>
+							<button class="btn btn-default" type="button" onclick="searchList();"><span class="glyphicon glyphicon-search"></span>검색</button>
+						</span></div>
+						</form>
 					</div>
 				</div>
 			</div>
 			<div class="category">
 				<div align="center" style="margin: 10px">
-					카테고리 : <a href="<%=cp%>"> 치킨 </a> |
-					<a href="<%=cp%>"> 중국집 </a> |
-					<a href="<%=cp%>"> 피자 </a> |
-					<a href="<%=cp%>"> 분식,떡볶이 </a> |
-					<a href="<%=cp%>"> 족발,보쌈 </a> |
-					<a href="<%=cp%>"> 한식 </a> 
+					카테고리 : <a href="<%=cp %>/client/storelist.do"> 치킨 </a> |
+					<a href="<%=cp%>/client/storelist.do"> 중국집 </a> |
+					<a href="<%=cp%>/client/storelist.do"> 피자 </a> |
+					<a href="<%=cp%>/client/storelist.do"> 분식,떡볶이 </a> |
+					<a href="<%=cp%>/client/storelist.do"> 족발,보쌈 </a> |
+					<a href="<%=cp%>/client/storelist.do"> 한식 </a> 
 				</div>
 			</div>
 		</div>
