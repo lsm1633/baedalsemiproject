@@ -22,6 +22,7 @@ public class MemberServlet extends MyServlet{
 	    String cp=req.getContextPath();
 	    MemberDAO dao = new MemberDAO();
 	    
+	   
 	    HttpSession session = req.getSession();
 	    
 	    if(uri.indexOf("join.do")!=-1){
@@ -82,6 +83,14 @@ public class MemberServlet extends MyServlet{
 	    	forward(req, resp, "/WEB-INF/views/member/join.jsp");
 	    	
 	    }
+	    else if(uri.indexOf("searchId.do")!=-1){
+	    	forward(req, resp, "/WEB-INF/views/member/searchId.jsp");
+	    }
+	    
+	    else if(uri.indexOf("searchPwd.do")!=-1){
+	    	forward(req, resp, "/WEB-INF/views/member/searchPwd.jsp");
+	    }
+	    
 	    else if(uri.indexOf("login.do")!=-1) {
 	          forward(req, resp, "/WEB-INF/views/member/login.jsp");
 	      }
@@ -93,8 +102,8 @@ public class MemberServlet extends MyServlet{
 	        
 	        if(dto!=null && dto.getUserPwd().equals(userPwd) && dto.getEnabled()==1){
 	        	 //로그인 성공
-	        	
 	        	SessionInfo info = new SessionInfo();
+	        	info = new SessionInfo();
 	        	info.setUserId(dto.getUserId());
 	        	info.setUserName(dto.getUserName());
 	        	
@@ -115,6 +124,109 @@ public class MemberServlet extends MyServlet{
 	          resp.sendRedirect(cp+"/");
 	          
 	     }
+	    else if(uri.indexOf("pwdChk.do")!=-1){
+	    	//정보수정 비밀번호확인
+	    	SessionInfo info = (SessionInfo)session.getAttribute("member");
+	    	if(info == null){
+	    		forward(req, resp, "/WEB-INF/views/member/login.jsp");
+	    		return;
+	    	}
+	    	
+	    	forward(req, resp, "/WEB-INF/views/member/pwdChk.jsp");
+	    }
+	    else if(uri.indexOf("update.do")!=-1){
+	    	
+	    	SessionInfo info = (SessionInfo)session.getAttribute("member");
+	    	if(info == null){
+	    		forward(req, resp, "/WEB-INF/views/member/login.jsp");
+	    		return;
+	    	}
+	    	
+	    	String userId = info.getUserId();
+	        String userPwd = req.getParameter("userPwd");
+	        
+	        MemberDTO dto = dao.readMember(userId);
+	        
+	        if(dto!=null && dto.getUserPwd().equals(userPwd) && dto.getEnabled()==1){
+	        	 //패스워드일치 -> 회원정보수정
+	        	
+	        	req.setAttribute("dto", dto);
+	        	req.setAttribute("mode", "update");
+		    	req.setAttribute("title", "회원정보 수정");
+		    	
+		    	forward(req, resp, "/WEB-INF/views/member/join.jsp");
+	        	 
+	        	return;
+	        }
+	        req.setAttribute("message", "패스워드가 일치하지 않습니다.");
+
+	        forward(req, resp, "/WEB-INF/views/member/pwdChk.jsp");
+	    	
+	    }
+	    else if(uri.indexOf("update_ok.do")!=-1){
+	    	SessionInfo info = (SessionInfo)session.getAttribute("member");
+	    	if(info == null){
+	    		forward(req, resp, "/WEB-INF/views/member/login.jsp");
+	    		return;
+	    	}
+	    	
+	    	String userId = info.getUserId();
+	    	MemberDTO dto = dao.readMember(userId);
+	    	
+	    	dto.setUserName(req.getParameter("userName"));
+	        dto.setUserPwd(req.getParameter("userPwd"));
+	        
+	        dto.setEmail(req.getParameter("email"));
+	        dto.setTel(req.getParameter("tel"));
+	        dto.setAddr1(req.getParameter("addr1"));
+	        dto.setAddr2(req.getParameter("addr2"));
+	        
+	        int result = dao.updateMember(dto);
+	        if(result != 1){
+	        	String message = "정보수정에 실패하셨습니다.";
+	        	req.setAttribute("title", "회원정보수정");
+	        	req.setAttribute("mode", "update");
+	        	req.setAttribute("message", message);
+	        	forward(req, resp, "/WEB-INF/views/member/join.jsp");
+	        	return;
+	        }
+	        
+	        StringBuffer sb = new StringBuffer();
+	        sb.append("<b>"+dto.getUserName()+"</b>님 회원정보수이 완료되었습니다.<br>");
+	        sb.append("메인화면으로 이동합니다.<br>");
+	         
+	        req.setAttribute("title", "정보 수정");
+	        req.setAttribute("message", sb.toString());
+	         
+	        forward(req, resp, "/WEB-INF/views/member/complete.jsp");
+	    }
+	    else if(uri.indexOf("leave.do")!=-1){
+	    	SessionInfo info = (SessionInfo)session.getAttribute("member");
+	    	if(info == null){
+	    		forward(req, resp, "/WEB-INF/views/member/login.jsp");
+	    		return;
+	    	}
+	    	
+	    	//탈퇴하기
+	    	forward(req, resp, "/WEB-INF/views/member/leave.jsp");
+	    	
+	    }
+	    else if(uri.indexOf("leave_ok.do")!=-1){
+	    	//탈퇴 실행
+	    	
+	    	SessionInfo info = (SessionInfo)session.getAttribute("member");
+	    	if(info == null){
+	    		forward(req, resp, "/WEB-INF/views/member/login.jsp");
+	    		return;
+	    	}
+	    	
+	    	String userId = info.getUserId();
+	    	dao.deleteMember(userId);
+	    	
+	    	session.removeAttribute("member");
+	        session.invalidate();
+	    	resp.sendRedirect(cp+"/");
+	    }
 	    
 	}
 

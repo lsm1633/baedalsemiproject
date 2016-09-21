@@ -404,10 +404,10 @@ function regame() {
 			 입력후 게임 시작 <input type="button" value="시작" onclick="Yl.create();">
 		</div>
  
-		<div id="div_body" style=" width:1000px;height:450px;border:1px solid #CCCCCC;position:relative;"></div>
+		<div id="div_body" style=" width:1000px; height:450px; border:1px solid #CCCCCC; position:relative;"></div>
 			<br><button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/game/sadari.do';">다시하기</button>
       	</div>
-      <div role="tabpanel" class="tab-pane fade" id="cal" aria-labelledBy="cal-tab">
+      <div role="tabpanel" class="tab-pane fade" id="cal" aria-labelledBy="cal-tab" style="height: 500px">
        
        <br>
         <div class="row">
@@ -433,7 +433,6 @@ function regame() {
       <br>
       <button type="reset" class="btn btn-default btn-sm wbtn" onclick="regame()" >다시하기</button>
       </div>
-      <div style="height: 500px"></div>
     </div>
       </form>
   </div>

@@ -18,22 +18,28 @@
 
 <script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript">
+
+
 function memberOk(){
 	var f = document.memberForm;
 	var str;
+	var mode="${mode}";
 	
 	str = f.userId.value;
-	if(!str) {
-		alert("아이디를 입력하세요. ");
-		f.userId.focus();
-		return;
+	
+	if(mode=="created"){
+		if(!str) {
+			alert("아이디를 입력하세요. ");
+			f.userId.focus();
+			return;
+		}
+		if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
+			alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
+			f.userId.focus();
+			return;
+		}
+		f.userId.value = str;
 	}
-	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
-		alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
-		f.userId.focus();
-		return;
-	}
-	f.userId.value = str;
 	
     str = f.userName.value;
     if(!str) {
@@ -95,19 +101,20 @@ function memberOk(){
     	f.addr2.focus();
     	return;
     }
-    
-    str = f.agree.checked;
-    if(str==""){
-    	alert("약관에 동의해주세요.");
-    	return;
+   
+    if(mode=="created"){
+    	 str = f.agree.checked;
+    	    if(str==""){
+    	    	alert("약관에 동의해주세요.");
+    	    	return;
+    	    }
     }
-    
-    var mode="${mode}";
-    if(mode == "created"){
+    if(mode == "created")
     	f.action = "<%=cp%>/member/join_ok.do";
-    }else if(mode == "update"){
+    else if(mode == "update")
     	f.action = "<%=cp%>/member/update_ok.do";
-    }
+    	
+    
     
     f.submit();
     
@@ -136,7 +143,7 @@ function chkId(){
 
 </script>
 
-<title>배달의 나라_회원가입</title>
+<title>${title}</title>
 
 <link rel="stylesheet" href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
 <link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap.min.css" type="text/css"/>
@@ -157,9 +164,7 @@ function chkId(){
 	</div>
 
 	<div class="page-header">
-		<h1>
-			회원가입 <small>쟈쟌회원가입폼 </small>
-		</h1>
+		<h1>${title}</h1>
 	</div>
 	<div class="col-md-6 col-md-offset-3">
 		<form name="memberForm" role="form">
@@ -169,18 +174,21 @@ function chkId(){
 				<div class="input-group">
 					<input type="text" class="form-control" id="userId" name="userId"
 						placeholder="ID를 입력해 주세요"
-						value="${param.userId}">
-						<!--value="${dto.userId}" ${mode=="update" ? "readonly='readonly' style='border:none;'":"" }  -->
+						value="${param.userId}" ${mode=="update" ? "readonly='readonly' style='border:none;'":"" }>
+						<!--value="${dto.userId}" ${mode=="update" ? "readonly='readonly' style='border:none;'":"${param.userId}" }  -->
+						<!--  value="${param.userId}"-->
+					<c:if test="${empty sessionScope.member}">	
 					<span class="input-group-btn">
 						<input type="button" class="btn btn-success" value="중복확인" onClick="chkId();">
 					</span>
+					</c:if>
 					
 				</div>
 				<span style="color: tomato;">${msg}</span>
 			</div>
 
 			<div class="form-group">
-				<label for="username">닉네임</label> <input type="text"
+				<label for="username">닉네임</label> <input type="text" value="${sessionScope.member.userName}"
 					class="form-control" name="userName" placeholder="닉네임을 입력해 주세요">
 			</div>
 			<!-- 			<div class="form-group">
@@ -199,8 +207,10 @@ function chkId(){
 
 			<div class="form-group">
 				<label for="InputAddr">주소</label> <input type="text"
+					value="${dto.addr1}"
 					class="form-control" name="addr1" placeholder="주소"> <input
 					type="text" class="form-control" name="addr2"
+					value="${dto.addr2}"
 					placeholder="나머지 주소를 입력하세요">
 			</div>
 
@@ -218,22 +228,24 @@ function chkId(){
 
 			<div class="form-group">
 				<label for="InputTel">휴대폰</label> <input type="tel"
+					value="${dto.tel}"
 					class="form-control" name="tel" placeholder="-없이 입력해주세요.">
 			</div>
 
 			<div class="form-group">
 				<label for="InputEmail">이메일</label> <input type="email"
+					value="${dto.email}"
 					class="form-control" name="email" placeholder="e-mail주소를 입력하세요">
 			</div>
 
 
-
+	<c:if test="${empty sessionScope.member}">
 			<div class="form-group">
 				<label>약관 동의</label>
 					
 				<div class="col-xs-12">
 					<textarea class="form-control" readonly rows="10" cols="100">제1조(목적)
-이 약관은 주식회사 아름(전자거래 사업자)이 운영하는 홈페이지(이하 "홈페이지"라 한다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 한다)를 이용함에 있어 사이버홈페이지과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
+이 약관은 주식회사 배달의 나라(전자거래 사업자)이 운영하는 홈페이지(이하 "홈페이지"라 한다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 한다)를 이용함에 있어 사이버홈페이지과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
 ※ 「PC통신 등을 이용하는 전자거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다」	
 제 7 조 (전자금융거래 기록의 생성 및 보존)
 ① “회사”는 “이용자”가 이용한 전자금융거래의 내용을 추적, 검색하거나 그 내용에 오류가 발생한 경우에 이를 확인하거나 정정할 수 있는 기록을 생성하여 보존합니다.
@@ -261,6 +273,7 @@ function chkId(){
 				</div>
 				
 			</div>
+			</c:if>
 			
 			
 			<div class="form-group text-center">
@@ -272,8 +285,14 @@ function chkId(){
 				<c:if test="${mode=='update'}">
 					<input type="hidden" name="enabled" value="${dto.enabled}">
 					<input type="button" value=" 정보수정 " class="btn btn-info" onclick="memberOk();"/>
-					<input type="reset" value=" 다시입력 " class="btn" onclick="document.memberForm.userId"/>
 					<input type="button" value=" 수정취소  " class ="btn btn-warning" onclick="javascript:location.href='<%=cp%>/';">
+				</c:if>
+			</div>
+			
+			<div class="form-group text-right"  >
+				<c:if test="${mode=='update'}">
+					<input type="hidden" name = "userId" value="${dto.userId }">
+					<a href="<%=cp%>/member/leave.do"" style="color: orange; border-bottom: 1px solid orange ">배달의 나라 탈퇴하기</a>
 				</c:if>
 			</div>
 			

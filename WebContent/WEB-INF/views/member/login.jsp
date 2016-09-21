@@ -58,11 +58,11 @@ function sendLogin(){
 				<h2>배달의 나라 로그인</h2>
 			</div>
 			<div class="col-md-5 col-md-offset-3">
-				<div class="login-box well">
+				<div class="pwdChk">
 					<form name="loginForm" accept-charset="UTF-8" role="form" method="post" action="">
-						<legend>로그인</legend>
+						<h3>로그인</h3>
 						<div class="form-group">
-							<label for="username-email">아이디</label> <input name="userId"
+							<label for="userId">아이디</label> <input name="userId"
 								value='' id="userId" placeholder="UserId" type="text"
 								class="form-control" />
 						</div>
@@ -76,13 +76,13 @@ function sendLogin(){
 								class="btn btn-default btn-login-submit btn-block m-t-md"
 								value="Login" onclick="sendLogin();"/>
 						</div>
-						<div class="form-group">
+						<div class="form-group" align="center">
 						<span class='text-center'>
-						<a href="#"
+						<a href="<%=cp%>/member/searchId.do"
 							class="text-sm">ID 찾기</a></span>
-						&nbsp;|&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;
 						<span class='text-center'>
-						<a href="#"
+						<a href="<%=cp%>/member/searchPwd.do"
 							class="text-sm">비밀번호 찾기</a></span></div>
 						<hr />
 						<div class="form-group">

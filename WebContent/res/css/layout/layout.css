@@ -183,3 +183,14 @@
     margin-bottom: 0;
   }
 }
+
+/** login pwdChk **/
+.pwdChk {
+  min-height: 20px;
+  padding: 19px;
+  margin: 20px auto 20px;
+  background-color: #FAE0D4;
+  border: 1px solid #FFC19E;
+  border-radius: 4px;
+}
+

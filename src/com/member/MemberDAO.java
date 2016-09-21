@@ -132,6 +132,71 @@ public class MemberDAO {
 		 
 		 return dto;
 	 }
+	 
+	 public int updateMember(MemberDTO dto){
+		 int result=0;
+		 PreparedStatement pstmt=null;
+		 String sql;
+		 
+		 try {
+			//member1 정보수정
+			sql = "UPDATE member1 SET userName=?, userPwd=? WHERE userId=?";
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getUserName());
+			pstmt.setString(2, dto.getUserPwd());
+			pstmt.setString(3, dto.getUserId());
+			
+			result=pstmt.executeUpdate();
+			pstmt.close();
+			pstmt=null;
+			
+			//member2 정보수정
+			sql=null;
+			sql = "UPDATE member2 SET email=?, tel=?, addr1=?, addr2=? WHERE userId=?";
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getEmail());
+			pstmt.setString(2, dto.getTel());
+			pstmt.setString(3, dto.getAddr1());
+			pstmt.setString(4, dto.getAddr2());
+			pstmt.setString(5, dto.getUserId());
+			
+			result=pstmt.executeUpdate();
+			pstmt.close();
+			pstmt = null;
+			
+			result = 1;  //정상적으로 작동되면 1을 넘겨줌.
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		 
+		 return result;
+	 }
+	 
+	 public int deleteMember(String userId){
+		 int result = 0;
+		 PreparedStatement pstmt=null;
+		 String sql;
+		 
+		 try {
+			 sql = "UPDATE member1 SET enabled=0 WHERE userId=?";
+			 
+			 pstmt = conn.prepareStatement(sql);
+			 
+			 pstmt.setString(1, userId);
+			 result = pstmt.executeUpdate();
+			 
+			 pstmt.close();
+			 pstmt = null;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		 
+		 return result;
+	 }
 	
 	
 
