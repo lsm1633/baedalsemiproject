@@ -40,7 +40,7 @@
 				<dd><a href="<%=cp%>/store/list.do"><img src="<%=cp%>/res/images/jungkukzip.png"class="img-circle"></a></dd>
 			</dl>
 			<dl style="margin: 15px 30px 15px;">
-				<dd><a href="<%=cp%>/store/list.do"><img src="<%=cp%>/res/images/bunsik.png"class="img-circle" style="border: 1px solid #ccc"></a></dd>
+				<dd><a href="<%=cp%>/store/list.do"><img src="<%=cp%>/res/images/bunsik.png"class="img-circle"></a></dd>
 				<dd><a href="<%=cp%>/store/list.do"><img src="<%=cp%>/res/images/jokbal.png"class="img-circle"></a></dd>
 				<dd><a href="<%=cp%>/store/list.do"><img src="<%=cp%>/res/images/hansik.jpg"class="img-circle"></a></dd>
 			</dl>

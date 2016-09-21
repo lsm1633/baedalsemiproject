@@ -50,7 +50,7 @@
          <div class="row1">
           <div class="col-sm-5 col-md-4">
            <div class="thumbnail">
-            <img src="<%=cp%>/res/images/${dto.imageFilename}" style="float: left" width="200px" height="150" border="1px solid #ccc"> 
+            <img src="<%=cp%>/res/images/${dto.imageFilename}" style="float: left" width="200px" height="150" border="1px solid #ccc" class="img-circle"> 
              <div class="caption">
              <h3>${dto.storeName}</h3>
              <p>주소: ${dto.storeAddr} <br> 전화번호: ${dto.storeTel}</p>   

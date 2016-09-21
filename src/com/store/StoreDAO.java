@@ -71,11 +71,12 @@ public class StoreDAO {
 		
 		//SELECT NVL(COUNT(*), 0) FROM store WHERE region = 'seoul' AND INSTR(storeName, '½ÅÃÌ') >= 1;
 		try {
-        	sql="SELECT NVL(COUNT(*), 0) FROM store WHERE region = " + searchKey + " AND storeName = ?";
+        	sql="SELECT NVL(COUNT(*), 0) FROM store WHERE region = ? AND INSTR(storeName, ?) >= 1";
         	
 
             pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1, searchValue);
+            pstmt.setString(1, searchKey);
+            pstmt.setString(2, searchValue);
 
             rs=pstmt.executeQuery();
 
@@ -137,7 +138,7 @@ public class StoreDAO {
 			sb.append("SELECT * FROM (");
 			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
 			sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
-			sb.append("		FROM store WHERE region =" + searchKey );
+			sb.append("		FROM store WHERE region = ? " );
 			if(searchValue!=null)
 				sb.append(" AND INSTR(storeName, ?) >= 1 ORDER BY storeId DESC");
 			else
@@ -147,9 +148,10 @@ public class StoreDAO {
 			
 			pstmt = conn.prepareStatement(sb.toString());
 			
-			pstmt.setString(1, searchValue);
-			pstmt.setInt(2, end);
-			pstmt.setInt(3, start);
+			pstmt.setString(1, searchKey);
+			pstmt.setString(2, searchValue);
+			pstmt.setInt(3, end);
+			pstmt.setInt(4, start);
 			
 			rs = pstmt.executeQuery();
 			
