@@ -72,6 +72,8 @@ public class CeoMemberServlet extends MyServlet{
 	    	
 	    	dto.setCeoId(req.getParameter("ceoId"));
 	    	dto.setCeoPwd(req.getParameter("ceoPwd"));
+	    	dto.setAskPwd(req.getParameter("askPwd"));
+	    	dto.setAnsPwd(req.getParameter("ansPwd"));
 	    	dto.setCeoName(req.getParameter("ceoName"));
 	    	
 	    	dto.setCeoTel1(req.getParameter("ceoTel1"));
@@ -87,6 +89,7 @@ public class CeoMemberServlet extends MyServlet{
 	    	
 	    	dto.setStoreName(req.getParameter("storeName"));
 	    	dto.setCeoCodeNum(req.getParameter("ceoCodeNum"));
+	    	dto.setStoreAddr(req.getParameter("storeAddr"));
 	    	dto.setStoreTel(req.getParameter("storeTel"));
 	    	dto.setStoreType(req.getParameter("storeType"));
 	    	

@@ -292,7 +292,7 @@ function chkId(){
 			<div class="form-group text-right"  >
 				<c:if test="${mode=='update'}">
 					<input type="hidden" name = "userId" value="${dto.userId }">
-					<a href="<%=cp%>/member/leave.do"" style="color: orange; border-bottom: 1px solid orange ">배달의 나라 탈퇴하기</a>
+					<a href="<%=cp%>/member/leave.do" style="color: orange; border-bottom: 1px solid orange ">배달의 나라 탈퇴하기</a>
 				</c:if>
 			</div>
 			

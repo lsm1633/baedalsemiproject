@@ -85,13 +85,34 @@
 		</a>
 	</div>
 </div>
+
 	<div style="margin: 120px auto 30px" align="center">
 		<a href="<%=cp%>/game/sadari.do"><img src="<%=cp%>/res/images/game.png"></a>
 	</div>
+		
+	<div class = "main-carousel" align="center">
+		
+		<h3 class="glyphicon glyphicon-book">공지사항</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="더보기" onclick="javascript:location.href='<%=cp%>/notice/notice.do';"><br>
+			
+			<div class="table-responsive">
+			<table class="table table-hover">
+				<c:forEach var="dto" items="${listNotice}">
+				     <tr>
+		               <td class="text-center"><span style="display: inline-block;width: 28px;height:18px;line-height:18px; background: #ED4C00;color: #FFFFFF">공지</span></td>
+		               <td><a href="${articleUrl}&num=${dto.num}">${dto.subject}</a></td>                           
+		               <td class="text-center">${dto.created}</td>
+		               <td><br></td>                                                   
+			         </tr>
+		                        	         
+	    		</c:forEach>
+	    	</table>	
+			</div>
+		<h3 class="glyphicon glyphicon-book">이용방법</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="자세히" onclick="javascript:location.href='#';"><br>		
+		
+	</div>
 	
-	
-	<div class="embed-responsive embed-responsive-4by3">
-	  <iframe width="600" class="embed-responsive-item" src="//www.youtube.com/embed/E_c1ouE2X5E" frameborder="0"></iframe>
+	<div style="margin: 120px auto 30px" align="center">
+	  <iframe width="500" height="350" src="https://www.youtube.com/embed/E_c1ouE2X5E" ></iframe>
 	</div>
 
 

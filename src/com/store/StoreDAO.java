@@ -71,19 +71,26 @@ public class StoreDAO {
 		
 		//SELECT NVL(COUNT(*), 0) FROM store WHERE region = 'seoul' AND INSTR(storeName, '½ÅÃÌ') >= 1;
 		try {
+			if(searchKey.equals("all")){
+				sql="SELECT NVL(COUNT(*), 0) FROM store WHERE INSTR(storeName, ?) >= 1";
+				
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, searchValue);
+			} else {
         	sql="SELECT NVL(COUNT(*), 0) FROM store WHERE region = ? AND INSTR(storeName, ?) >= 1";
         	
 
             pstmt=conn.prepareStatement(sql);
             pstmt.setString(1, searchKey);
             pstmt.setString(2, searchValue);
-
+			}
             rs=pstmt.executeQuery();
 
             if(rs.next())
                 result=rs.getInt(1);
             rs.close();
             pstmt.close();
+			
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

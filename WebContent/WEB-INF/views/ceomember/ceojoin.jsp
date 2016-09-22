@@ -40,6 +40,54 @@ function ceomemberok() {
 	var f = document.ceomemberForm;
 	var str;
 	
+	str=f.ceoId.value;
+	if(!str) {
+		alert("아이디를 입력하세요. ");
+		f.ceoId.focus();
+		return;
+	}
+	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
+		alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
+		f.userId.focus();
+		return;
+	}
+	f.ceoId.value = str;
+	
+	
+	str = f.ceoPwd.value;
+	if(!str) {
+		alert("패스워드를 입력하세요. ");
+		f.ceoPwd.focus();
+		return;
+	}
+	if(!/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/i.test(str)) { 
+		alert("패스워드는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.");
+		f.ceoPwd.focus();
+		return;
+	}
+	f.ceoPwd.value = str;
+
+	if(str!= f.ceoPwd1.value) {
+        alert("패스워드가 일치하지 않습니다. ");
+        f.ceoPwd1.focus();
+        return;
+	}
+	
+	str = f.askPwd.value;
+	if(!str) {
+		alert("패스워드 질문을 입력하세요. ");
+		f.askPwd.focus();
+		return;
+	}
+	
+	str = f.ansPwd.value;
+	if(!str) {
+		alert("패스워드 대답을 입력하세요. ");
+		f.ansPwd.focus();
+		return;
+	}
+	
+		
 	str = f.ceoName.value;
     if(!str) {
         alert("이름을 입력하세요. ");
@@ -116,38 +164,41 @@ function ceomemberok() {
         return;
     }      
 	
-	str=f.ceoId.value;
-	if(!str) {
-		alert("아이디를 입력하세요. ");
-		f.ceoId.focus();
-		return;
-	}
-	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
-		alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
-		f.userId.focus();
-		return;
-	}
-	f.ceoId.value = str;
-	
-	
-	str = f.ceoPwd.value;
-	if(!str) {
-		alert("패스워드를 입력하세요. ");
-		f.ceoPwd.focus();
-		return;
-	}
-	if(!/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/i.test(str)) { 
-		alert("패스워드는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.");
-		f.ceoPwd.focus();
-		return;
-	}
-	f.ceoPwd.value = str;
-
-	if(str!= f.ceoPwd1.value) {
-        alert("패스워드가 일치하지 않습니다. ");
-        f.ceoPwd1.focus();
+    str = f.storeName.value;
+    if(!str) {
+        alert("가게이름을 입력하세요. ");
+        f.storeName.focus();
         return;
-	}    
+    }
+    
+    str = f.ceoCodeNum.value;
+    if(!str) {
+        alert("사업자등록번호를 입력하세요. ");
+        f.ceoCodeNum.focus();
+        return;
+    }
+    
+    str = f.storeAddr.value;
+    if(!str) {
+        alert("가게주소를 입력하세요. ");
+        f.storeAddr.focus();
+        return;
+    }
+    
+    str = f.storeTel.value;
+    if(!str) {
+        alert("가게 전화번호를 입력하세요. ");
+        f.storeTel.focus();
+        return;
+    }
+    
+    str = f.storeType.value;
+    if(!str) {
+        alert("가게 종류를 선택하세요. ");
+        f.storeType.focus();
+        return;
+    }
+	    
     
   
     var mode="${mode}";
@@ -202,7 +253,7 @@ function setEmail() {
 #category {
 	float: left;
 	width: 200px;
-	height: 905px;
+	height: 1005px;
 	background: #DCDCDC;
 	font-size: 13pt;
 	font-weight: 500;
@@ -243,7 +294,7 @@ function setEmail() {
 }
 
 #accountInfo {
-	height:250px; line-height: 250px;
+	height:350px; line-height: 350px;
 	margin: 0px; padding: 0px;
 }
 
@@ -328,15 +379,23 @@ select {
 		<div id=category>
 		<%/*항목 카테고리 컬럼 레이아웃 */%>
 		 	<dl class=row01 style="border-top: 3px solid DarkSlateGrey ;">
+				<dd id=accountInfo>계정 정보</dd>		 	
 		 		<dd id=personal>사장님 정보</dd>
-		 		<dd id=myStore>내 업소 정보</dd>
-		 		<dd id=accountInfo>계정 정보</dd>
+		 		<dd id=myStore>내 업소 정보</dd>		 		
 		 	</dl>
 		</div>
 		
 		<div id=item>
 		<%/*항목 컬럼 레이아웃 */%>	
 			<dl class=row02 style="border-top: 3px solid DarkSlateGrey ;">
+				<dd></dd>
+		 		<dd>아이디</dd>
+		 		<dd>비밀번호 입력</dd>
+		 		<dd>비밀번호 확인</dd>
+		 		<dd>비밀번호 질문</dd>
+		 		<dd>비밀번호 대답</dd>		 		
+		 		<dd style="border-bottom: 1px solid silver;"></dd>
+		 		
 		 		<dd></dd>
 		 		<dd>사장님 성함</dd>
 		 		<dd>휴대폰 번호</dd>
@@ -347,16 +406,12 @@ select {
 		 		<dd></dd>
 		 		<dd>점포명</dd>
 		 		<dd>사업자 등록번호</dd>
-		 		<dd>사업자 등록증 첨부</dd>
+		 		<dd>점포 주소</dd>
 		 		<dd>점포 전화번호</dd>
 		 		<dd>카테고리</dd>
 		 		<dd style="border-bottom: 1px solid silver;"></dd>
 		 		
-		 		<dd></dd>
-		 		<dd>아이디</dd>
-		 		<dd>비밀번호 입력</dd>
-		 		<dd>비밀번호 확인</dd>
-		 		<dd style="border-bottom: 1px solid silver;"></dd>		 		
+		 				 		
 		 	</dl>		
 		</div>
 		
@@ -364,15 +419,47 @@ select {
 		<div id=input>
 		<%/* 입력란 레이아웃 */%>
 			<dl class=row03 style="border-top: 3px solid DarkSlateGrey ;">
+				<dd></dd>
+		 		<dd>
+		 			<%/* 아이디 */%>
+		 			<input type="text" name="ceoId" size="50" maxlength="20" value="${param.ceoId}"
+		 				placeholder="영문자와 숫자합쳐 5~10자 첫글자는 영문자">&nbsp;
+					<input type="button" name="check_bNum" class="chBtn" value="중복확인 " onclick="chkceoId();"><span style="color: blue;">${message2}</span>					
+				</dd>
+				
+		 		<dd>
+		 			<%/* 비밀번호 */%>
+		 			<input type="password" name="ceoPwd" size="50" maxlength="20"
+		 				placeholder="5~10자이며 하나 이상의 숫자나 특수문자가 포함">		 			
+		 		</dd>
+		 		
+		 		<dd>
+		 			<%/* 비밀번호 확인 */%>
+		 			<input type="password" name="ceoPwd1" size="50" maxlength="20"
+		 				placeholder="위 비밀번호를 한번 더 입력해 주세요">
+		 		</dd>
+		 		
+		 		<dd>
+		 			<%/* 비밀번호 질문 */%>
+		 			<input type="text" name="askPwd" size="50" maxlength="20" value="${param.askPwd}">
+		 		</dd>
+		 		
+		 		<dd>
+		 			<%/* 비밀번호 대답 */%>
+		 			<input type="text" name="ansPwd" size="50" maxlength="20" value="${param.ansPwd}">
+		 		</dd>
+		 		
+		 		<dd style="border-bottom: 1px solid silver;"></dd>			
+				
 		 		<dd></dd>
 		 		<dd>
 		 			<%/* 사장성명 */%>	 			
-		 			<input type="text" name="ceoName" size="28" value="${dto.ceoName}">		 			
+		 			<input type="text" name="ceoName" size="28" value="${param.ceoName}">		 			
 		 		</dd>
 		 				 		
 		 		<dd>
 		 			<%/* 전화번호 */%>
-		 			<select name="ceoTel1">
+		 			<select name="ceoTel1" >
 		 				<option value="">선택</option>
 		 				<option value="010">010</option>
 		 				<option value="011">011</option>
@@ -381,8 +468,8 @@ select {
 		 				<option value="018">018</option>
 		 				<option value="019">019</option>		 			
 		 			</select>&nbsp;
-		 			<input type="text" name="ceoTel2" size="11" maxlength="4">&nbsp;
-		 			<input type="text" name="ceoTel3" size="11" maxlength="4">&nbsp;
+		 			<input type="text" name="ceoTel2" value="${param.ceoTel2}" size="11" maxlength="4" >&nbsp;
+		 			<input type="text" name="ceoTel3" value="${param.ceoTel3}" size="11" maxlength="4">&nbsp;
 		 			
 		 		</dd>
 		 		
@@ -413,8 +500,8 @@ select {
 		 		<dd>
 		 			<%/* 이메일 */%>	 			 
 		 			
-						<input type="text" name="ceoEmail1">&nbsp;@&nbsp;
-						<input type="text" name="ceoEmail2">
+						<input type="text" name="ceoEmail1" value="${param.ceoEmail1}" >&nbsp;@&nbsp;
+						<input type="text" name="ceoEmail2" >
 		 				<select name="getEmail" onchange="setEmail();">
 							<option value="direct" selected="selected">직접입력&nbsp;&nbsp;</option>
 							<option value="naver.com">naver.com</option>
@@ -432,25 +519,24 @@ select {
 		 		
 		 		<dd>
 		 			<%/* 업소명 */%> 			
-					<input type="text" name="storeName" size="40">&nbsp;
+					<input type="text" name="storeName" value="${param.storeName}" size="40">&nbsp;
 				</dd>
 		 		
 		 		<dd>
 		 			<%/* 사업자등록번호 */%> 			
-					<input type="text" name="ceoCodeNum" size="40">&nbsp;
+					<input type="text" name="ceoCodeNum" size="40" value="${param.ceoCodeNum}">&nbsp;
 					<input type="button" name="check_bNum" class="chBtn" value="중복확인 " onclick="chkceoCodeNum();"><span style="color: blue;">${message1}</span>
 					
 				</dd>
 		 		
 		 		<dd>
-		 			<%/* 사업자등록증 첨부 */%>
-		 			<input type="text" name="licenceUpload" size="40">&nbsp;
-					<input type="button" name="check_bNum" class="chBtn" value="첨부하기 ">
+		 			<%/* 점포 주소 */%>
+		 			<input type="text" name="storeAddr"  value="${param.storeAddr}" size="60">
 				</dd>
 				
 				<dd>
 		 			<%/* 점포 전화번호 */%> 			
-					<input type="text" name="storeTel" size="40">&nbsp;
+					<input type="text" name="storeTel"   value="${param.storeTel}" size="40">&nbsp;
 				</dd>
 		 		
 		 		<dd>
@@ -464,30 +550,9 @@ select {
 		 			</select>
 		 		</dd>
 		 		
-		 		<dd style="border-bottom: 1px solid silver;"></dd>
-		 		
+		 		<dd style="border-bottom: 1px solid silver;"></dd>		 		
 		 				 		
-		 		<dd></dd>
-		 		<dd>
-		 			<%/* 아이디 */%>
-		 			<input type="text" name="ceoId" size="35" maxlength="20"
-		 				placeholder="영문자와 숫자합쳐 5~10자 첫글자는 영문자">&nbsp;
-					<input type="button" name="check_bNum" class="chBtn" value="중복확인 " onclick="chkceoId();"><span style="color: blue;">${message2}</span>					
-				</dd>
-				
-		 		<dd>
-		 			<%/* 비밀번호 */%>
-		 			<input type="password" name="ceoPwd" size="35" maxlength="20"
-		 				placeholder="5~10자이며 하나 이상의 숫자나 특수문자가 포함">		 			
-		 		</dd>
-		 		
-		 		<dd>
-		 			<%/* 비밀번호 확인 */%>
-		 			<input type="password" name="ceoPwd1" size="35" maxlength="20"
-		 				placeholder="위 비밀번호를 한번 더 입력해 주세요">
-		 		</dd>
-		 		
-		 		<dd style="border-bottom: 1px solid silver;"></dd>			 		
+		 		 		
 		 	</dl>
 		</div>
 		
@@ -495,9 +560,12 @@ select {
 		<div id=footer>
 			<br>
 			<input type="button" name="complete_btn" class="cbtn" value="가입완료 " onclick="ceomemberok();">
+			<input type="reset" class="cbtn" value="다시하기 ">
+			<input type="button" name="complete_btn" class="cbtn" value="가입취소 " onclick="javascript:location.href='<%=cp%>/ceomain/ceomain.do';">
 		</div>
 	</div>
 </div>
+
 </form>
 
 <div align="center">

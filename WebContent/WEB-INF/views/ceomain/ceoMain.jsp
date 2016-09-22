@@ -112,7 +112,7 @@
 									
 								<li role="presentation"  style="font-size: 35pt; font-family: 'Nanum Pen Script', serif;"><a href="<%=cp%>/ceomember/logout.do">로그아웃</a></li>
 								
-								<li role="presentation"  style="font-size: 35pt; font-family: 'Nanum Pen Script', serif;"><a href="<%=cp%>/business/business.do">가게관리</a></li>
+								<li role="presentation"  style="font-size: 35pt; font-family: 'Nanum Pen Script', serif;"><a href="<%=cp%>/storeMenu/menu.do">가게관리</a></li>
 								<li role="presentation"  style="font-size: 35pt; font-family: 'Nanum Pen Script', serif;"><a href="<%=cp%>/ceomoney/ceomoney.do">정산확인</a></li>
 			        			
 							</ul>

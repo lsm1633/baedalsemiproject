@@ -1,12 +1,12 @@
 package com.ceomember;
 
 public class CeoMemberDTO {
-	private String ceoId,ceoName,ceoPwd;
+	private String ceoId,ceoName,ceoPwd,askPwd,ansPwd;
 	private String ceoTel,ceoTel1,ceoTel2,ceoTel3;
 	private String ceoBirth,ceoBirth1,ceoBirth2,ceoBirth3;
 	private String ceoEmail,ceoEmail1,ceoEmail2;
 	private int enabled;
-	private String storeName,ceoCodeNum,storeTel,storeType;
+	private String storeName,ceoCodeNum, storeAddr, storeTel,storeType;
 	
 	public String getCeoId() {
 		return ceoId;
@@ -121,6 +121,24 @@ public class CeoMemberDTO {
 	}
 	public void setStoreType(String storeType) {
 		this.storeType = storeType;
+	}
+	public String getStoreAddr() {
+		return storeAddr;
+	}
+	public void setStoreAddr(String storeAddr) {
+		this.storeAddr = storeAddr;
+	}
+	public String getAskPwd() {
+		return askPwd;
+	}
+	public void setAskPwd(String askPwd) {
+		this.askPwd = askPwd;
+	}
+	public String getAnsPwd() {
+		return ansPwd;
+	}
+	public void setAnsPwd(String ansPwd) {
+		this.ansPwd = ansPwd;
 	}
 	
 	
