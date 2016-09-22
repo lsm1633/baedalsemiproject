@@ -1,6 +1,9 @@
 package com.ceomember;
 
+
+import java.io.File;
 import java.io.IOException;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.util.MyServlet;
 
 @WebServlet("/ceomember/*")
@@ -22,7 +27,7 @@ public class CeoMemberServlet extends MyServlet{
 	    String cp=req.getContextPath();
 	    
 	    CeoMemberDAO dao=new CeoMemberDAO();
-	    HttpSession session = req.getSession();
+	    HttpSession session = req.getSession();	    	    
 	    
 	    if(uri.indexOf("join.do")!=-1){
 	    	//회원가입 폼
@@ -33,7 +38,18 @@ public class CeoMemberServlet extends MyServlet{
 	    	forward(req, resp, "/WEB-INF/views/ceomember/ceojoin.jsp");
 	    }else if(uri.indexOf("join_idchk.do")!=-1){
 	    	//id중복 확인
-	    	String ceoId = req.getParameter("ceoId");
+	    	String pathname="c:/"+File.separator+"storePhoto";
+	    	File f=new File(pathname);
+	    	if(! f.exists()){ // 폴더가 존재하지 않으면
+	    		f.mkdirs(); // 모든폴더를 만든다.
+	    	}	    	
+	    	String encType="UTF-8";
+	    	int maxFilesize=5*1024*1024;
+	    	
+	    	MultipartRequest mreq=null;
+	    	mreq=new MultipartRequest(req,pathname,maxFilesize,encType,new DefaultFileRenamePolicy());
+	    	
+	    	String ceoId = mreq.getParameter("ceoId");
 	    	
 	    	CeoMemberDTO dto = dao.readMemberid(ceoId); 
 	    	StringBuffer sb=new StringBuffer();
@@ -51,7 +67,19 @@ public class CeoMemberServlet extends MyServlet{
 	    	
 	    }else if(uri.indexOf("join_numchk.do")!=-1){
 	    	//사업자번호 중복 확인
-	    	String ceoCodeNum = req.getParameter("ceoCodeNum");
+	    	String pathname="c:/"+File.separator+"storePhoto";
+	    	File f=new File(pathname);
+	    	if(! f.exists()){ // 폴더가 존재하지 않으면
+	    		f.mkdirs(); // 모든폴더를 만든다.
+	    	}	    	
+	    	String encType="UTF-8";
+	    	int maxFilesize=5*1024*1024;
+	    	
+	    	MultipartRequest mreq=null;
+	    	mreq=new MultipartRequest(req,pathname,maxFilesize,encType,new DefaultFileRenamePolicy());
+	    	
+	    	
+	    	String ceoCodeNum = mreq.getParameter("ceoCodeNum");
 	    	
 	    	CeoMemberDTO dto = dao.readMembernum(ceoCodeNum); 
 	    	StringBuffer sb=new StringBuffer();
@@ -68,32 +96,50 @@ public class CeoMemberServlet extends MyServlet{
 	    	forward(req, resp, "/WEB-INF/views/ceomember/ceojoin.jsp");
 	    	
 	    }else if(uri.indexOf("join_ok.do")!=-1){
-	    	CeoMemberDTO dto=new CeoMemberDTO();
 	    	
-	    	dto.setCeoId(req.getParameter("ceoId"));
-	    	dto.setCeoPwd(req.getParameter("ceoPwd"));
-	    	dto.setAskPwd(req.getParameter("askPwd"));
-	    	dto.setAnsPwd(req.getParameter("ansPwd"));
-	    	dto.setCeoName(req.getParameter("ceoName"));
+	    	String pathname="c:/"+File.separator+"storePhoto";
+	    	File f=new File(pathname);
+	    	if(! f.exists()){ // 폴더가 존재하지 않으면
+	    		f.mkdirs(); // 모든폴더를 만든다.
+	    	}	    	
+	    	String encType="UTF-8";
+	    	int maxFilesize=5*1024*1024;
 	    	
-	    	dto.setCeoTel1(req.getParameter("ceoTel1"));
-	    	dto.setCeoTel2(req.getParameter("ceoTel2"));
-	    	dto.setCeoTel3(req.getParameter("ceoTel3"));
+	    	MultipartRequest mreq=null;
+	    	mreq=new MultipartRequest(req,pathname,maxFilesize,encType,new DefaultFileRenamePolicy());
 	    	
-	    	dto.setCeoBirth1(req.getParameter("ceoBirth1"));
-	    	dto.setCeoBirth2(req.getParameter("ceoBirth2"));
-	    	dto.setCeoBirth3(req.getParameter("ceoBirth3"));
 	    	
-	    	dto.setCeoEmail1(req.getParameter("ceoEmail1"));
-	    	dto.setCeoEmail2(req.getParameter("ceoEmail2"));
+	    	CeoMemberDTO dto=new CeoMemberDTO();    	
 	    	
-	    	dto.setStoreName(req.getParameter("storeName"));
-	    	dto.setCeoCodeNum(req.getParameter("ceoCodeNum"));
-	    	dto.setStoreAddr(req.getParameter("storeAddr"));
-	    	dto.setStoreTel(req.getParameter("storeTel"));
-	    	dto.setStoreType(req.getParameter("storeType"));
+	    	dto.setCeoId(mreq.getParameter("ceoId"));
+	    	dto.setCeoPwd(mreq.getParameter("ceoPwd"));
+	    	dto.setAskPwd(mreq.getParameter("askPwd"));
+	    	dto.setAnsPwd(mreq.getParameter("ansPwd"));
+	    	dto.setCeoName(mreq.getParameter("ceoName"));
+	    	
+	    	dto.setCeoTel1(mreq.getParameter("ceoTel1"));
+	    	dto.setCeoTel2(mreq.getParameter("ceoTel2"));
+	    	dto.setCeoTel3(mreq.getParameter("ceoTel3"));
+	    	
+	    	dto.setCeoBirth1(mreq.getParameter("ceoBirth1"));
+	    	dto.setCeoBirth2(mreq.getParameter("ceoBirth2"));
+	    	dto.setCeoBirth3(mreq.getParameter("ceoBirth3"));
+	    	
+	    	dto.setCeoEmail1(mreq.getParameter("ceoEmail1"));
+	    	dto.setCeoEmail2(mreq.getParameter("ceoEmail2"));
+	    	
+	    	dto.setStoreName(mreq.getParameter("storeName"));
+	    	dto.setCeoCodeNum(mreq.getParameter("ceoCodeNum"));
+	    	
+	    	dto.setStoreAddr1(mreq.getParameter("storeAddr1"));
+	    	dto.setStoreAddr2(mreq.getParameter("storeAddr2"));
+	    	
+	    	dto.setStoreTel(mreq.getParameter("storeTel"));
+	    	dto.setStoreType(mreq.getParameter("storeType"));
+	    	dto.setStorePhoto(mreq.getFilesystemName("storePhoto"));	    	
 	    	
 	    	int result=dao.insertCeoMember(dto);
+	    	
 	    	if(result!=1){
 				String message="회원 가입이 실패 했습니다.";
 				
@@ -119,7 +165,7 @@ public class CeoMemberServlet extends MyServlet{
 	        
 	        CeoMemberDTO dto = dao.readMemberid(ceoId); 
 	        
-	        if(dto!=null && dto.getCeoPwd().equals(ceoPwd)){
+	        if(dto!=null && dto.getCeoPwd().equals(ceoPwd)&& dto.getEnabled()==1){
 	        	 //로그인 성공
 	        	
 	        	SessionInfo info = new SessionInfo();

@@ -13,6 +13,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>배달의 나라</title>
+
 <link rel="stylesheet" href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
 <link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap.min.css" type="text/css"/>
 <link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap-theme.min.css" type="text/css"/>
@@ -33,18 +34,20 @@
 		<div class="body-title">
 			<h3 align="center">MENU 선택</h3>
 		</div>
+		<!-- <form name="searchForm" method="post" class="form-inline"> -->
 		<div class="body-menu" align="center">
 			<dl style="margin: 15px 30px 15px;">
-				<dd><a href="<%=cp%>/store/list.do"><img src="<%=cp%>/res/images/chicken.png"class="img-circle"></a></dd>
-				<dd><a href="<%=cp%>/store/list.do"><img src="<%=cp%>/res/images/pizza.png" class="img-circle"></a></dd>
-				<dd><a href="<%=cp%>/store/list.do"><img src="<%=cp%>/res/images/jungkukzip.png"class="img-circle"></a></dd>
+				<dd><a onclick="searchList('chicken');"><img src="<%=cp%>/res/images/chicken.png"class="img-circle"></a></dd>
+				<dd><a onclick="searchList('pizza');"><img src="<%=cp%>/res/images/pizza.png" class="img-circle"></a></dd>
+				<dd><a onclick="searchList('jungkukzip');"><img src="<%=cp%>/res/images/jungkukzip.png"class="img-circle"></a></dd>
 			</dl>
 			<dl style="margin: 15px 30px 15px;">
-				<dd><a href="<%=cp%>/store/list.do"><img src="<%=cp%>/res/images/bunsik.png"class="img-circle"></a></dd>
-				<dd><a href="<%=cp%>/store/list.do"><img src="<%=cp%>/res/images/jokbal.png"class="img-circle"></a></dd>
-				<dd><a href="<%=cp%>/store/list.do"><img src="<%=cp%>/res/images/hansik.jpg"class="img-circle"></a></dd>
+				<dd><a onclick="searchList('bunsik');"><img src="<%=cp%>/res/images/bunsik.png"class="img-circle"></a></dd>
+				<dd><a onclick="searchList('jokbal');"><img src="<%=cp%>/res/images/jokbal.png"class="img-circle"></a></dd>
+				<dd><a onclick="searchList('hansik');"><img src="<%=cp%>/res/images/hansik.jpg"class="img-circle"></a></dd>
 			</dl>
 		</div>
+		<!-- </form> -->
 	</div>
 	
 	<div class = "main-carousel" align="center">

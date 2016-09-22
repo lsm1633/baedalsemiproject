@@ -56,6 +56,36 @@ public class MemberDAO {
 		return result;		//1을 return하면 회원가입폼 정상작성.
 	}
 	
+	//회원ID찾기
+	public int searchId(String userName){
+		PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    int check = 0;
+	    
+	    String sql=null;
+	    try {
+			sql = "SELECT COUNT(m1.userId) as cnt FROM member1 m1";
+			sql +=" LEFT OUTER JOIN member2 m2 ON m1.userId=m2.userId";
+			sql += " WHERE userName=?";
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, userName);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()==true){
+		    	check = rs.getInt("cnt");
+		    }
+		    
+		    rs.close();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	    
+	    return check;
+	}
+	
 	//아이디 중복체크
 	public int idChk(String userId){
 		PreparedStatement pstmt = null;
@@ -81,10 +111,58 @@ public class MemberDAO {
 		    
 		} catch (Exception e) {
 			System.out.println(e.toString());
+			
 		}
 	    
 	    return check;
 	}
+	public MemberDTO readNameMember(String userName){
+		 MemberDTO dto = null;
+		 
+		 PreparedStatement pstmt = null;
+		 ResultSet rs = null;
+		 
+		 StringBuffer sb = new StringBuffer();
+		 
+		 try {
+			sb.append("SELECT m1.userId, userName, userPwd, enabled, created_date, modify_date,");
+			sb.append(" email, tel, addr1, addr2");
+			sb.append(" FROM member1 m1");
+			sb.append(" LEFT OUTER JOIN member2 m2 ON m1.userId=m2.userId");
+			sb.append(" WHERE userName = ?");
+			
+			pstmt=conn.prepareStatement(sb.toString());
+			   
+			pstmt.setString(1, userName);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				dto = new MemberDTO();
+				dto.setUserId(rs.getString("userId"));
+				dto.setUserName(rs.getString("userName"));
+				dto.setUserPwd(rs.getString("userPwd"));
+				dto.setEnabled(rs.getInt("enabled"));
+				   
+				dto.setCreated_date(rs.getString("created_date"));
+				dto.setModify_date(rs.getString("modify_date"));
+				
+				dto.setEmail(rs.getString("email"));
+				dto.setTel(rs.getString("tel"));
+				dto.setAddr1(rs.getString("addr1"));
+				dto.setAddr2(rs.getString("addr2"));
+			}
+			rs.close();
+			pstmt.close();
+			   
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			System.out.println("여기일까?");
+		}
+		 
+		 return dto;
+	 }
+	
 	
 	//정보를 가져옴.
 	 public MemberDTO readMember(String userId){
@@ -131,6 +209,32 @@ public class MemberDAO {
 		}
 		 
 		 return dto;
+	 }
+	 
+	 //비밀번호 변경
+	 public int updatePwd(MemberDTO dto){
+		 int result=0;
+		 PreparedStatement pstmt=null;
+		 String sql;
+		
+		 try {
+			sql = "UPDATE member1 SET userPwd=? WHERE userId = ?";
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getUserPwd());
+			pstmt.setString(2, dto.getUserId());
+			
+			result=pstmt.executeUpdate();
+			pstmt.close();
+			pstmt = null;
+			
+			result = 1;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		 
+		 return result;
 	 }
 	 
 	 public int updateMember(MemberDTO dto){

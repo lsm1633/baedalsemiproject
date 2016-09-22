@@ -84,11 +84,105 @@ public class MemberServlet extends MyServlet{
 	    	
 	    }
 	    else if(uri.indexOf("searchId.do")!=-1){
-	    	forward(req, resp, "/WEB-INF/views/member/searchId.jsp");
+	    	//id 찾기
+	    	req.setAttribute("title", "ID 찾기");
+	    	req.setAttribute("mode", "id");
+	    	forward(req, resp, "/WEB-INF/views/member/search.jsp");
+	    }
+	    else if(uri.indexOf("searchId_ok.do")!=-1){
+	    	//id찾기 폼
+	    	
+	    	String userName = req.getParameter("userName");
+	    	String tel = req.getParameter("tel");
+	    	
+	    	MemberDTO dto = dao.readNameMember(userName);  
+	    	
+	    	int chk = dao.searchId(userName);
+
+
+	    	if(chk == 1 && dto.getEnabled()!=0 &&dto.getTel().equals(tel))
+	    		
+	    		req.setAttribute("message","회원님의 id는 "+dto.getUserId()+" 입니다.");
+		   
+	    	else if(chk == 1 && dto.getEnabled()==0)
+	    			req.setAttribute("message","탈퇴한 계정입니다.");
+	    			
+	    	else if(chk == 0)
+	    		req.setAttribute("message","존재하지 않는 계정입니다.");	
+	    		
+	    	else
+	    		req.setAttribute("message","입력하신 정보가 일치하지 않습니다.");
+	    	
+	    	req.setAttribute("title", "ID 찾기");
+	    	req.setAttribute("mode", "id");
+	    	
+	    	forward(req, resp, "/WEB-INF/views/member/search.jsp");
+	    	
 	    }
 	    
 	    else if(uri.indexOf("searchPwd.do")!=-1){
-	    	forward(req, resp, "/WEB-INF/views/member/searchPwd.jsp");
+	    	req.setAttribute("title", "PWD 찾기");
+	    	req.setAttribute("mode", "pwd");
+	    	
+	    	forward(req, resp, "/WEB-INF/views/member/search.jsp");
+	    }
+	    else if(uri.indexOf("searchPwd_ok.do")!=-1){
+	    	//패스워드 찾기
+	    	String userId = req.getParameter("userId");
+	    	String userName = req.getParameter("userName");
+	    	String tel = req.getParameter("tel");
+	    	String email = req.getParameter("email");
+	    	
+	    	MemberDTO dto = dao.readMember(userId);  
+	    	
+	    	int chk = dao.searchId(userName);
+
+	    	if(chk == 1 && dto.getEnabled()!=0 &&dto.getTel().equals(tel)&& dto.getEmail().equals(email)){
+	    		//일치했을경우 비밀번호 변경
+	    		
+	    		req.setAttribute("userId",dto.getUserId());
+	    		forward(req, resp, "/WEB-INF/views/member/updatePwd.jsp");
+	    		return;
+	    	}
+	    		
+	    	else if(chk == 1 && dto.getEnabled()==0)
+	    			req.setAttribute("message","탈퇴한 계정입니다.");
+	    			
+	    	else if(chk == 0)
+	    		req.setAttribute("message","존재하지 않는 계정입니다.");	
+	    		
+	    	else
+	    		req.setAttribute("message","입력하신 정보가 일치하지 않습니다.");
+	    	
+	    	req.setAttribute("title", "PWD 찾기");
+	    	req.setAttribute("mode", "pwd");
+	    	
+	    	forward(req, resp, "/WEB-INF/views/member/search.jsp");
+	    }
+	    else if(uri.indexOf("updatePwd_ok.do")!=-1){
+	    	String userId = req.getParameter("userId");
+	    	
+	    	MemberDTO dto = dao.readMember(userId);
+
+	        dto.setUserPwd(req.getParameter("userPwd1"));
+	        
+	        int result = dao.updatePwd(dto);
+	        if(result != 1){
+	        	
+	        	req.setAttribute("userId", userId);
+	        	forward(req, resp, "/WEB-INF/views/member/updatePwd.jsp");
+	        	return;
+	        }
+	        
+	        StringBuffer sb = new StringBuffer();
+	        sb.append("비밀번호 수정이 완료되었습니다.<br>");
+	        sb.append("메인화면으로 이동합니다.<br>");
+	        
+	        req.setAttribute("title", "비밀번호 변경");
+	        req.setAttribute("message", sb.toString());
+	        
+	        forward(req, resp, "/WEB-INF/views/member/complete.jsp");
+	    			
 	    }
 	    
 	    else if(uri.indexOf("login.do")!=-1) {

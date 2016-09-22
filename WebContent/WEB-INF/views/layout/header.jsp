@@ -6,8 +6,11 @@
 	String cp = request.getContextPath();
 %>
 <script type="text/javascript">
-function searchList() {
+function searchList(cate) {
 		var f = document.searchForm;
+		if(cate!=undefined)
+			f.cate.value=cate;
+		
 		f.action = "<%=cp %>/store/list.do";
 		f.submit();
 	}
@@ -52,17 +55,18 @@ function searchList() {
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button" onclick="searchList();"><span class="glyphicon glyphicon-search"></span>검색</button>
 						</span></div>
+						<input type="hidden" name="cate">
 					</form>
 				</div>
 			</div>
 			<div class="category">
 				<div align="center" style="margin: 10px">
-					카테고리 : <a href="<%=cp %>/store/list.do?cate=chiken"> 치킨 </a> |
-					<a href="<%=cp%>/store/list.do?cate=jungkukzip"> 중국집 </a> |
-					<a href="<%=cp%>/store/list.do?cate=pizza"> 피자 </a> |
-					<a href="<%=cp%>/store/list.do?cate=bunsik"> 분식,떡볶이 </a> |
-					<a href="<%=cp%>/store/list.do?cate=jokbal"> 족발,보쌈 </a> |
-					<a href="<%=cp%>/store/list.do?cate=hansik"> 한식 </a> 
+					카테고리 : <a onclick="searchList('chicken');"> 치킨 </a> |
+					<a onclick="searchList('jungkukzip');"> 중국집 </a> |
+					<a onclick="searchList('pizza');"> 피자 </a> |
+					<a onclick="searchList('bunsik');"> 분식,떡볶이 </a> |
+					<a onclick="searchList('jokbal');"> 족발,보쌈 </a> |
+					<a onclick="searchList('hansik');"> 한식 </a> 
 				</div>
 			</div>
 		</div>

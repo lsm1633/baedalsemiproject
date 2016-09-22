@@ -88,6 +88,7 @@ function sendLogin(){
 						<div class="form-group">
 							<a href="<%=cp%>/member/join.do" class="btn btn-default btn-block m-t-md"> 회원가입</a>
 						</div>
+						<span style="color: tomato;">${message}</span>
 					</form>
 				</div>
 			</div>

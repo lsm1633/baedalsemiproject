@@ -178,10 +178,17 @@ function ceomemberok() {
         return;
     }
     
-    str = f.storeAddr.value;
+    str = f.storeAddr1.value;
     if(!str) {
         alert("가게주소를 입력하세요. ");
-        f.storeAddr.focus();
+        f.storeAddr1.focus();
+        return;
+    }
+    
+    str = f.storeAddr2.value;
+    if(!str) {
+        alert("가게주소를 입력하세요. ");
+        f.storeAddr2.focus();
         return;
     }
     
@@ -253,7 +260,7 @@ function setEmail() {
 #category {
 	float: left;
 	width: 200px;
-	height: 1005px;
+	height: 1055px;
 	background: #DCDCDC;
 	font-size: 13pt;
 	font-weight: 500;
@@ -289,7 +296,7 @@ function setEmail() {
 }
 
 #myStore {
-	height:350px; line-height: 350px;
+	height:400px; line-height: 400px;
 	margin: 0px; padding: 0px;
 }
 
@@ -372,7 +379,7 @@ select {
   </dl>
 </div>
 
-<form name="ceomemberForm" method="post">
+<form name="ceomemberForm" method="post" enctype="multipart/form-data">
 <div>
 <div id=header>사장님 회원가입</div>
 	<div id=formbody>
@@ -409,6 +416,7 @@ select {
 		 		<dd>점포 주소</dd>
 		 		<dd>점포 전화번호</dd>
 		 		<dd>카테고리</dd>
+		 		<dd>점포사진</dd>
 		 		<dd style="border-bottom: 1px solid silver;"></dd>
 		 		
 		 				 		
@@ -422,7 +430,7 @@ select {
 				<dd></dd>
 		 		<dd>
 		 			<%/* 아이디 */%>
-		 			<input type="text" name="ceoId" size="50" maxlength="20" value="${param.ceoId}"
+		 			<input type="text" name="ceoId" size="50" maxlength="20" value="${params.ceoId}"
 		 				placeholder="영문자와 숫자합쳐 5~10자 첫글자는 영문자">&nbsp;
 					<input type="button" name="check_bNum" class="chBtn" value="중복확인 " onclick="chkceoId();"><span style="color: blue;">${message2}</span>					
 				</dd>
@@ -531,7 +539,13 @@ select {
 		 		
 		 		<dd>
 		 			<%/* 점포 주소 */%>
-		 			<input type="text" name="storeAddr"  value="${param.storeAddr}" size="60">
+		 			<select name="storeAddr1">
+		 				<option value="" selected="selected">선택&nbsp;&nbsp;</option>
+		 				<option value="서울">서울</option>
+		 				<option value="경기">경기</option>
+		 				<option value="인천">인천</option>		 					 			
+		 			</select>
+		 			<input type="text" name="storeAddr2"  value="${param.storeAddr}" size="60">
 				</dd>
 				
 				<dd>
@@ -550,8 +564,12 @@ select {
 		 			</select>
 		 		</dd>
 		 		
-		 		<dd style="border-bottom: 1px solid silver;"></dd>		 		
-		 				 		
+		 		<dd>
+		 			<%/* 가게사진등록  */%>						
+					<input type="file" name="storePhoto" style="height: 35px; border: 0px solid silver;	padding: 0px 0px 0px 0px;">					
+				</dd>
+		 		
+		 		<dd style="border-bottom: 1px solid silver;"></dd>		 				 		
 		 		 		
 		 	</dl>
 		</div>

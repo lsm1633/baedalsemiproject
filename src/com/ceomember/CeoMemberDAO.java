@@ -24,6 +24,10 @@ public class CeoMemberDAO {
 			if(dto.getCeoEmail1().length()!=0&&dto.getCeoEmail2().length()!=0)
 				dto.setCeoEmail(dto.getCeoEmail1()+"@"+dto.getCeoEmail2());
 			
+			if(dto.getStoreAddr1().length()!=0&&dto.getStoreAddr2().length()!=0)
+				dto.setStoreAddr(dto.getStoreAddr1()+" "+dto.getStoreAddr2());
+			
+			
 			sb.append("INSERT INTO ceomember1(ceoId,ceoPwd,askPwd,ansPwd,ceoName,ceoBirth,ceoEmail,ceoTel) VALUES(?,?,?,?,?,?,?,?)");
 			pstmt=conn.prepareStatement(sb.toString());
 			
@@ -43,7 +47,7 @@ public class CeoMemberDAO {
 			
 			sb=new StringBuffer();
 			
-			sb.append("INSERT INTO ceomember2(ceoId,storeName,ceoCodeNum,storeAddr,storeTel,storeType) VALUES(?,?,?,?,?,?)");
+			sb.append("INSERT INTO ceomember2(ceoId,storeName,ceoCodeNum,storeAddr,storeTel,storeType,storePhoto) VALUES(?,?,?,?,?,?,?)");
 			pstmt=conn.prepareStatement(sb.toString());
 			
 			pstmt.setString(1, dto.getCeoId());
@@ -52,6 +56,7 @@ public class CeoMemberDAO {
 			pstmt.setString(4, dto.getStoreAddr());
 			pstmt.setString(5, dto.getStoreTel());
 			pstmt.setString(6, dto.getStoreType());
+			pstmt.setString(7, dto.getStorePhoto());
 			
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -72,7 +77,7 @@ public class CeoMemberDAO {
 		StringBuffer sb = new StringBuffer();
 		
 		try {
-			sb.append("SELECT cm1.ceoId,askPwd,ansPwd,ceoName,ceoPwd,ceoBirth,ceoEmail,ceoTel,storeName,ceoCodeNum,storeAddr,storeTel,storeType "
+			sb.append("SELECT cm1.ceoId,askPwd,ansPwd,ceoName,ceoPwd,ceoBirth,ceoEmail,ceoTel,storeName,ceoCodeNum,storeAddr,storeTel,storeType,storePhoto "
 					+ "FROM ceomember1 cm1 LEFT OUTER JOIN ceomember2 cm2 ON cm1.ceoId=cm2.ceoId WHERE cm1.ceoId=?");
 			
 			pstmt=conn.prepareStatement(sb.toString());
@@ -96,7 +101,7 @@ public class CeoMemberDAO {
 				dto.setStoreAddr(rs.getString("storeAddr"));
 				dto.setStoreTel(rs.getString("storeTel"));
 				dto.setStoreType(rs.getString("storeType"));
-				
+				dto.setStorePhoto(rs.getString("storePhoto"));
 			}
 			rs.close();
 			pstmt.close();
@@ -115,7 +120,7 @@ public class CeoMemberDAO {
 		StringBuffer sb = new StringBuffer();
 		
 		try {
-			sb.append("SELECT cm1.ceoId,askPwd,ansPwd,ceoName,ceoPwd,ceoBirth,ceoEmail,ceoTel,storeName,ceoCodeNum,storeAddr,storeTel,storeType "
+			sb.append("SELECT cm1.ceoId,askPwd,ansPwd,ceoName,ceoPwd,ceoBirth,ceoEmail,ceoTel,storeName,ceoCodeNum,storeAddr,storeTel,storeType,storePhoto "
 					+ "FROM ceomember1 cm1 LEFT OUTER JOIN ceomember2 cm2 ON cm1.ceoId=cm2.ceoId WHERE ceoCodeNum=?");
 			
 			pstmt=conn.prepareStatement(sb.toString());
@@ -139,7 +144,7 @@ public class CeoMemberDAO {
 				dto.setStoreAddr(rs.getString("storeAddr"));
 				dto.setStoreTel(rs.getString("storeTel"));
 				dto.setStoreType(rs.getString("storeType"));
-				
+				dto.setStorePhoto(rs.getString("storePhoto"));
 			}
 			rs.close();
 			pstmt.close();

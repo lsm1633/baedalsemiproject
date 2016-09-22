@@ -42,15 +42,33 @@ public class StoreDAO {
 		return dto;
 	}
 	
-	public int dataCount() {
+
+	public int dataCount(String cate,String searchKey) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
 		
-		try {
-			sql = "SELECT NVL(COUNT(*), 0) FROM store ";
-			pstmt = conn.prepareStatement(sql);
+		try { //가게이름 입력x..
+			if(cate.length()==0 && searchKey.equals("all")){ //그림x , 전부출력
+				sql = "SELECT NVL(COUNT(*), 0) FROM store ";
+				pstmt = conn.prepareStatement(sql);
+			}else if(cate.length()==0){ //그림x , 지역 선택출력
+				sql = "SELECT NVL(COUNT(*), 0) FROM store WHERE region=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, searchKey);
+			}
+			else if(searchKey.equals("all")){ //그림선택, 전부출력
+				sql = "SELECT NVL(COUNT(*), 0) FROM store where cate=? ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, cate);
+			}else { //그림선택, 지역선택출력
+				sql = "SELECT NVL(COUNT(*), 0) FROM store where cate=? and region=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, cate);
+				pstmt.setString(2, searchKey);
+			}
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);
@@ -63,27 +81,38 @@ public class StoreDAO {
 		return result;
 	}
 	
-	public int dataCount(String searchKey, String searchValue) {
+	public int dataCount(String cate,String searchKey, String searchValue) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
 		
-		//SELECT NVL(COUNT(*), 0) FROM store WHERE region = 'seoul' AND INSTR(storeName, '신촌') >= 1;
-		try {
-			if(searchKey.equals("all")){
+		
+		try { //가게이름 입력시..
+			if(cate.length()==0 && searchKey.equals("all")){ //그림x , 전부출력
 				sql="SELECT NVL(COUNT(*), 0) FROM store WHERE INSTR(storeName, ?) >= 1";
 				
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setString(1, searchValue);
-			} else {
-        	sql="SELECT NVL(COUNT(*), 0) FROM store WHERE region = ? AND INSTR(storeName, ?) >= 1";
-        	
-
-            pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1, searchKey);
-            pstmt.setString(2, searchValue);
+			}else if(cate.length()==0){ //그림x , 지역 선택출력
+				sql="SELECT NVL(COUNT(*), 0) FROM store WHERE region= ? and INSTR(storeName, ?) >= 1";
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, searchKey);
+				pstmt.setString(2, searchValue);
+			}else if(searchKey.equals("all")){ //그림선택, 전부출력
+				sql="SELECT NVL(COUNT(*), 0) FROM store WHERE region = ? AND cate = ?";
+	        	pstmt=conn.prepareStatement(sql);
+	        	pstmt.setString(1, searchKey);
+	        	pstmt.setString(2, cate);
+			}else { //그림선택, 지역선택출력
+				sql="SELECT NVL(COUNT(*), 0) FROM store WHERE region = ? AND cate = ? AND INSTR(storeName,?)  >= 1";
+	        	pstmt=conn.prepareStatement(sql);
+	        	pstmt.setString(1, searchKey);
+	        	pstmt.setString(2, cate);
+	        	pstmt.setString(3, searchValue);
 			}
+													
+			
             rs=pstmt.executeQuery();
 
             if(rs.next())
@@ -97,24 +126,39 @@ public class StoreDAO {
 		return result;
 	}
 	
-	public List<StoreDTO> listStore(int start, int end, String cate) {
+	public List<StoreDTO> listStore2(int start, int end, String searchKey, String cate) {
 		List<StoreDTO> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		StringBuffer sb = new StringBuffer();
 		
 		try {
-			sb.append("SELECT * FROM (");
-			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
-			sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
-			sb.append("		FROM store ORDER BY storeId DESC");
-			sb.append("    ) tb WHERE ROWNUM <= ? ");
-			sb.append(") WHERE rnum >= ? ");
-			
-			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, end);
-			pstmt.setInt(2, start);
-			
+			if(searchKey.equals("all")) {
+				sb.append("SELECT * FROM (");
+				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
+				sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
+				sb.append("		FROM store WHERE cate = ? ORDER BY storeId DESC");
+				sb.append("    ) tb WHERE ROWNUM <= ? ");
+				sb.append(") WHERE rnum >= ? ");
+				
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setString(1, cate);
+				pstmt.setInt(2, end);
+				pstmt.setInt(3, start);
+			} else {
+				sb.append("SELECT * FROM (");
+				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
+				sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
+				sb.append("		FROM store WHERE region = ? AND cate = ? ORDER BY storeId DESC");
+				sb.append("    ) tb WHERE ROWNUM <= ? ");
+				sb.append(") WHERE rnum >= ? ");
+				
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setString(1, searchKey);
+				pstmt.setString(2, cate);
+				pstmt.setInt(3, end);
+				pstmt.setInt(4, start);
+			}
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -134,8 +178,7 @@ public class StoreDAO {
 		}
 		return list;
 	}
-	
-	public List<StoreDTO> listStore(int start, int end, String searchKey, String searchValue, String cate) {
+	public List<StoreDTO> listStore(int start, int end, String searchKey, String searchValue) {
 		List<StoreDTO> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -166,7 +209,7 @@ public class StoreDAO {
 				pstmt.setString(1, searchValue);
 				pstmt.setInt(2, end);
 				pstmt.setInt(3, start);
-			} else if(! searchKey.equals("all") && searchValue.equals("")) {
+			} else if(!searchKey.equals("all") && searchValue.length()==0) {
 			sb.append("SELECT * FROM (");
 			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
 			sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
