@@ -97,7 +97,7 @@ public class StoreDAO {
 		return result;
 	}
 	
-	public List<StoreDTO> listStore(int start, int end) {
+	public List<StoreDTO> listStore(int start, int end, String cate) {
 		List<StoreDTO> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -135,30 +135,67 @@ public class StoreDAO {
 		return list;
 	}
 	
-	public List<StoreDTO> listStore(int start, int end, String searchKey, String searchValue) {
+	public List<StoreDTO> listStore(int start, int end, String searchKey, String searchValue, String cate) {
 		List<StoreDTO> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		StringBuffer sb = new StringBuffer();
 		
 		try {
+			if(searchKey.equals("all") && searchValue==null) {
+				sb.append("SELECT * FROM (");
+				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
+				sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
+				sb.append("		FROM store ORDER BY storeId DESC");
+				sb.append("    ) tb WHERE ROWNUM <= ? ");
+				sb.append(") WHERE rnum >= ? ");
+				
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, end);
+				pstmt.setInt(2, start);
+			} else if(searchKey.equals("all") && searchValue!=null) {
+				sb.append("SELECT * FROM (");
+				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
+				sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
+				sb.append("		FROM store WHERE INSTR(storeName, ?) >= 1 ORDER BY storeId DESC" );
+				sb.append("    ) tb WHERE ROWNUM <= ?");
+				sb.append(") WHERE rnum >= ?");
+				
+				pstmt = conn.prepareStatement(sb.toString());
+				
+				pstmt.setString(1, searchValue);
+				pstmt.setInt(2, end);
+				pstmt.setInt(3, start);
+			} else if(! searchKey.equals("all") && searchValue.equals("")) {
 			sb.append("SELECT * FROM (");
 			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
 			sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
 			sb.append("		FROM store WHERE region = ? " );
-			if(searchValue!=null)
-				sb.append(" AND INSTR(storeName, ?) >= 1 ORDER BY storeId DESC");
-			else
-				sb.append(" ORDER BY storeId DESC");
+			sb.append(" ORDER BY storeId DESC");
 			sb.append("    ) tb WHERE ROWNUM <= ?");
 			sb.append(") WHERE rnum >= ?");
 			
 			pstmt = conn.prepareStatement(sb.toString());
 			
 			pstmt.setString(1, searchKey);
-			pstmt.setString(2, searchValue);
-			pstmt.setInt(3, end);
-			pstmt.setInt(4, start);
+			pstmt.setInt(2, end);
+			pstmt.setInt(3, start);
+			} else {
+				sb.append("SELECT * FROM (");
+				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
+				sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
+				sb.append("		FROM store WHERE region = ? AND INSTR(storeName, ?) >= 1 " );
+				sb.append(" ORDER BY storeId DESC");
+				sb.append("    ) tb WHERE ROWNUM <= ?");
+				sb.append(") WHERE rnum >= ?");
+				
+				pstmt = conn.prepareStatement(sb.toString());
+				
+				pstmt.setString(1, searchKey);
+				pstmt.setString(2, searchValue);
+				pstmt.setInt(3, end);
+				pstmt.setInt(4, start);
+			}
 			
 			rs = pstmt.executeQuery();
 			

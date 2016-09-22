@@ -36,14 +36,15 @@ public class StoreServlet extends MyServlet{
 			
 			String searchKey=req.getParameter("searchKey");
 			String searchValue = req.getParameter("searchValue");
+			String cate = req.getParameter("cate");
 			if(searchKey==null) {
-				searchKey="subject";
+				searchKey="all";
 				searchValue="";
 			}
 			if(req.getMethod().equalsIgnoreCase("GET")) {
 				searchValue=URLDecoder.decode(searchValue, "utf-8");
 			}
-			int numPerPage=10;
+			int numPerPage=9;
 			int dataCount, total_page;
 			
 			if(searchValue.length()!=0) {
@@ -62,9 +63,9 @@ public class StoreServlet extends MyServlet{
 			
 			List<StoreDTO> list;
 			if(searchValue.length()!=0) {
-				list = dao.listStore(start, end, searchKey, searchValue);
+				list = dao.listStore(start, end, searchKey, searchValue, cate);
 			} else {
-				list = dao.listStore(start, end);
+				list = dao.listStore(start, end, cate);
 			}
 			
 			String params = "";

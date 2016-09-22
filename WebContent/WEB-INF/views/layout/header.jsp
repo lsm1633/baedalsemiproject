@@ -57,12 +57,12 @@ function searchList() {
 			</div>
 			<div class="category">
 				<div align="center" style="margin: 10px">
-					카테고리 : <a href="<%=cp %>/store/list.do"> 치킨 </a> |
-					<a href="<%=cp%>/store/list.do"> 중국집 </a> |
-					<a href="<%=cp%>/store/list.do"> 피자 </a> |
-					<a href="<%=cp%>/store/list.do"> 분식,떡볶이 </a> |
-					<a href="<%=cp%>/store/list.do"> 족발,보쌈 </a> |
-					<a href="<%=cp%>/store/list.do"> 한식 </a> 
+					카테고리 : <a href="<%=cp %>/store/list.do?cate=chiken"> 치킨 </a> |
+					<a href="<%=cp%>/store/list.do?cate=jungkukzip"> 중국집 </a> |
+					<a href="<%=cp%>/store/list.do?cate=pizza"> 피자 </a> |
+					<a href="<%=cp%>/store/list.do?cate=bunsik"> 분식,떡볶이 </a> |
+					<a href="<%=cp%>/store/list.do?cate=jokbal"> 족발,보쌈 </a> |
+					<a href="<%=cp%>/store/list.do?cate=hansik"> 한식 </a> 
 				</div>
 			</div>
 		</div>
