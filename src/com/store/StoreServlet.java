@@ -98,7 +98,7 @@ public class StoreServlet extends MyServlet{
 			req.setAttribute("total_page", total_page);
 			
 			forward(req, resp, "/WEB-INF/views/store/list.jsp");
-		}
+		} 
 	}
 
 }

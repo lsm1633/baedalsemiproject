@@ -31,6 +31,7 @@
 </style>
 
 
+
 </head>
 <body>
 	<div>
@@ -59,7 +60,7 @@
              <div class="caption">
              <h3>${dto.storeName}</h3>
              <p>주소: ${dto.storeAddr} <br> 전화번호: ${dto.storeTel}</p>   
-             <p align="center"><a href="#" class="btn btn-primary" role="button" >주문하기</a></p>
+             <p align="center"><a href="<%=cp %>/menu/list.do?ceoId=${dto.ceoId}" class="btn btn-primary" role="button">주문하기</a></p>
              <input type="hidden" value="${dto.ceoId}">
              </div>
            </div>

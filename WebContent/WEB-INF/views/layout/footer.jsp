@@ -2,24 +2,20 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String cp=request.getContextPath();
+   String cp=request.getContextPath();
 %>
 
 <footer class="bs-docs-footer" role="contentinfo">
 <hr>
     <div class="container">
-        <ul class="bs-docs-footer-links text-muted">
-            <li><a href="#">배달의 나라 정책 및 약관</a></li>
+        <ul class="bs-docs-footer-links text-muted">            
+            <li><a href="<%=cp%>/intro/intro.do">배달의 나라 소개</a></li>
+            <li>&middot;</li>                  
+            <li><a href="<%=cp%>/term/term.do">이용약관</a></li>
             <li>&middot;</li>
-            <li><a href="#">회사소개</a></li>
+            <li><a href="<%=cp%>/faq/faq.do">고객센터</a>
             <li>&middot;</li>
-            <li><a href="#">제휴제안</a></li>
-            <li>&middot;</li>
-            <li><a href="#">이용약관</a></li>
-            <li>&middot;</li>
-            <li><a href="#">개인정보취급방침</a></li>
-            <li>&middot;</li>
-            <li><a href="#">고객센터</a></li>
+            <li><a href="#">제휴문의</a></li>
             <li>&middot;</li>
             <li><a href="#">가맹문의</a></li>
             <li>&middot;</li>

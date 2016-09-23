@@ -221,8 +221,8 @@ function updateBoard() {
 	<%-- 각종 버튼들(하단) --%>
 	<div id=footer_p1>
 		<%-- 답글: depth가 0인 글만 버튼 노출 --%>
-		<c:if test="${dto.depth==0 && sessionScope.member.userId=='admin'}">
-		<input type="submit" name="btn" class="btn_article" value=" 답글 "
+		<c:if test="${dto.depth==0}">
+		<input type="submit" name="btn" class="btn_article" value=" 답글 " 
 				onclick="javascript:location.href='<%=cp%>/qna/reply.do?boardNum=${dto.boardNum}&page=${page}';">
 		</c:if>		
 		

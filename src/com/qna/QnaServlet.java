@@ -142,11 +142,24 @@ public class QnaServlet extends MyServlet {
 			
 			forward(req, resp, "/WEB-INF/views/qna/qna.jsp");
 		} else if(uri.indexOf("created.do")!=-1) {
-			// ±Û¾²±â Æû
+			// ÀÏ¹Ý ±Û¾²±â Æû
 			
 			req.setAttribute("mode", "created");
+			forward(req, resp, "/WEB-INF/views/qna/created.jsp");			
+		}else if(uri.indexOf("createdAlliance.do")!=-1) {
+			// Á¦ÈÞ¹®ÀÇ ±Û¾²±â Æû
+			
+			req.setAttribute("mode", "created");
+			req.setAttribute("head", "[Á¦ÈÞ¹®ÀÇ]");
 			forward(req, resp, "/WEB-INF/views/qna/created.jsp");
-		} else if(uri.indexOf("created_ok.do")!=-1) {
+		}else if(uri.indexOf("createdJoin.do")!=-1) {
+			// °¡¸Í¹®ÀÇ ±Û¾²±â Æû
+			
+			req.setAttribute("mode", "created");
+			req.setAttribute("head", "[°¡¸Í¹®ÀÇ]");
+			forward(req, resp, "/WEB-INF/views/qna/created.jsp");
+		} 
+		else if(uri.indexOf("created_ok.do")!=-1) {
 			// ±Û ÀúÀå
 			QnaDTO dto=new QnaDTO();
 			

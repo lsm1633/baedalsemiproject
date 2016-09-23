@@ -430,7 +430,7 @@ select {
 				<dd></dd>
 		 		<dd>
 		 			<%/* 아이디 */%>
-		 			<input type="text" name="ceoId" size="50" maxlength="20" value="${params.ceoId}"
+		 			<input type="text" name="ceoId" size="50" maxlength="20" value="${ceoId}"
 		 				placeholder="영문자와 숫자합쳐 5~10자 첫글자는 영문자">&nbsp;
 					<input type="button" name="check_bNum" class="chBtn" value="중복확인 " onclick="chkceoId();"><span style="color: blue;">${message2}</span>					
 				</dd>
@@ -449,12 +449,12 @@ select {
 		 		
 		 		<dd>
 		 			<%/* 비밀번호 질문 */%>
-		 			<input type="text" name="askPwd" size="50" maxlength="20" value="${param.askPwd}">
+		 			<input type="text" name="askPwd" size="50" maxlength="20" value="${askPwd}">
 		 		</dd>
 		 		
 		 		<dd>
 		 			<%/* 비밀번호 대답 */%>
-		 			<input type="text" name="ansPwd" size="50" maxlength="20" value="${param.ansPwd}">
+		 			<input type="text" name="ansPwd" size="50" maxlength="20" value="${ansPwd}">
 		 		</dd>
 		 		
 		 		<dd style="border-bottom: 1px solid silver;"></dd>			
@@ -462,7 +462,7 @@ select {
 		 		<dd></dd>
 		 		<dd>
 		 			<%/* 사장성명 */%>	 			
-		 			<input type="text" name="ceoName" size="28" value="${param.ceoName}">		 			
+		 			<input type="text" name="ceoName" size="28" value="${ceoName}">		 			
 		 		</dd>
 		 				 		
 		 		<dd>
@@ -476,8 +476,8 @@ select {
 		 				<option value="018">018</option>
 		 				<option value="019">019</option>		 			
 		 			</select>&nbsp;
-		 			<input type="text" name="ceoTel2" value="${param.ceoTel2}" size="11" maxlength="4" >&nbsp;
-		 			<input type="text" name="ceoTel3" value="${param.ceoTel3}" size="11" maxlength="4">&nbsp;
+		 			<input type="text" name="ceoTel2" value="${ceoTel2}" size="11" maxlength="4" >&nbsp;
+		 			<input type="text" name="ceoTel3" value="${ceoTel3}" size="11" maxlength="4">&nbsp;
 		 			
 		 		</dd>
 		 		
@@ -508,7 +508,7 @@ select {
 		 		<dd>
 		 			<%/* 이메일 */%>	 			 
 		 			
-						<input type="text" name="ceoEmail1" value="${param.ceoEmail1}" >&nbsp;@&nbsp;
+						<input type="text" name="ceoEmail1" value="${ceoEmail1}" >&nbsp;@&nbsp;
 						<input type="text" name="ceoEmail2" >
 		 				<select name="getEmail" onchange="setEmail();">
 							<option value="direct" selected="selected">직접입력&nbsp;&nbsp;</option>
@@ -527,12 +527,12 @@ select {
 		 		
 		 		<dd>
 		 			<%/* 업소명 */%> 			
-					<input type="text" name="storeName" value="${param.storeName}" size="40">&nbsp;
+					<input type="text" name="storeName" value="${storeName}" size="40">&nbsp;
 				</dd>
 		 		
 		 		<dd>
 		 			<%/* 사업자등록번호 */%> 			
-					<input type="text" name="ceoCodeNum" size="40" value="${param.ceoCodeNum}">&nbsp;
+					<input type="text" name="ceoCodeNum" size="40" value="${ceoCodeNum}">&nbsp;
 					<input type="button" name="check_bNum" class="chBtn" value="중복확인 " onclick="chkceoCodeNum();"><span style="color: blue;">${message1}</span>
 					
 				</dd>
@@ -545,12 +545,12 @@ select {
 		 				<option value="gyeonggi">경기</option>
 		 				<option value="incheon">인천</option>		 					 			
 		 			</select>
-		 			<input type="text" name="storeAddr"  value="${param.storeAddr}" size="60">
+		 			<input type="text" name="storeAddr"  value="${storeAddr}" size="60">
 				</dd>
 				
 				<dd>
 		 			<%/* 점포 전화번호 */%> 			
-					<input type="text" name="storeTel"   value="${param.storeTel}" size="40">&nbsp;
+					<input type="text" name="storeTel"   value="${storeTel}" size="40">&nbsp;
 				</dd>
 		 		
 		 		<dd>

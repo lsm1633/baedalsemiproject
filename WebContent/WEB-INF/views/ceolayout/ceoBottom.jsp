@@ -1,12 +1,25 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
- String cp=request.getContextPath();
- request.setCharacterEncoding("utf-8");
- 
+   String cp=request.getContextPath();
 %>
 
-<img src="<%=cp%>/res/images/logo2.gif" width="100" height="100"/>
-배달의 나라 사장님 싸이트, 개발자 : 나, 디자인 : 나나나나 
-<img src="<%=cp%>/res/images/logo2.gif" width="100" height="100"/>
-
+<footer class="bs-docs-footer" role="contentinfo">
+<hr>
+    <div class="container">
+        <ul class="bs-docs-footer-links text-muted">            
+            <li><a href="<%=cp%>/intro/intro.do">배달의 나라 소개</a></li>
+            <li>&middot;</li>                  
+            <li><a href="<%=cp%>/term/term.do">이용약관</a></li>
+            <li>&middot;</li>
+            <li><a href="<%=cp%>/faq/faq.do">고객센터</a>
+            <li>&middot;</li>
+            <li><a href="#">제휴문의</a></li>
+            <li>&middot;</li>
+            <li><a href="#">가맹문의</a></li>
+            <li>&middot;</li>
+            <li>© 배달의나라 Corp.</li>
+        </ul>
+    </div>      
+</footer>

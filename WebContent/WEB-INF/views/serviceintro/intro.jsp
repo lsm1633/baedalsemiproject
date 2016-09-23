@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>배달의 나라 점주 사이트</title>
+<title>배달의 나라 소개</title>
 <style>
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
@@ -42,12 +42,10 @@
 </style>
 </head>
 <body>
+<div class="container">
+
 <div>
-<dl style="height: 150px">
-    <dd>
-      <jsp:include page="/WEB-INF/views/ceolayout/ceoTop.jsp"/>
-    </dd>
-  </dl>
+	<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 </div>
 
 <div style="height: 1500px">
@@ -90,14 +88,10 @@
   
 </div>
 
-
-<div align="center">
-<dl style="height: 140px">
-    <dd>
-      <jsp:include page="/WEB-INF/views/ceolayout/ceoBottom.jsp"/>
-    </dd>
-  </dl>
+<div>
+	<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>
 
+</div>
 </body>
 </html>

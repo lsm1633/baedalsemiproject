@@ -147,8 +147,8 @@ dd {
    <ul class="nav nav-tabs nav-justified">
      <li><a href="<%=cp%>/notice/notice.do">공지사항</a></li>
      <li><a href="<%=cp%>/freeboard/freeboard.do">자유게시판</a></li>
-     <li><a href="<%=cp%>/qna/qna.do">질문과답변</a></li>
-     <li class="active"><a href="<%=cp%>/faq/faq.do">자주묻는질문</a></li>
+     <li class="active"><a href="<%=cp%>/qna/qna.do">질문과답변</a></li>
+     <li><a href="<%=cp%>/faq/faq.do">자주묻는질문</a></li>
    </ul>
    
 <div id=header>질문과 답변</div>
@@ -166,7 +166,7 @@ dd {
 <div id=items>
 	<dl>
 		<dd style="height: 40px; border-top: 1px solid #B0C4DE;">
-			<input type="text" name="subject" class=created_sub maxlength="100" class="boxTF" value="${dto.subject}">
+			<input type="text" name="subject" class=created_sub maxlength="100" class="boxTF" value="${head==null ? dto.subject : head}">
 		</dd>
 		<dd style="height: 40px; line-height: 40px;">&nbsp;&nbsp;${sessionScope.member.userName}</dd>
 		<dd style="height: 200px;">
