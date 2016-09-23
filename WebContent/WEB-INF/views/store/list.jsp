@@ -60,6 +60,14 @@
           </div>
          </div>   
        </c:forEach>
+       <div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
+			<c:if test="${dataCount==0 }">
+			         <img alt="검색된 점포가 없습니다." src="<%=cp%>/res/images/storenone.png">
+			</c:if>
+			<c:if test="${dataCount!=0 }">
+			       ${paging}
+			</c:if>
+	   </div>
        </div>
    </div>
        

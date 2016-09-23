@@ -41,9 +41,7 @@ public class StoreServlet extends MyServlet{
 				searchKey="all";
 				searchValue="";
 			}
-			System.out.println(searchKey);
-			System.out.println(searchValue);
-			System.out.println(cate);
+			
 			if(cate==null)
 				cate="";
 			

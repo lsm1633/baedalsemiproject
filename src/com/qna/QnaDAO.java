@@ -19,7 +19,7 @@ public class QnaDAO {
 		String sql;
 		
 		try {
-			sql="SELECT NVL(MAX(boardNum),0) FROM board";
+			sql="SELECT NVL(MAX(boardNum),0) FROM qnaboard";
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next())
@@ -55,7 +55,7 @@ public class QnaDAO {
 		}		
 		
 		try {
-			sql="INSERT INTO board(boardNum,userId,subject,content,"
+			sql="INSERT INTO qnaboard(boardNum,userId,subject,content,"
 					+ "groupNum,orderNo,depth,parent,parent_id) "
 					+ "VALUES(?,?,?,?,?,?,?,?,?)";
 			
@@ -91,10 +91,10 @@ public class QnaDAO {
 		
 		try {
 			if(userId==null || userId.equals("admin")) {
-				sql="SELECT NVL(COUNT(*), 0) FROM board";
+				sql="SELECT NVL(COUNT(*), 0) FROM qnaboard";
 				pstmt=conn.prepareStatement(sql);
 			} else {
-				sql="SELECT NVL(COUNT(*), 0) FROM board WHERE userId=?";
+				sql="SELECT NVL(COUNT(*), 0) FROM qnaboard WHERE userId=?";
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setString(1, userId);				
 			}
@@ -120,12 +120,12 @@ public class QnaDAO {
 		try {
 			sb.append("SELECT * FROM (");
 			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
-			sb.append("         SELECT boardNum, b.userId, userName,");
+			sb.append("         SELECT boardNum, q.userId, userName,");
 			sb.append("               subject, groupNum, orderNo, depth, parent_id, hitCount,");
 			sb.append("               created");
-			sb.append("               FROM board b");
-			sb.append("               JOIN member1 m ON b.userId=m.userId");
-			sb.append("               WHERE b.userId=? OR parent_id=?");
+			sb.append("               FROM qnaboard q");
+			sb.append("               JOIN member1 m ON q.userId=m.userId");
+			sb.append("               WHERE q.userId=? OR parent_id=?");
 			sb.append("               ORDER BY groupNum DESC, depth ASC ");
 			sb.append("    ) tb WHERE ROWNUM <= ? ");
 			sb.append(") WHERE rnum >= ? ");
@@ -174,11 +174,11 @@ public class QnaDAO {
 		try {
 			sb.append("SELECT * FROM (");
 			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
-			sb.append("         SELECT boardNum, b.userId, userName,");
+			sb.append("         SELECT boardNum, q.userId, userName,");
 			sb.append("               subject, groupNum, orderNo, depth, parent_id, hitCount,");
 			sb.append("               created");
-			sb.append("               FROM board b");
-			sb.append("               JOIN member1 m ON b.userId=m.userId");
+			sb.append("               FROM qnaboard q");
+			sb.append("               JOIN member1 m ON q.userId=m.userId");
 			sb.append("               ORDER BY groupNum DESC, depth ASC ");
 			sb.append("    ) tb WHERE ROWNUM <= ? ");
 			sb.append(") WHERE rnum >= ? ");
@@ -226,12 +226,12 @@ public class QnaDAO {
         try {
 			sb.append("SELECT * FROM (");
 			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
-			sb.append("         SELECT boardNum, b.userId, userName,");
+			sb.append("         SELECT boardNum, q.userId, userName,");
 			sb.append("               subject, groupNum, orderNo, depth, hitCount,");
 			sb.append("               created");
-			sb.append("               FROM board b");
-			sb.append("               JOIN member1 m ON b.userId=m.userId");
-			sb.append("               WHERE b.userId=? OR parent_id=?");
+			sb.append("               FROM qnaboard q");
+			sb.append("               JOIN member1 m ON q.userId=m.userId");
+			sb.append("               WHERE q.userId=? OR parent_id=?");
 			
 			if(searchKey.equals("created"))
 				sb.append("           WHERE TO_CHAR(created, 'YYYY-MM-DD') = ? ");
@@ -283,10 +283,10 @@ public class QnaDAO {
 		StringBuffer sb=new StringBuffer();
 		
 		try {
-			sb.append("SELECT boardNum, b.userId, userName, subject, ");
+			sb.append("SELECT boardNum, q.userId, userName, subject, ");
 			sb.append("    content, created, hitCount, groupNum, depth, orderNo, parent, parent_id ");
-			sb.append("    FROM board b");
-			sb.append("    JOIN member1 m ON b.userId=m.userId");
+			sb.append("    FROM qnaboard q");
+			sb.append("    JOIN member1 m ON q.userId=m.userId");
 			sb.append("    WHERE boardNum=?");
 			
 			pstmt=conn.prepareStatement(sb.toString());
@@ -332,8 +332,8 @@ public class QnaDAO {
             if(searchValue!=null && searchValue.length() != 0) {
                 sb.append("SELECT ROWNUM, tb.* FROM ( ");
                 sb.append("  SELECT boardNum, subject  ");
-    			sb.append("               FROM board b");
-    			sb.append("               JOIN member1 m ON b.userId=m.userId");
+    			sb.append("               FROM qnaboard q");
+    			sb.append("               JOIN member1 m ON q.userId=m.userId");
     			if(searchKey.equals("created"))
     				sb.append("           WHERE (TO_CHAR(created, 'YYYY-MM-DD') = ? ) AND ");
     			else if(searchKey.equals("userName"))
@@ -353,7 +353,7 @@ public class QnaDAO {
                 pstmt.setInt(4, groupNum);
 			} else {
                 sb.append("SELECT ROWNUM, tb.* FROM ( ");
-                sb.append("     SELECT boardNum, subject FROM board b JOIN member1 m ON b.userId=m.userId ");                
+                sb.append("     SELECT boardNum, subject FROM qnaboard q JOIN member1 m ON q.userId=m.userId ");                
                 sb.append("  WHERE (groupNum = ? AND orderNo < ?) ");
                 sb.append("         OR (groupNum > ? ) ");
                 sb.append("         ORDER BY groupNum ASC, orderNo DESC) tb WHERE ROWNUM = 1 ");
@@ -394,8 +394,8 @@ public class QnaDAO {
             if(searchValue!=null && searchValue.length() != 0) {
                 sb.append("SELECT ROWNUM, tb.* FROM ( ");
                 sb.append("  SELECT boardNum, subject ");
-    			sb.append("               FROM board b");
-    			sb.append("               JOIN member1 m ON b.userId=m.userId");
+    			sb.append("               FROM qnaboard q");
+    			sb.append("               JOIN member1 m ON q.userId=m.userId");
     			if(searchKey.equals("created"))
     				sb.append("           WHERE (TO_CHAR(created, 'YYYY-MM-DD') = ? ) AND ");
     			else if(searchKey.equals("userName"))
@@ -415,7 +415,7 @@ public class QnaDAO {
 
 			} else {
                 sb.append("SELECT ROWNUM, tb.* FROM ( ");
-                sb.append("     SELECT boardNum, subject FROM board b JOIN member1 m ON b.userId=m.userId ");
+                sb.append("     SELECT boardNum, subject FROM qnaboard q JOIN member1 m ON q.userId=m.userId ");
                 sb.append("  WHERE (groupNum = ? AND orderNo > ?) ");
                 sb.append("         OR (groupNum < ? ) ");
                 sb.append("         ORDER BY groupNum DESC, orderNo ASC) tb WHERE ROWNUM = 1 ");
@@ -468,9 +468,9 @@ public class QnaDAO {
     	PreparedStatement pstmt=null;
     	String sql;
     	
-    	sql="UPDATE board SET orderNo=orderNo+1";
+    	sql="UPDATE qnaboard SET orderNo=orderNo+1";
     	sql+=" WHERE groupNum=? AND orderNo>?";
-    	//같은 그룹이면서, 새로운 리플 작성시 orderNum이 증가하므로
+    	//같은 그룹이면서, 새로운 답변 작성시 orderNum이 증가하므로
     	
     	try {
 			pstmt=conn.prepareStatement(sql);
@@ -492,7 +492,7 @@ public class QnaDAO {
     	PreparedStatement pstmt=null;
     	String sql;
     	
-    	sql="UPDATE board SET subject=?, content=? WHERE boardNum=?";
+    	sql="UPDATE qnaboard SET subject=?, content=? WHERE boardNum=?";
     	try {
 			pstmt=conn.prepareStatement(sql);
 			
@@ -514,7 +514,7 @@ public class QnaDAO {
     	PreparedStatement pstmt=null;
     	String sql;
     	
-    	sql="DELETE FROM board WHERE boardNum IN ("
+    	sql="DELETE FROM qnasboard WHERE boardNum IN ("
     		+"	SELECT boardNum FROM board START WITH boardNum=? "
     		+"	CONNECT BY PRIOR boardNum=parent)";
        	
