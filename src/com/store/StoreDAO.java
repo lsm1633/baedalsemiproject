@@ -188,7 +188,7 @@ public class StoreDAO {
 		StringBuffer sb = new StringBuffer();
 		
 		try {
-			if(searchKey.equals("all") && searchValue==null) {
+			if(searchKey.equals("all") && searchValue.length()==0) {
 				sb.append("SELECT * FROM (");
 				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
 				sb.append("		SELECT ceoId, storeName, storeTel, storeAddr, storePhoto ");
@@ -196,9 +196,13 @@ public class StoreDAO {
 				sb.append("    ) tb WHERE ROWNUM <= ? ");
 				sb.append(") WHERE rnum >= ? ");
 				
+				System.out.println(searchKey);
+				
+				
 				pstmt = conn.prepareStatement(sb.toString());
 				pstmt.setInt(1, end);
 				pstmt.setInt(2, start);
+				
 			} else if(searchKey.equals("all") && searchValue!=null) {
 				sb.append("SELECT * FROM (");
 				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
@@ -212,6 +216,7 @@ public class StoreDAO {
 				pstmt.setString(1, searchValue);
 				pstmt.setInt(2, end);
 				pstmt.setInt(3, start);
+				
 			} else if(!searchKey.equals("all") && searchValue.length()==0) {
 			sb.append("SELECT * FROM (");
 			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");

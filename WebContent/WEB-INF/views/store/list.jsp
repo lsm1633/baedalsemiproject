@@ -36,8 +36,13 @@
 	<div>
 		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	</div>
-    <div style="line-height: 100px; background-color: black;">
-      <label></label>
+    <div style="line-height: 150px; background-color: black;" align="center">
+      <label><a onclick="searchList('chicken');"><img src="<%=cp%>/res/images/chicken.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('pizza');"><img src="<%=cp%>/res/images/pizza.png" class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('jungkukzip');"><img src="<%=cp%>/res/images/jungkukzip.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('bunsik');"><img src="<%=cp%>/res/images/bunsik.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('jokbal');"><img src="<%=cp%>/res/images/jokbal.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('hansik');"><img src="<%=cp%>/res/images/hansik.jpg"class="img-circle" width="120px" height="90"></a></label> 
 
     </div>
     

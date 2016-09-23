@@ -64,6 +64,7 @@ public class CeoMemberServlet extends MyServlet{
           
           req.setAttribute("mode", "created");
           req.setAttribute("title", "회원가입");
+          
           req.setAttribute("message2", sb.toString());
           
           forward(req, resp, "/WEB-INF/views/ceomember/ceojoin.jsp");
@@ -188,8 +189,9 @@ public class CeoMemberServlet extends MyServlet{
                
               return;
            }
+           req.setAttribute("mode", "login");
            req.setAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");             
-         
+           
          forward(req, resp, "/WEB-INF/views/ceomember/ceologin.jsp");
       }else if(uri.indexOf("logout.do")!=-1){
              //로그아웃
@@ -216,10 +218,10 @@ public class CeoMemberServlet extends MyServlet{
               String ceoId=dto.getCeoId();
               
               req.setAttribute("title", "ID찾기 성공");
-            req.setAttribute("message", ceoName+"님의 ID는"+ceoId+"입니다.");
-              
-            forward(req,resp,"/WEB-INF/views/ceomember/ceocomplete.jsp");                
-              
+            req.setAttribute("message", ceoName+"님의 ID는"+ceoId+"입니다.");              
+            
+            forward(req,resp,"/WEB-INF/views/ceomember/ceocomplete.jsp");
+            return;
            }
            
            req.setAttribute("mode", "findid");
@@ -246,7 +248,7 @@ public class CeoMemberServlet extends MyServlet{
               req.setAttribute("askPwd", dto.getAskPwd());
               req.setAttribute("mode", "findpwd2");              
               forward(req, resp, "/WEB-INF/views/ceomember/ceologin.jsp");                
-              
+              return;
            }          
             
           req.setAttribute("mode", "findpwd1");
@@ -267,7 +269,7 @@ public class CeoMemberServlet extends MyServlet{
             req.setAttribute("message", ceoName+"님의 패스워드는"+ceoPwd+"입니다.");
               
             forward(req,resp,"/WEB-INF/views/ceomember/ceocomplete.jsp");                
-              
+            return;
            }
            
            req.setAttribute("mode", "findpwd2");
