@@ -38,9 +38,7 @@ public class StoreServlet extends MyServlet{
 			String searchValue = req.getParameter("searchValue");
 			String cate = req.getParameter("cate");
 			
-			System.out.println(searchKey);
-			System.err.println(searchValue);
-			System.out.println(cate);
+			
 			if(searchKey==null) {
 				searchKey="all";
 				searchValue="";

@@ -196,8 +196,6 @@ public class StoreDAO {
 				sb.append("    ) tb WHERE ROWNUM <= ? ");
 				sb.append(") WHERE rnum >= ? ");
 				
-				System.out.println(searchKey);
-				
 				
 				pstmt = conn.prepareStatement(sb.toString());
 				pstmt.setInt(1, end);

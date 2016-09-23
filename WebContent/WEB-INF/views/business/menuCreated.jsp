@@ -109,9 +109,9 @@ function check(){
 						<tr>
 							<td class="td1">음식카테고리</td>
 							<td><select name="cate" required="required">
-									<option value="치킨" selected>치킨</option>
-									<option value="피자">피자</option>
-									<option value="중식">중식</option>
+									<option value="set" selected>세트</option>
+									<option value="main">주 메뉴</option>
+									<option value="side">부 메뉴</option>
 							</select></td>
 						</tr>
 
@@ -149,9 +149,9 @@ function check(){
 							<tr>
 								<td class="td1">등록이미지</td>
 								<td colspan="3" class="td3"><img
-									src="<%=cp%>/uploads/photo/${dto.imageFilename}" width="30"
+									src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}" width="30"
 									height="30" border="0"
-									onclick="imageViewer('<%=cp%>/uploads/photo/${dto.imageFilename}');"
+									onclick="imageViewer('<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}');"
 									style="cursor: pointer;"></td>
 							</tr>
 						</c:if>

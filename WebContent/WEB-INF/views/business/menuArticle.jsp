@@ -114,7 +114,7 @@ function deletePhoto(num) {
 	                     </tr>
                          <tr style="border-bottom:none;">
                              <td colspan="2">
-                                 <img src="<%=cp%>/uploads/photo/${dto.imageFilename}" style="max-width:100%; height:auto; resize:both;">
+                                 <img src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}" style="max-width:100%; height:auto; resize:both;">
                              </td>
                          </tr>
 	                     <tr>
