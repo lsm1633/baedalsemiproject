@@ -178,17 +178,17 @@ function ceomemberok() {
         return;
     }
     
-    str = f.storeAddr1.value;
+    str = f.region.value;
     if(!str) {
-        alert("가게주소를 입력하세요. ");
-        f.storeAddr1.focus();
+        alert("지역을 선택하세요. ");
+        f.region.focus();
         return;
     }
     
-    str = f.storeAddr2.value;
+    str = f.storeAddr.value;
     if(!str) {
         alert("가게주소를 입력하세요. ");
-        f.storeAddr2.focus();
+        f.storeAddr.focus();
         return;
     }
     
@@ -539,13 +539,13 @@ select {
 		 		
 		 		<dd>
 		 			<%/* 점포 주소 */%>
-		 			<select name="storeAddr1">
+		 			<select name="region">
 		 				<option value="" selected="selected">선택&nbsp;&nbsp;</option>
-		 				<option value="서울">서울</option>
-		 				<option value="경기">경기</option>
-		 				<option value="인천">인천</option>		 					 			
+		 				<option value="seoul">서울</option>
+		 				<option value="gyeonggi">경기</option>
+		 				<option value="incheon">인천</option>		 					 			
 		 			</select>
-		 			<input type="text" name="storeAddr2"  value="${param.storeAddr}" size="60">
+		 			<input type="text" name="storeAddr"  value="${param.storeAddr}" size="60">
 				</dd>
 				
 				<dd>
@@ -557,10 +557,12 @@ select {
 		 			<%/* 카테고리 */%>
 		 			<select name="storeType">
 		 				<option value="" selected="selected">선택&nbsp;&nbsp;</option>
-		 				<option value="중식">중식</option>
-		 				<option value="치킨">치킨</option>
-		 				<option value="분식">분식</option>
-		 				<option value="피자">피자</option>	 			
+		 				<option value="jungkukzip">중식</option>
+		 				<option value="chicken">치킨</option>
+		 				<option value="bunsik">분식</option>
+		 				<option value="pizza">피자</option>
+		 				<option value="hansik">한식</option>
+		 				<option value="jokbal">족발</option>	 			
 		 			</select>
 		 		</dd>
 		 		

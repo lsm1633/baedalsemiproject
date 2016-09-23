@@ -7,7 +7,7 @@ public class CeoMemberDTO {
 	private String ceoEmail,ceoEmail1,ceoEmail2;
 	private int enabled;
 	private String storeName,ceoCodeNum;
-	private String storeAddr,storeAddr1,storeAddr2;
+	private String region,storeAddr;
 	private String storeTel,storeType;
 	private String storePhoto;
 	
@@ -142,24 +142,18 @@ public class CeoMemberDTO {
 	}
 	public void setAnsPwd(String ansPwd) {
 		this.ansPwd = ansPwd;
-	}
-	public String getStoreAddr1() {
-		return storeAddr1;
-	}
-	public void setStoreAddr1(String storeAddr1) {
-		this.storeAddr1 = storeAddr1;
-	}
-	public String getStoreAddr2() {
-		return storeAddr2;
-	}
-	public void setStoreAddr2(String storeAddr2) {
-		this.storeAddr2 = storeAddr2;
-	}
+	}	
 	public String getStorePhoto() {
 		return storePhoto;
 	}
 	public void setStorePhoto(String storePhoto) {
 		this.storePhoto = storePhoto;
+	}
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
 	}
 	
 	

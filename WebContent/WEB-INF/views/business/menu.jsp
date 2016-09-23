@@ -117,7 +117,7 @@
 								escapeXml="false" />
 						</c:if>
 						<div class="imgLayout">
-							<img src="<%=cp%>/uploads/photo/${dto.imageFilename}"
+							<img src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
 								onclick="javascript:article('${dto.num}');"
 								style="width: 190px; height: 190px;" border="0"> <span
 								class="name" onclick="javascript:article('${dto.num}');">

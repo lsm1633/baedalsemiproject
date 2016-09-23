@@ -23,10 +23,7 @@ public class CeoMemberDAO {
          
          if(dto.getCeoEmail1().length()!=0&&dto.getCeoEmail2().length()!=0)
             dto.setCeoEmail(dto.getCeoEmail1()+"@"+dto.getCeoEmail2());
-         
-         if(dto.getStoreAddr1().length()!=0&&dto.getStoreAddr2().length()!=0)
-            dto.setStoreAddr(dto.getStoreAddr1()+" "+dto.getStoreAddr2());
-         
+       
          
          sb.append("INSERT INTO ceomember1(ceoId,ceoPwd,askPwd,ansPwd,ceoName,ceoBirth,ceoEmail,ceoTel) VALUES(?,?,?,?,?,?,?,?)");
          pstmt=conn.prepareStatement(sb.toString());
@@ -47,16 +44,17 @@ public class CeoMemberDAO {
          
          sb=new StringBuffer();
          
-         sb.append("INSERT INTO ceomember2(ceoId,storeName,ceoCodeNum,storeAddr,storeTel,storeType,storePhoto) VALUES(?,?,?,?,?,?,?)");
+         sb.append("INSERT INTO ceomember2(ceoId,storeName,ceoCodeNum,region,storeAddr,storeTel,storeType,storePhoto) VALUES(?,?,?,?,?,?,?,?)");
          pstmt=conn.prepareStatement(sb.toString());
          
          pstmt.setString(1, dto.getCeoId());
          pstmt.setString(2, dto.getStoreName());
          pstmt.setString(3, dto.getCeoCodeNum());
-         pstmt.setString(4, dto.getStoreAddr());
-         pstmt.setString(5, dto.getStoreTel());
-         pstmt.setString(6, dto.getStoreType());
-         pstmt.setString(7, dto.getStorePhoto());
+         pstmt.setString(4, dto.getRegion());
+         pstmt.setString(5, dto.getStoreAddr());
+         pstmt.setString(6, dto.getStoreTel());
+         pstmt.setString(7, dto.getStoreType());
+         pstmt.setString(8, dto.getStorePhoto());
          
          pstmt.executeUpdate();
          pstmt.close();
@@ -77,7 +75,7 @@ public class CeoMemberDAO {
       StringBuffer sb = new StringBuffer();
       
       try {
-         sb.append("SELECT cm1.ceoId,askPwd,ansPwd,enabled,ceoName,ceoPwd,ceoBirth,ceoEmail,ceoTel,storeName,ceoCodeNum,storeAddr,storeTel,storeType,storePhoto "
+         sb.append("SELECT cm1.ceoId,askPwd,ansPwd,enabled,ceoName,ceoPwd,ceoBirth,ceoEmail,ceoTel,storeName,ceoCodeNum,region,storeAddr,storeTel,storeType,storePhoto "
                + "FROM ceomember1 cm1 LEFT OUTER JOIN ceomember2 cm2 ON cm1.ceoId=cm2.ceoId WHERE cm1.ceoId=?");
          
          pstmt=conn.prepareStatement(sb.toString());
@@ -157,4 +155,107 @@ public class CeoMemberDAO {
       
       return dto;
    }
+   public CeoMemberDTO findMemberid(String ceoName,String ceoTel){
+	      CeoMemberDTO dto=null;
+	      
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      StringBuffer sb = new StringBuffer();
+	      
+	      try {
+	         sb.append("SELECT ceoId,enabled FROM ceomember1 WHERE ceoName=? AND ceoTel=?");
+	         
+	         pstmt=conn.prepareStatement(sb.toString());
+	            
+	         pstmt.setString(1, ceoName);
+	         pstmt.setString(2, ceoTel);
+	         rs = pstmt.executeQuery();
+	         
+	         if(rs.next()){
+	            dto=new CeoMemberDTO();
+	            
+	            dto.setCeoId(rs.getString("ceoId"));
+	            dto.setEnabled(rs.getInt("enabled"));
+	            
+	         }
+	         rs.close();
+	         pstmt.close();
+	         
+	      } catch (Exception e) {
+	         System.out.println(e.toString());
+	      }
+	      
+	      return dto;
+	   }
+   
+   		public CeoMemberDTO findMemberpwd1(String ceoId,String ceoName){
+	      CeoMemberDTO dto=null;
+	      
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      StringBuffer sb = new StringBuffer();
+	      
+	      try {
+	         sb.append("SELECT enabled,askPwd FROM ceomember1 WHERE ceoId=? AND ceoName=?");
+	         
+	         pstmt=conn.prepareStatement(sb.toString());
+	            
+	         pstmt.setString(1, ceoId);
+	         pstmt.setString(2, ceoName);
+	         rs = pstmt.executeQuery();
+	         
+	         if(rs.next()){
+	            dto=new CeoMemberDTO();	            
+	            
+	            dto.setEnabled(rs.getInt("enabled"));
+	            dto.setAskPwd(rs.getString("askPwd"));
+	            
+	         }
+	         rs.close();
+	         pstmt.close();
+	         
+	      } catch (Exception e) {
+	         System.out.println(e.toString());
+	      }
+	      
+	      return dto;
+	   }
+   
+   	   public CeoMemberDTO findMemberpwd2(String ansPwd){
+	      CeoMemberDTO dto=null;
+	      
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      StringBuffer sb = new StringBuffer();
+	      
+	      try {
+	         sb.append("SELECT ceoId,ceoPwd,ceoName,enabled,askPwd,ansPwd FROM ceomember1 WHERE ansPwd=?");
+	         
+	         pstmt=conn.prepareStatement(sb.toString());
+	            
+	         pstmt.setString(1, ansPwd);
+	         
+	         rs = pstmt.executeQuery();
+	         
+	         if(rs.next()){
+	            dto=new CeoMemberDTO();	            
+	            
+	            dto.setCeoId(rs.getString("ceoId"));
+	            dto.setCeoPwd(rs.getString("ceoPwd"));
+	            dto.setCeoName(rs.getString("ceoName"));	            
+	            dto.setEnabled(rs.getInt("enabled"));
+	            dto.setAskPwd(rs.getString("askPwd"));
+	            dto.setAnsPwd(rs.getString("ansPwd"));
+	            
+	         }
+	         rs.close();
+	         pstmt.close();
+	         
+	      } catch (Exception e) {
+	         System.out.println(e.toString());
+	      }
+	      
+	      return dto;
+	   }
+   
 }

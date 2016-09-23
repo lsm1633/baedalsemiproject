@@ -229,7 +229,7 @@ public class StoreDAO {
 				sb.append("SELECT * FROM (");
 				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
 				sb.append("		SELECT ceoId, storeName, storeTel, storeAddr, storePhoto ");
-				sb.append("		FROM store WHERE region = ? AND INSTR(storeName, ?) >= 1 " );
+				sb.append("		FROM ceomember2 WHERE region = ? AND INSTR(storeName, ?) >= 1 " );
 				sb.append("    ) tb WHERE ROWNUM <= ?");
 				sb.append(") WHERE rnum >= ?");
 				

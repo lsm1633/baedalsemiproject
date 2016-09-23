@@ -39,7 +39,7 @@ public class StoreMenuServlet extends MyServlet {
 
 		// 이미지를 저장할 경로(pathname)
 		String root = session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"photo";
+		String pathname=root+File.separator+"uploads"+File.separator+info.getCeoId()+File.separator+"menu";
 		File f=new File(pathname);
 		if(! f.exists()) { // 폴더가 존재하지 않으면
 			f.mkdirs();
