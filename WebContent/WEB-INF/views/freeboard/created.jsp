@@ -121,8 +121,9 @@
 					  <table style="width: 600px; margin: 0px auto; border-spacing: 0px;">
 					     <tr height="45"> 
 					      <td align="center" >
-						    <input type="image" src="<%=cp%>/res/images/btn_submit.gif" >
-		        		    <a href="javascript:location.href='<%=cp%>/freeboard/freeboard.do';"><img src="<%=cp%>/res/images/btn_cancel.gif" border="0"></a>
+				
+						    <button type="submit" class="btn btn-primary"> 확인 <span class="glyphicon glyphicon-ok"></span></button>
+		        		    <a href="javascript:location.href='<%=cp%>/freeboard/freeboard.do';"><button type="button" class="btn btn-danger"> 취소 </button></a>
 		        		    
 		        		    <c:if test="${mode=='update'}">
 		        		          <input type="hidden" name="boardNum" value="${dto.boardNum}">

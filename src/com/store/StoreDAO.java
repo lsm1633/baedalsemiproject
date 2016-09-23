@@ -18,8 +18,8 @@ public class StoreDAO {
 		String sql;
 		
 		try { 
-			sql = "SELECT storeId, storeName, storeAddr, storeTel, ";
-			sql += "imageFilename, region, cate FROM store";
+			sql = "SELECT ceoId, storeName, storeAddr, storeTel, ";
+			sql += "storePhoto, region, storeType FROM ceomember2";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -28,13 +28,13 @@ public class StoreDAO {
 			if(rs.next()) {
 				dto = new StoreDTO();
 				
-				dto.setStoreId(rs.getString("storeId"));
+				dto.setCeoId(rs.getString("ceoId"));
 				dto.setStoreName(rs.getString("storeName"));
 				dto.setStoreAddr(rs.getString("storeAddr"));
 				dto.setStoreTel(rs.getString("storeTel"));
-				dto.setImageFilename(rs.getString("imageFilename"));
+				dto.setStorePhoto(rs.getString("storePhoto"));
 				dto.setRegion(rs.getString("region"));
-				dto.setCate(rs.getString("cate"));
+				dto.setStoreType(rs.getString("storeType"));
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -51,19 +51,19 @@ public class StoreDAO {
 		
 		try { //가게이름 입력x..
 			if(cate.length()==0 && searchKey.equals("all")){ //그림x , 전부출력
-				sql = "SELECT NVL(COUNT(*), 0) FROM store ";
+				sql = "SELECT NVL(COUNT(*), 0) FROM ceomember2 ";
 				pstmt = conn.prepareStatement(sql);
 			}else if(cate.length()==0){ //그림x , 지역 선택출력
-				sql = "SELECT NVL(COUNT(*), 0) FROM store WHERE region=?";
+				sql = "SELECT NVL(COUNT(*), 0) FROM ceomember2 WHERE region=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, searchKey);
 			}
 			else if(searchKey.equals("all")){ //그림선택, 전부출력
-				sql = "SELECT NVL(COUNT(*), 0) FROM store where cate=? ";
+				sql = "SELECT NVL(COUNT(*), 0) FROM ceomember2 where storeType=? ";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, cate);
 			}else { //그림선택, 지역선택출력
-				sql = "SELECT NVL(COUNT(*), 0) FROM store where cate=? and region=?";
+				sql = "SELECT NVL(COUNT(*), 0) FROM ceomember2 where storeType=? and region=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, cate);
 				pstmt.setString(2, searchKey);
@@ -90,22 +90,22 @@ public class StoreDAO {
 		
 		try { //가게이름 입력시..
 			if(cate.length()==0 && searchKey.equals("all")){ //그림x , 전부출력
-				sql="SELECT NVL(COUNT(*), 0) FROM store WHERE INSTR(storeName, ?) >= 1";
+				sql="SELECT NVL(COUNT(*), 0) FROM ceomember2 WHERE INSTR(storeName, ?) >= 1";
 				
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setString(1, searchValue);
 			}else if(cate.length()==0){ //그림x , 지역 선택출력
-				sql="SELECT NVL(COUNT(*), 0) FROM store WHERE region= ? and INSTR(storeName, ?) >= 1";
+				sql="SELECT NVL(COUNT(*), 0) FROM ceomember2 WHERE region= ? and INSTR(storeName, ?) >= 1";
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setString(1, searchKey);
 				pstmt.setString(2, searchValue);
 			}else if(searchKey.equals("all")){ //그림선택, 전부출력
-				sql="SELECT NVL(COUNT(*), 0) FROM store WHERE region = ? AND cate = ?";
+				sql="SELECT NVL(COUNT(*), 0) FROM ceomember2 WHERE region = ? AND storeType = ?";
 	        	pstmt=conn.prepareStatement(sql);
 	        	pstmt.setString(1, searchKey);
 	        	pstmt.setString(2, cate);
 			}else { //그림선택, 지역선택출력
-				sql="SELECT NVL(COUNT(*), 0) FROM store WHERE region = ? AND cate = ? AND INSTR(storeName,?)  >= 1";
+				sql="SELECT NVL(COUNT(*), 0) FROM ceomember2 WHERE region = ? AND storeType = ? AND INSTR(storeName,?)  >= 1";
 	        	pstmt=conn.prepareStatement(sql);
 	        	pstmt.setString(1, searchKey);
 	        	pstmt.setString(2, cate);
@@ -126,6 +126,8 @@ public class StoreDAO {
 		return result;
 	}
 	
+	
+
 	public List<StoreDTO> listStore2(int start, int end, String searchKey, String cate) {
 		List<StoreDTO> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -136,8 +138,8 @@ public class StoreDAO {
 			if(searchKey.equals("all")) {
 				sb.append("SELECT * FROM (");
 				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
-				sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
-				sb.append("		FROM store WHERE cate = ? ORDER BY storeId DESC");
+				sb.append("		SELECT ceoId, storeName, storeTel, storeAddr, storePhoto ");
+				sb.append("		FROM ceomember2 WHERE storeType = ?");
 				sb.append("    ) tb WHERE ROWNUM <= ? ");
 				sb.append(") WHERE rnum >= ? ");
 				
@@ -148,8 +150,8 @@ public class StoreDAO {
 			} else {
 				sb.append("SELECT * FROM (");
 				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
-				sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
-				sb.append("		FROM store WHERE region = ? AND cate = ? ORDER BY storeId DESC");
+				sb.append("		SELECT ceoId, storeName, storeTel, storeAddr, storePhoto ");
+				sb.append("		FROM ceomember2 WHERE region = ? AND storeType = ?");
 				sb.append("    ) tb WHERE ROWNUM <= ? ");
 				sb.append(") WHERE rnum >= ? ");
 				
@@ -163,11 +165,11 @@ public class StoreDAO {
 			
 			while(rs.next()) {
 				StoreDTO dto = new StoreDTO();
-				dto.setStoreId(rs.getString("storeId"));
+				dto.setCeoId(rs.getString("ceoId"));
 				dto.setStoreName(rs.getString("storeName"));
 				dto.setStoreTel(rs.getString("storeTel"));
 				dto.setStoreAddr(rs.getString("storeAddr"));
-				dto.setImageFilename(rs.getString("imageFilename"));
+				dto.setStorePhoto(rs.getString("storePhoto"));
 				
 				list.add(dto);
 			}
@@ -178,6 +180,7 @@ public class StoreDAO {
 		}
 		return list;
 	}
+
 	public List<StoreDTO> listStore(int start, int end, String searchKey, String searchValue) {
 		List<StoreDTO> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -188,8 +191,8 @@ public class StoreDAO {
 			if(searchKey.equals("all") && searchValue==null) {
 				sb.append("SELECT * FROM (");
 				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
-				sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
-				sb.append("		FROM store ORDER BY storeId DESC");
+				sb.append("		SELECT ceoId, storeName, storeTel, storeAddr, storePhoto ");
+				sb.append("		FROM ceomember2");
 				sb.append("    ) tb WHERE ROWNUM <= ? ");
 				sb.append(") WHERE rnum >= ? ");
 				
@@ -199,8 +202,8 @@ public class StoreDAO {
 			} else if(searchKey.equals("all") && searchValue!=null) {
 				sb.append("SELECT * FROM (");
 				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
-				sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
-				sb.append("		FROM store WHERE INSTR(storeName, ?) >= 1 ORDER BY storeId DESC" );
+				sb.append("		SELECT ceoId, storeName, storeTel, storeAddr, storePhoto ");
+				sb.append("		FROM ceomember2 WHERE INSTR(storeName, ?) >= 1" );
 				sb.append("    ) tb WHERE ROWNUM <= ?");
 				sb.append(") WHERE rnum >= ?");
 				
@@ -212,9 +215,8 @@ public class StoreDAO {
 			} else if(!searchKey.equals("all") && searchValue.length()==0) {
 			sb.append("SELECT * FROM (");
 			sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
-			sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
-			sb.append("		FROM store WHERE region = ? " );
-			sb.append(" ORDER BY storeId DESC");
+			sb.append("		SELECT ceoId, storeName, storeTel, storeAddr, storePhoto ");
+			sb.append("		FROM ceomember2 WHERE region = ? " );
 			sb.append("    ) tb WHERE ROWNUM <= ?");
 			sb.append(") WHERE rnum >= ?");
 			
@@ -226,9 +228,8 @@ public class StoreDAO {
 			} else {
 				sb.append("SELECT * FROM (");
 				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
-				sb.append("		SELECT storeId, storeName, storeTel, storeAddr, imageFilename ");
+				sb.append("		SELECT ceoId, storeName, storeTel, storeAddr, storePhoto ");
 				sb.append("		FROM store WHERE region = ? AND INSTR(storeName, ?) >= 1 " );
-				sb.append(" ORDER BY storeId DESC");
 				sb.append("    ) tb WHERE ROWNUM <= ?");
 				sb.append(") WHERE rnum >= ?");
 				
@@ -244,11 +245,11 @@ public class StoreDAO {
 			
 			while(rs.next()) {
 				StoreDTO dto = new StoreDTO();
-				dto.setStoreId(rs.getString("storeId"));
+				dto.setCeoId(rs.getString("ceoId"));
 				dto.setStoreName(rs.getString("storeName"));
 				dto.setStoreTel(rs.getString("storeTel"));
 				dto.setStoreAddr(rs.getString("storeAddr"));
-				dto.setImageFilename(rs.getString("imageFilename"));
+				dto.setStorePhoto(rs.getString("storePhoto"));
 				
 				list.add(dto);
 			}

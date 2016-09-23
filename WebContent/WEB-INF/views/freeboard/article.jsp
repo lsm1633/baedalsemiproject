@@ -165,7 +165,7 @@ function updateBoard() {
 								   <a href="<%=cp%>/freeboard/article.do?${params}&boardNum=${nextReadDto.boardNum}">${nextReadDto.subject}</a>
 							    </c:if>
 							  <c:if test="${! not empty nextReadDto }">
-	                          	 등록된 게시물이 없습니다.
+	                          	 등록된 게시물이 없습니다.	
 	                           </c:if>
 	                      </td>
 	                 </tr>
@@ -175,11 +175,16 @@ function updateBoard() {
 					<tfoot>
 	                	<tr>
 	                		<td>
+	                		 
+	                		  <button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/freeboard/reply.do?boardNum=${dto.boardNum}&page=${page}';">답변</button>
 	                		    <c:if test="${sessionScope.member.userId==dto.userId}">		                		
 	                		        <button type="button" class="btn btn-default btn-sm wbtn"
 	                		                    onclick="javascript:location.href='<%=cp%>/freeboard/update.do?boardNum=${dto.boardNum}&page=${page}';">수정</button>
-	                		    </c:if> 
+	                		    </c:if > 
+	                		     <c:if test="${sessionScope.member.userId==dto.userId}">	
 	                		        <button type="button" class="btn btn-default btn-sm wbtn" onclick="deleteBoard('${dto.boardNum}');">삭제</button>
+	                		     </c:if > 
+	                		     
 	                		</td>
 	                		<td align="right">
 	                		    <button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/freeboard/freeboard.do?${params}';"> 목록으로 </button>

@@ -1,20 +1,20 @@
 package com.store;
 
 public class StoreDTO {
-	private String storeId, storeName;
-	private String storeTel, storeAddr, imageFilename;
-	public String getStoreAddr() {
-		return storeAddr;
+	private String ceoId, storeName;
+	private String storeTel, storeAddr, storePhoto, storeType ,region;
+	
+	public String getRegion() {
+		return region;
 	}
-	public void setStoreAddr(String storeAddr) {
-		this.storeAddr = storeAddr;
+	public void setRegion(String region) {
+		this.region = region;
 	}
-	private String region, cate;
-	public String getStoreId() {
-		return storeId;
+	public String getCeoId() {
+		return ceoId;
 	}
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
+	public void setCeoId(String ceoId) {
+		this.ceoId = ceoId;
 	}
 	public String getStoreName() {
 		return storeName;
@@ -28,24 +28,26 @@ public class StoreDTO {
 	public void setStoreTel(String storeTel) {
 		this.storeTel = storeTel;
 	}
-	public String getImageFilename() {
-		return imageFilename;
+	public String getStoreAddr() {
+		return storeAddr;
 	}
-	public void setImageFilename(String imageFilename) {
-		this.imageFilename = imageFilename;
+	public void setStoreAddr(String storeAddr) {
+		this.storeAddr = storeAddr;
 	}
-	public String getRegion() {
-		return region;
+	public String getStorePhoto() {
+		return storePhoto;
 	}
-	public void setRegion(String region) {
-		this.region = region;
+	public void setStorePhoto(String storePhoto) {
+		this.storePhoto = storePhoto;
 	}
-	public String getCate() {
-		return cate;
+	public String getStoreType() {
+		return storeType;
 	}
-	public void setCate(String cate) {
-		this.cate = cate;
+	public void setStoreType(String storeType) {
+		this.storeType = storeType;
 	}
+	
+	
 	
 	
 }

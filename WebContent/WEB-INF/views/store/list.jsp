@@ -50,11 +50,12 @@
          <div class="row1">
           <div class="col-sm-5 col-md-4">
            <div class="thumbnail">
-            <img src="<%=cp%>/res/images/${dto.imageFilename}" style="float: left" width="200px" height="150" border="1px solid #ccc" class="img-circle"> 
+            <img src="<%=cp%>/res/images/storedefault.png" style="float: left" width="200px" height="150" border="1px solid #ccc" class="img-circle"> 
              <div class="caption">
              <h3>${dto.storeName}</h3>
              <p>주소: ${dto.storeAddr} <br> 전화번호: ${dto.storeTel}</p>   
              <p align="center"><a href="#" class="btn btn-primary" role="button" >주문하기</a></p>
+             <input type="hidden" value="${dto.ceoId}">
              </div>
            </div>
           </div>
