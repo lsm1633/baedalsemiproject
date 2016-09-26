@@ -257,5 +257,28 @@ public class CeoMemberDAO {
 	      
 	      return dto;
 	   }
-   
+   	   public int updatePwd(CeoMemberDTO dto){
+   		   int result=0;
+   		   PreparedStatement pstmt = null;
+   		   String sql;
+   		   try {
+   			   sql="UPDATE ceomember1 SET ceoPwd=? WHERE ceoId=?";
+   			   pstmt=conn.prepareStatement(sql);
+			
+				pstmt.setString(1, dto.getCeoPwd());
+				pstmt.setString(2, dto.getCeoId());
+				
+				result=pstmt.executeUpdate();
+				pstmt.close();
+				pstmt = null;
+			
+				result = 1;
+			
+   		   } catch (Exception e) {
+			System.out.println(e.toString());
+   		   }
+   		      		   
+   		   return result;
+   	   }
+   	   
 }

@@ -305,23 +305,21 @@ public class CeoMemberServlet extends MyServlet{
 	        }	    	
 	         
 	    	req.setAttribute("mode", "findpwd1");
+	    	req.setAttribute("message", "이름 을 잘못 기재했거나 가입돼지 않은 ID 입니다.");
 	    	forward(req, resp, "/WEB-INF/views/ceomember/ceologin.jsp");  
 	    }else if(uri.indexOf("findpwd2_ok.do")!=-1){
-	    	
+	    	 //password찾기 2단계(맞으면 비번수정 진행,틀리면 2단계 화면)
 	        String ansPwd = req.getParameter("ansPwd");
 	        
 	        CeoMemberDTO dto = dao.findMemberpwd2(ansPwd); 
 	        	        
 	        
 	        if(dto.getAnsPwd().equals(ansPwd)){
-	        	 //찾기 성공
-	        	String ceoName=dto.getCeoName();
-	        	String ceoPwd=dto.getCeoPwd();
-	        	
-	        	req.setAttribute("title", "패스워드찾기 성공");
-				req.setAttribute("message", ceoName+"님의 패스워드는"+ceoPwd+"입니다.");
-	        	
-				forward(req,resp,"/WEB-INF/views/ceomember/ceocomplete.jsp"); 	        	 
+	        	//찾기 성공
+	        		        	
+	        	req.setAttribute("mode", "updatepwd");
+	        	req.setAttribute("ceoId", dto.getCeoId());
+				forward(req,resp,"/WEB-INF/views/ceomember/ceologin.jsp"); 	        	 
 				return;
 	        }
 	        
@@ -330,8 +328,32 @@ public class CeoMemberServlet extends MyServlet{
 			
 			forward(req, resp, "/WEB-INF/views/ceomember/ceologin.jsp");	     
 	    	
+	    }else if(uri.indexOf("updatepwd_ok.do")!=-1){
+	    	 //password 수정하기(수정완료하면 메인화면)
+	    	String ceoId=req.getParameter("ceoId");
+	    	
+	    	CeoMemberDTO dto=dao.readMemberid(ceoId);
+	    	
+	    	dto.setCeoPwd(req.getParameter("ceoPwd"));	        
+	       
+	        int result=dao.updatePwd(dto); 	        	        
+	        
+	        if(result==1){
+	        	//수정 성공	        	     	
+	        	
+	        	req.setAttribute("title", "패스워드수정 성공");
+				req.setAttribute("message","정상적으로 수정돼었습니다.<br>새로운 패스워드로 로그인 하세요.");
+	        	
+				forward(req,resp,"/WEB-INF/views/ceomember/ceocomplete.jsp"); 	        	 
+				return;
+	        }
+	        
+	        req.setAttribute("mode", "updatepwd");
+        	req.setAttribute("ceoId", dto.getCeoId());
+        	req.setAttribute("message", "수정에 실패했습니다. 다시입력하세요.");
+			forward(req,resp,"/WEB-INF/views/ceomember/ceologin.jsp");     
+	    	
 	    }
-	    
 	}
 
 }

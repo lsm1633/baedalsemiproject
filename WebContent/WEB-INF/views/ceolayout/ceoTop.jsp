@@ -6,36 +6,6 @@
  request.setCharacterEncoding("utf-8");
 %>
 
-<style>
-  *{
-    margin:0; padding:0;
-    font:nomal 12px 'Dotum';
-  }
-  
-  a{text-decoration:none;}
-  img{border:0;}
-  ul{list-style:none;}
-  
-  body{
-    width:980px;
-    margin:0 auto;
-  }
-
-  #main_header{
-    position:relative;
-    height:75px;
-  }
-  
-  #main_header > h1.logo{
-    position:absolute;
-    left:15px; top:10px;
-  }
-  
-  #main_header > div.login_menu{
-    position:absolute;
-    top:10px; right:0px;
-  }
-</style>
 <div class = "container">
 	<div class="page-header" id="main-header">
 		<div align="right" style="margin: 10px">

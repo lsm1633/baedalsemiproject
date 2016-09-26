@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <link rel="stylesheet"
 	href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css"
 	type="text/css" />
@@ -27,6 +28,15 @@
 <script type="text/javascript"
 	src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/res/js/util.js"></script>
+<script type="text/javascript">
+function basketadd() {
+	var f = document.jangForm;
+	
+	
+	f.action = "<%=cp%>/menu/menuadd_ok.do";
+	f.submit();
+}
+</script>
 
 </head>
 <body>
@@ -35,10 +45,25 @@
 	</div>
 
 	<div class="container">
+	<form name="jangForm" method="post" class="form-inline">
 		<div style="font-size: 20pt">주문 하기</div>
-
+		<div style="width: 300px; border: 1px solid #ccc; margin: 30px auto 5px; float: right;" ><h5 align="center">장바구니</h5>
+		<c:if test="${empty list2}">
+			<label>장바구니가 비어있습니다</label>
+		</c:if>
+		<c:if test="${not empty list2}">
+		<c:forEach var="dto" items="${list2}">
+		<div style="width: 300px; border-bottom: 1px solid #ccc; clear: both;" align="left">
+			<label style="width: 150px">${dto.menuName }</label>
+			<label style="width: 80px">${dto.price}원</label>
+			<label style="width: 30px">${dto.num}개</label>
+			<a onclick="">X</a>
+		</div>
+		</c:forEach>
+		</c:if>
+		</div>
 		<div class="panel-group" id="accordion" role="tablist"
-			aria-multiselectable="true" style="width: 1000px">
+			aria-multiselectable="true" style="width: 800px;">
 			<div class="panel panel-default">
 				<div class="panel-heading" role="tab" id="headingOne">
 					<h4 class="panel-title">
@@ -55,13 +80,20 @@
 							<div class="row1">
 								<div class="col-sm-5 col-md-6">
 									<div class="thumbnail" style="border-color: white;">
-										<a href="#" class="btn btn-default" role="button" style="width: 450px; height: 160px"> <img
+										<c:if test="${empty dto.name}">
+											<div>
+												<img alt="" src="<%=cp%>/res/images/nomenu.png">
+											</div>
+										</c:if>
+										<a onclick="basketadd()" class="btn btn-default" role="button" style="width: 350px; height: 160px"> <img
 											src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
-											style="float: left" width="200px" height="130px"> <b
-											style="font-size: 15pt">${dto.name}</b> <br> <b
-											style="font-size: 10pt">${dto.price} </b> <br> <b
-											style="font-size: 10pt">${dto.content} </b> <input
-											type="hidden" value="${dto.ceoId}">
+											style="float: left" width="150px" height="130px"> 
+											<b style="font-size: 15pt">${dto.name}</b> <br> 
+											<b style="font-size: 10pt">${dto.price} </b> <br>
+											<b style="font-size: 10pt">${dto.content} </b> 
+											<input name="ceoId" type="hidden" value="${dto.ceoId}">
+											<input name="price" type="hidden" value="${dto.price}">
+											<input name="menuName" type="hidden" value="${dto.name}">
 										</a>
 									</div>
 								</div>
@@ -93,13 +125,15 @@
 							<div class="row1">
 								<div class="col-sm-5 col-md-6">
 									<div class="thumbnail" style="border-color: white;">
-										<a href="#" class="btn btn-default" role="button" style="width: 450px; height: 160px" > <img
+										<a onclick="basketadd()" class="btn btn-default" role="button" style="width: 350px; height: 160px" > <img
 											src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
-											style="float: left" width="200px" height="130px"> <b
+											style="float: left" width="150px" height="130px"> <b
 											style="font-size: 15pt;">${dto.name}</b> <br> <b
 											style="font-size: 10pt;">${dto.price} </b> <br> <b
-											style="font-size: 10pt; ">${dto.content} </b> <input
-											type="hidden" value="${dto.ceoId}">
+											style="font-size: 10pt; ">${dto.content} </b> 
+											<input name="ceoId" type="hidden" value="${dto.ceoId}">
+											<input name="price" type="hidden" value="${dto.price}">
+											<input name="menuName" type="hidden" value="${dto.name}">
 										</a>
 									</div>
 								</div>
@@ -127,15 +161,17 @@
 						<c:forEach var="dto" items="${list}">
 						<c:if test="${dto.cate == 'side'}">
 							<div class="row1">
-								<div class="col-sm-5 col-md-6">
+								<div class="scol-sm-5 col-md-6">
 									<div class="thumbnail" style="border-color: white;">
-										<a href="#" class="btn btn-default" role="button" style="width: 450px; height: 160px"> <img
+										<a onclick="basketadd()" class="btn btn-default" role="button" style="width: 350px; height: 160px"> <img
 											src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
-											style="float: left" width="200px" height="130px"> <b
+											style="float: left" width="150px" height="130px"> <b
 											style="font-size: 15pt">${dto.name}</b> <br> <b
 											style="font-size: 10pt">${dto.price} </b> <br> <b
-											style="font-size: 10pt">${dto.content} </b> <input
-											type="hidden" value="${dto.ceoId}">
+											style="font-size: 10pt">${dto.content} </b> 
+											<input name="ceoId" type="hidden" value="${dto.ceoId}">
+											<input name="price" type="hidden" value="${dto.price}">
+											<input name="menuName" type="hidden" value="${dto.name}">
 										</a>
 									</div>
 								</div>
@@ -146,10 +182,10 @@
 					</div>
 				</div>
 			</div>
-
-
 		</div>
-	</div>
+		</form>
+	
+		</div>
 
 	<div style="clear: both;">
 		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>

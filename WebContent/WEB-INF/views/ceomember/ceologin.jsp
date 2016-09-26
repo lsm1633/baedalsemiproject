@@ -97,6 +97,30 @@ function findpwd2(){
     f.submit();
 }
 
+function updatepwd(){
+	var f = document.loginForm;
+	
+	var str = f.ceoPwd.value;
+	if(!str) {
+		alert("패스워드를 입력하세요. ");
+		f.ceoPwd.focus();
+		return;
+	}
+	if(!/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/i.test(str)) { 
+		alert("패스워드는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.");
+		f.ceoPwd.focus();
+		return;
+	}
+	f.ceoPwd.value = str;
+
+	if(str!= f.ceoPwd1.value) {
+        alert("패스워드가 일치하지 않습니다. ");
+        f.ceoPwd1.focus();
+        return;
+	}
+	f.action = "<%=cp%>/ceomember/updatepwd_ok.do";
+    f.submit();
+}
 
 
 </script>
@@ -123,10 +147,13 @@ function findpwd2(){
 				<h2>배달의 나라 점주 ID찾기</h2>
 			</c:if>
 			<c:if test="${mode=='findpwd1'}">
-				<h2>배달의 나라 점주 비밀번호찾기 1단계</h2>
+				<h2>배달의 나라 점주 패스워드찾기 1단계</h2>
 			</c:if>
 			<c:if test="${mode=='findpwd2'}">
-				<h2>배달의 나라 점주 비밀번호찾기 2단계</h2>
+				<h2>배달의 나라 점주 패스워드찾기 2단계</h2>
+			</c:if>
+			<c:if test="${mode=='updatepwd'}">
+				<h2>배달의 나라 점주 패스워드 설정하기</h2>
 			</c:if>
 			
 			</div>
@@ -142,7 +169,7 @@ function findpwd2(){
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<label for="password">비밀번호</label> <input name="ceoPwd"
+							<label for="password">패스워드</label> <input name="ceoPwd"
 								id="ceoPwd" value='' placeholder="Password" type="password"
 								class="form-control" />
 						</div>
@@ -192,7 +219,7 @@ function findpwd2(){
 					</c:if>
 					
 					<c:if test="${mode=='findpwd2'}">
-						<h2>비밀번호 찾기 2단계 대답</h2>
+						<h2>패스워드 찾기 2단계 대답</h2>
 						<div class="form-group">
 							<label for="username-email">질문</label>
 							<h3>${askPwd}</h3>
@@ -208,6 +235,30 @@ function findpwd2(){
 								value="패스워드확인" onclick="findpwd2();"/>
 						</div>
 					</c:if>
+					
+					<c:if test="${mode=='updatepwd'}">
+						<h2>패스워드 수정하기</h2>
+						<div class="form-group">
+							<label for="username-email">새 비밀패스워드번호 입력</label> <input name="ceoPwd"
+								value='' id="ceoPwd" placeholder="5~10자 하나 이상의 숫자나 특수문자가 포함" type="password"
+								class="form-control" />
+						</div>
+						<div class="form-group">
+							<label for="password">패스워드 재입력</label> <input name="ceoPwd1"
+								id="ceoPwd1" value='' placeholder="패스워드" type="password"
+								class="form-control" />
+						</div>
+						<div class="form-group">
+							<input type="button"
+								class="btn btn-default btn-login-submit btn-block m-t-md"
+								value="패스워드 수정확인" onclick="updatepwd();"/>
+						</div>
+							<input type="hidden" name="ceoId" value="${ceoId}">
+						<div>
+						</div>
+						
+					</c:if>
+					
 					
 					
 						<div class="form-group">
