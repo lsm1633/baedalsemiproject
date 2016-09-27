@@ -56,6 +56,16 @@ function basketdelete(userId, ceoId, menuName) {
 }
 </script>
 
+<script type="text/javascript">
+function sendOrder() {
+	var f = document.orderform;
+	
+	
+	f.action = "<%=cp%>/order/order.do";
+	f.submit();
+}
+</script>
+
 </head>
 <body>
 	<div>
@@ -65,29 +75,39 @@ function basketdelete(userId, ceoId, menuName) {
 	<div class="container">
 
 		<div style="font-size: 20pt">주문 하기</div>
-		<div style="width: 300px; border: 1px solid #ccc; margin: 30px auto 5px; float: right;" ><h5 align="center">장바구니</h5>
-		<c:if test="${empty list2}">
-			<label>장바구니가 비어있습니다</label>
-		</c:if>
-		<c:if test="${not empty list2}">
-		<c:forEach var="dto" items="${list2}">
-		<div style="width: 300px; border-bottom: 1px solid #ccc; clear: both;" align="left">
-			<label style="width: 150px">${dto.menuName}</label>
-			<label style="width: 80px">${dto.price}원</label>
-			<label style="width: 30px">${dto.num}개</label>
-			<a onclick="basketdelete('${dto.userId}', '${dto.ceoId}', '${dto.menuName}')" role="button">X</a>
-		</div>
-		</c:forEach>
-		<form name="jangdelform" method="post" class="form-inline">
-			<input name="userId" type="hidden">
-			<input name="ceoId" type="hidden">
-			<input name="menuName" type="hidden">
-		</form>
+		<div style="width: 300px;  margin: 30px auto 5px; float: right;" >
+      <div style="border: 1px solid #ccc; margin: 30px auto 5px;"><h5 align="center">장바구니</h5>
+      <c:if test="${empty list2}">
+         <label>장바구니가 비어있습니다</label>
+      </c:if>
+      <c:if test="${not empty list2}">
+      <c:set var="total" value="0"/>
+      <c:forEach var="dto" items="${list2}">
+      <div style="width: 300px; border-bottom: 1px solid #ccc; clear: both;" align="left">
+         <label style="width: 150px">${dto.menuName}</label>
+         <label style="width: 80px">${dto.price}원</label>
+         <label style="width: 30px">${dto.num}개</label>
+         <a onclick="basketdelete('${dto.userId}', '${dto.ceoId}', '${dto.menuName}')" role="button">X</a>
+      </div>
+      <c:set var="total" value="${total+(dto.price*dto.num)}"/>
+      
+      </c:forEach>
+      
+       <div style="width: 300px; margin: 30px auto 5px; font-size: 15pt;">총 가격 : ${total}원 </div>
+      <form name="jangdelform" method="post" class="form-inline">
+         <input name="userId" type="hidden">
+         <input name="ceoId" type="hidden">
+         <input name="menuName" type="hidden">
+      </form>
+      <form name="orderform" method="post" class="form-inline">
 		<div style="width: 300px">
-			<button style="width: 300px" class="btn btn-success">주문하기</button>
+			<input type="button" style="width: 300px" class="btn btn-success" value="주문하기" onclick="sendOrder()">
 		</div>
-		</c:if>
-		</div>
+		</form>
+      </c:if>
+      
+      </div>
+      </div>
 		<div class="panel-group" id="accordion" role="tablist"
 			aria-multiselectable="true" style="width: 800px;">
 			<div class="panel panel-default">

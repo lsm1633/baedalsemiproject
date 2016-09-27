@@ -1,9 +1,11 @@
 package com.order;
 
+import java.sql.Connection;
+
+import com.util.DBConn;
+
 public class OrderDAO {
 
-	public OrderDAO() {
-		// TODO Auto-generated constructor stub
-	}
+	private Connection conn = DBConn.getConnection();
 
 }
