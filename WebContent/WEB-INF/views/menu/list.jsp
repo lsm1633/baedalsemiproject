@@ -101,7 +101,10 @@ function sendOrder() {
       </form>
       <form name="orderform" method="post" class="form-inline">
 		<div style="width: 300px">
+		<c:forEach var="dto" items="${list2}" begin="0" end="0">
 			<input type="button" style="width: 300px" class="btn btn-success" value="주문하기" onclick="sendOrder()">
+			<input type="hidden" name="ceoId" value="${dto.ceoId}">
+		</c:forEach>
 		</div>
 		</form>
       </c:if>

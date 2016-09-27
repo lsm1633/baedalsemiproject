@@ -13,6 +13,10 @@
 <meta charset="UTF-8">
 <title>성공</title>
 
+<link rel="stylesheet" href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap-theme.min.css" type="text/css"/>
+
 <link rel="stylesheet" href="<%=cp%>/res/css/style.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css"
 	type="text/css">
@@ -30,11 +34,11 @@
 
 </head>
 <body>
-
-	<div>
+	
+	<div class="layoutHeader">
 		<jsp:include page="/WEB-INF/views/ceolayout/ceoTop.jsp"></jsp:include>
 	</div>
-
+	
 	
 	<div class="container">
 
@@ -54,10 +58,16 @@
 
 	</div>
 
-	<div>
+	<div class="layoutFooter">
 		<jsp:include page="/WEB-INF/views/ceolayout/ceoBottom.jsp"></jsp:include>
 	</div>
-
+	
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
 
 
 </body>

@@ -363,5 +363,27 @@ public class CeoMemberDAO {
                       
           return result;
        }
+       public int deleteMember(String ceoId){
+  		 int result = 0;
+  		 PreparedStatement pstmt=null;
+  		 String sql;
+  		 
+  		 try {
+  			 sql = "UPDATE ceomember1 SET enabled=0 WHERE ceoId=?";
+  			 
+  			 pstmt = conn.prepareStatement(sql);
+  			 
+  			 pstmt.setString(1, ceoId);
+  			 result = pstmt.executeUpdate();
+  			 
+  			 pstmt.close();
+  			 pstmt = null;
+  			
+  		} catch (Exception e) {
+  			System.out.println(e.toString());
+  		}
+  		 
+  		 return result;
+  	 }
    
 }

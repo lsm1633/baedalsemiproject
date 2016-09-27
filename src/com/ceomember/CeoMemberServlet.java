@@ -248,14 +248,20 @@ public class CeoMemberServlet extends MyServlet{
 	          
 	     } else if(uri.indexOf("ceoinfo.do")!=-1) {
 	    	SessionInfo info=(SessionInfo)session.getAttribute("ceomember");
+	    	
+	    	if(info==null) {
+	    		 resp.sendRedirect(cp+"/ceomember/login.do");
+	    		 return;
+	    	 }	
+	    	
 	    	String ceoId=info.getCeoId();
 	    	CeoMemberDTO dto=dao.readMemberid(ceoId);
-	       		    	
+	       	
 	    	if(dto==null) {
-	    		resp.sendRedirect(cp+"/ceomain/ceomain.do");
-	    		return;
-	    	}	
-	    	
+	    		 resp.sendRedirect(cp+"/storeMenu/menu.do");
+	    		 return;
+	    	 }	
+	    		    	
 	    	String ceoBirth[]={};
 	    	ceoBirth=dto.getCeoBirth().split("-");
 	    	
@@ -270,8 +276,8 @@ public class CeoMemberServlet extends MyServlet{
 	     } else if(uri.indexOf("ceoinfo_update.do")!=-1) {
 		    	SessionInfo info=(SessionInfo)session.getAttribute("ceomember");
 		    	String ceoId=info.getCeoId();
-		    	CeoMemberDTO dto=dao.readMemberid(ceoId);
-		       	
+		    	CeoMemberDTO dto=dao.readMemberid(ceoId);  			    	
+		    	
 		    	
 		    	String ceoTel[]={}, ceoEmail[]={};
 		    	ceoTel=dto.getCeoTel().split("-");
@@ -314,13 +320,11 @@ public class CeoMemberServlet extends MyServlet{
 	     } else if(uri.indexOf("storeInfo.do")!=-1){
 	    	
 	    	 SessionInfo info=(SessionInfo)session.getAttribute("ceomember");
+	    	 
+	    	 
 	    	 String ceoId=info.getCeoId();
 	    	 CeoMemberDTO dto=dao.readMemberid(ceoId);
-
-	    	 if(dto==null) {
-	    		 resp.sendRedirect(cp+"/storeMenu/menu.do");
-	    		 return;
-	    	 }	    	 	    	 
+  	     	 	    	 
 	    	 
 	    	 if(dto.getRegion().equals("Seoul")){
 	    		 dto.setRegion("서울");
@@ -519,7 +523,7 @@ public class CeoMemberServlet extends MyServlet{
            if(result==1){
               //수정 성공                      
               
-              req.setAttribute("title", "패스워드수정 성공");
+             req.setAttribute("title", "패스워드수정 성공");
             req.setAttribute("message","정상적으로 수정되었습니다.<br>새로운 패스워드로 로그인 하세요.");
               
             forward(req,resp,"/WEB-INF/views/ceomember/ceocomplete.jsp");                
@@ -532,6 +536,35 @@ public class CeoMemberServlet extends MyServlet{
          forward(req,resp,"/WEB-INF/views/ceomember/ceologin.jsp");     
           
        }
+       else if(uri.indexOf("quit.do")!=-1){
+    	 SessionInfo info=(SessionInfo)session.getAttribute("ceomember");
+    	 
+    	 if(info == null){
+	    	forward(req, resp, "/WEB-INF/views/ceomember/ceologin.jsp");
+	    	return;
+	     }
+          
+         forward(req,resp,"/WEB-INF/views/ceomember/quit.jsp");     
+          
+       }
+       else if(uri.indexOf("quit_ok.do")!=-1){
+      	 SessionInfo info=(SessionInfo)session.getAttribute("ceomember");
+      	 
+      	 if(info == null){
+  	    	forward(req, resp, "/WEB-INF/views/ceomember/ceologin.jsp");
+  	    	return;
+  	     }
+      	String ceoId = info.getCeoId();
+    	dao.deleteMember(ceoId);
+    	
+    	session.removeAttribute("ceomember");
+        session.invalidate();
+    	
+    	req.setAttribute("title", "점주계정 탈퇴 완료");
+        req.setAttribute("message","정상적으로 탈퇴되었습니다.<br>이용해 주셔서 감사합니다.");
+           
+        forward(req,resp,"/WEB-INF/views/ceomember/ceocomplete.jsp");
+        }
    }
 	
 }

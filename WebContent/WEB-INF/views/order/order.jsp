@@ -25,6 +25,15 @@
 	margin: 20px 40px 30px;
 }
 </style>
+<script type="text/javascript">
+function orderOk() {
+	var f = document.orderForm;
+	
+	alert();
+	f.action = "<%=cp%>/order/order_ok.do";
+	f.submit();
+}
+</script>
 	
 </head>
 <body>
@@ -40,7 +49,7 @@
 		<div class= "col-md-6">
 			<div class="form-group">
 				<label> 휴대폰 </label>
-				<input width="500px;" type="text" class="form-control" name="tel" placeholder="-없이 입력해주세요." value="01011115555">
+				<input width="500px;" type="text" class="form-control" name="tel" placeholder="-없이 입력해주세요." value="${tel}">
 			</div>
 			<div class="form-group">
             	<label>주소</label> 
@@ -52,29 +61,42 @@
        		<div class="form-group">
             	<label> 요청 사항 </label> 
             	<input type="text" value="" class="form-control" 
-             	  name="addr1" placeholder="예) 벨 누르시기전에 전화해 주세요."> 
+             	  name="coment" placeholder="예) 벨 누르시기전에 전화해 주세요."> 
        		</div>
 			<h3 style="line-height: 50px; min-width:1140px; border-bottom: 1px solid black;">02. 결제정보 및 결제방법 선택</h3>
 			<div class="form-group">
             	<label> 주문내역 </label> 
+            	<c:set var="total" value="0"/>
+            	<c:set var="totalmenu" value=" "/>
+            	<c:forEach var="dto" items="${list}">
             	<div style="border-bottom: 1px solid #ccc; clear: both;" align="left">
-         			<label style="width: 200px">메뉴</label>
-        			<label style="width: 150px">(가격)원</label>
-         			<label style="width: 80px">(갯수)개</label>
+         			<label style="width: 200px">${dto.menuName}</label>
+        			<label style="width: 150px">${dto.price}원</label>
+         			<label style="width: 80px">${dto.num}개</label>
       			</div>
-      			<div>총 가격</div>
+      			<c:set var="total" value="${total+(dto.price*dto.num)}"/>
+      			<c:set var="totalmenu" value="${dto.menuName}+${totalmenu}"/>
+      			</c:forEach>
+      			<div class="form-group">총 가격 
+      				<input type="text" value="${total}" name="price" readonly="readonly">원
+      				<input type="hidden" name="menuName" value="${totalmenu}">
+      			</div>
+      			
+      			
        		</div>
        		<div class="form-group" style="line-height: 50px">
        			<label style="margin-right: 50px"> 결제방법 </label>
-       			<select style="width: 300px" name="paymeny">
+       			<select style="width: 300px" name="payment">
 					<option value="cash">만나서 결제 - 현금</option>
 					<option value="card">만나서 결제 - 카드</option>
 				</select>
+				<input type="hidden" name="ceoId" value="${ceoId}">
+				<input type="hidden" name="userId" value="${userId}">
        		</div>
        		
 		</div>
        		<div class="col-md-6 col-md-offset-5" style="line-height: 100px;">
-       			<input type="button" value=" 주문완료하기  " class ="btn btn-info" onclick="">
+       			<input type="button" value=" 주문완료하기  " class ="btn btn-info" onclick="orderOk()">
        		</div>
 		</form>
 		</div>

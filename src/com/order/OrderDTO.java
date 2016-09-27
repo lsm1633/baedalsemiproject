@@ -1,7 +1,13 @@
 package com.order;
 
 public class OrderDTO {
-	private String userId, ceoId, menuName, adrress, coment, tel;
+	private String userId, ceoId, menuName, adrress, coment, tel, payment;
+	public String getPayment() {
+		return payment;
+	}
+	public void setPayment(String payment) {
+		this.payment = payment;
+	}
 	public String getTel() {
 		return tel;
 	}

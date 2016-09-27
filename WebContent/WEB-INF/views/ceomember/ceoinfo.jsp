@@ -272,6 +272,10 @@ select {
 						&nbsp; <input type="button" name="complete_btn" class="cbtn"
 							value=" 돌아가기 "
 							onclick="javascript:location.href='<%=cp%>/ceomain/ceomain.do';">
+						&nbsp;
+						<input type="button" name="complete_btn" class="chBtn"
+							value=" 회원탈퇴 " 
+							onclick="javascript:location.href='<%=cp%>/ceomember/quit.do';">
 					</div>
 
 				</div>
