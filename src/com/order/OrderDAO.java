@@ -19,8 +19,8 @@ public class OrderDAO {
       
       try {
          sb.append("INSERT INTO orderinfo(");
-         sb.append("ordernum, userId, ceoId, menuname, price, adrress, coment, payment) ");
-         sb.append("VALUES (orderinfo_seq.NEXTVAL,?,?,?,?,?,?,?) ");
+         sb.append("ordernum, userId, ceoId, menuname, price, adrress, coment, payment, tel) ");
+         sb.append("VALUES (orderinfo_seq.NEXTVAL,?,?,?,?,?,?,?,?) ");
          
          pstmt=conn.prepareStatement(sb.toString());
          pstmt.setString(1, dto.getUserId());
@@ -30,6 +30,7 @@ public class OrderDAO {
          pstmt.setString(5, dto.getAdrress());
          pstmt.setString(6, dto.getComent());
          pstmt.setString(7, dto.getPayment());
+         pstmt.setString(8, dto.getTel());
          
          result=pstmt.executeUpdate();
          pstmt.close();

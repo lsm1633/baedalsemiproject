@@ -112,4 +112,25 @@ public class BasketDAO {
 		}
 		return result;
 	}
+	
+	public int deleteBasket(String userId, String ceoId, String menuName) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		try {
+			sql = "DELETE FROM basket WHERE userId = ? AND ceoId = ? AND menuName = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, ceoId);
+			pstmt.setString(3, menuName);
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 }

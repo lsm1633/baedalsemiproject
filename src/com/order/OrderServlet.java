@@ -69,11 +69,10 @@ public class OrderServlet extends MyServlet{
 			dto.setPayment(req.getParameter("payment"));
 			dto.setPrice(Integer.parseInt(req.getParameter("price")));
 			dto.setUserId(req.getParameter("userId"));
+			dto.setTel(req.getParameter("tel"));
 			
 			
-			System.out.println("디비");
 			dao.insertOrder(dto);
-			System.out.println("디비");
 			dao2.deleteBasket(userId, ceoId);
 			
 		}

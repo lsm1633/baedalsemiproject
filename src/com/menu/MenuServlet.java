@@ -141,7 +141,7 @@ public class MenuServlet extends MyServlet{
 			System.out.println(ceoId);
 			System.out.println(menuName);
 			
-			dao2.deleteBasket(userId, ceoId);
+			dao2.deleteBasket(userId, ceoId, menuName);
 			resp.sendRedirect(cp+"/menu/list.do?ceoId="+ceoId);
 		}
 		
