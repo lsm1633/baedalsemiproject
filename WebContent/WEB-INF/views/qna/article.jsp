@@ -247,6 +247,8 @@ function updateBoard() {
 </div>
 
 </div>
-
+<div>
+    <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
+</div>
 </body>
 </html>

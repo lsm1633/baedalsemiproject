@@ -151,12 +151,6 @@
 		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 	</div>
 
-	<script type="text/javascript"
-		src="<%=cp%>/res/jquery/js/jquery-ui.min.js"></script>
-	<script type="text/javascript"
-		src="<%=cp%>/res/jquery/js/jquery.ui.datepicker-ko.js"></script>
-	<script type="text/javascript"
-		src="<%=cp%>/res/bootstrap/js/bootstrap.min.js"></script>
 
 
 </body>
