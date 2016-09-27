@@ -1,7 +1,7 @@
 package com.menu;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -31,8 +31,7 @@ public class MenuServlet extends MyServlet{
 		String cp = req.getContextPath();
 		
 		HttpSession session = req.getSession();
-		
-		List<MenuDTO> menu = new ArrayList<MenuDTO>();
+	
 		
 		
 		if(uri.indexOf("list.do")!=-1) {
@@ -98,19 +97,51 @@ public class MenuServlet extends MyServlet{
 			String userId = info.getUserId();
 			String menuName = req.getParameter("name");
 			int price = Integer.parseInt(req.getParameter("price"));
+		
+			 List<BasketDTO> list;
+	         if(userId == null) {
+	            list = null;
+	         } else {
+	            list = dao2.listBasket(userId, ceoId);
+	         }
+	         
+	         int i=0;
+	         Iterator<BasketDTO> it=list.iterator();
+	         while(it.hasNext()){
+	            BasketDTO dto2=it.next();
+	            if(dto2.getMenuName().equals(menuName) && dto2.getCeoId().equals(ceoId) && dto2.getUserId().equals(userId)){
+	               dto.setCeoId(ceoId);
+	               dto.setUserId(userId);
+	               dto.setMenuName(menuName);
+	               dto.setPrice(price);
+	               
+	               dao2.updateBasket(dto);
+	               resp.sendRedirect(cp+"/menu/list.do?ceoId="+ceoId);
+	               i=1;
+	            }
+	         }
+	         
+	         if(i==0){
+	            dto.setCeoId(ceoId);
+	            dto.setUserId(userId);
+	            dto.setMenuName(menuName);
+	            dto.setPrice(price);
+	               
+	            dao2.insertBasket(dto);      
+	            
+	            resp.sendRedirect(cp+"/menu/list.do?ceoId="+ceoId);
+	         }
+		} else if(uri.indexOf("menudelete_ok.do")!=-1) {
+
+			String userId = req.getParameter("userId");
+			String ceoId = req.getParameter("ceoId");
+			String menuName = req.getParameter("menuName");
 			
-			
-			System.out.println(ceoId);
 			System.out.println(userId);
+			System.out.println(ceoId);
 			System.out.println(menuName);
-			System.out.println(price);
 			
-			dto.setCeoId(ceoId);
-			dto.setUserId(userId);
-			dto.setMenuName(menuName);
-			dto.setPrice(price);
-			
-			dao2.insertBasket(dto);
+			dao2.deleteBasket(userId, ceoId, menuName);
 			resp.sendRedirect(cp+"/menu/list.do?ceoId="+ceoId);
 		}
 		

@@ -42,6 +42,20 @@ function basketadd(ceoId, price, name) {
 }
 </script>
 
+<script type="text/javascript">
+function basketdelete(userId, ceoId, menuName) {
+	var f = document.jangdelform;
+	
+	f.userId.value=userId;
+	f.ceoId.value=ceoId;
+	f.menuName.value=menuName;
+	
+	
+	f.action = "<%=cp%>/menu/menudelete_ok.do";
+	f.submit();
+}
+</script>
+
 </head>
 <body>
 	<div>
@@ -61,9 +75,17 @@ function basketadd(ceoId, price, name) {
 			<label style="width: 150px">${dto.menuName}</label>
 			<label style="width: 80px">${dto.price}원</label>
 			<label style="width: 30px">${dto.num}개</label>
-			<a onclick="">X</a>
+			<a onclick="basketdelete('${dto.userId}', '${dto.ceoId}', '${dto.menuName}')" role="button">X</a>
 		</div>
 		</c:forEach>
+		<form name="jangdelform" method="post" class="form-inline">
+			<input name="userId" type="hidden">
+			<input name="ceoId" type="hidden">
+			<input name="menuName" type="hidden">
+		</form>
+		<div style="width: 300px">
+			<button style="width: 300px" class="btn btn-success">주문하기</button>
+		</div>
 		</c:if>
 		</div>
 		<div class="panel-group" id="accordion" role="tablist"

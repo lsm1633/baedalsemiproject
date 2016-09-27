@@ -77,7 +77,7 @@ public class BasketDAO {
 		StringBuffer sb = new StringBuffer();
 		
 		try {
-			sb.append("UPDATE SET num = num+1 FROM basket ");
+			sb.append("UPDATE basket SET num = num+1 ");
 			sb.append("WHERE userId = ? AND ceoId = ? AND menuName = ?");
 			
 			pstmt = conn.prepareStatement(sb.toString());
@@ -93,16 +93,18 @@ public class BasketDAO {
 		return result;
 	}
 	
-	public int deleteBasket(String userId) {
+	public int deleteBasket(String userId, String ceoId, String menuName) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql;
 		
 		try {
-			sql = "DELETE FRON basket WHERE userId = ?";
+			sql = "DELETE FROM basket WHERE userId = ? AND ceoId = ? AND menuName = ?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
+			pstmt.setString(2, ceoId);
+			pstmt.setString(3, menuName);
 			result = pstmt.executeUpdate();
 			pstmt.close();
 			

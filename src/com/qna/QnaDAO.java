@@ -514,9 +514,9 @@ public class QnaDAO {
     	PreparedStatement pstmt=null;
     	String sql;
     	
-    	sql="DELETE FROM qnasboard WHERE boardNum IN ("
-    		+"	SELECT boardNum FROM board START WITH boardNum=? "
-    		+"	CONNECT BY PRIOR boardNum=parent)";
+    	sql="DELETE FROM qnaboard WHERE boardNum IN ("
+    	          +"   SELECT boardNum FROM qnaboard START WITH boardNum=? "
+    	          +"   CONNECT BY PRIOR boardNum=parent)";
        	
     	try {
 			pstmt=conn.prepareStatement(sql);
