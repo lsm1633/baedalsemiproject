@@ -106,7 +106,6 @@
 	text-align: center;
 	background: #FFFFFF;
 	cursor: pointer;
-	text-align: cetner;
 }
 
 .chBtn:hover {

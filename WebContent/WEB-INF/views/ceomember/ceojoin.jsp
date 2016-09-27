@@ -365,12 +365,12 @@ function ceomemberok() {
 	height: 35px;
 	line-height: 35px;
 	text-align: center;
-	padding: 0px auto;
+	padding: 0px 0px 0px 2px;
 	border: 1px solid SlateGray;
 	outline: 0;
 	color: SlateGray;
 	background: #FFFFFF;
-	cursor: pointer;
+	cursor: pointer;	
 }
 
 .chBtn:hover {
@@ -459,7 +459,7 @@ select {
 									/* 아이디 */
 								%>
 								<input type="text" name="ceoId" size="50" maxlength="20"
-									value="${params.ceoId}" placeholder="영문자와 숫자합쳐 5~10자 첫글자는 영문자">&nbsp;
+									value="${ceoId}" placeholder="영문자와 숫자합쳐 5~10자 첫글자는 영문자">&nbsp;
 								<input type="button" name="check_bNum" class="chBtn"
 									value="중복확인 " onclick="chkceoId();"><span
 									style="color: blue;">${message2}</span>
@@ -486,7 +486,7 @@ select {
 									/* 비밀번호 질문 */
 								%>
 								<input type="text" name="askPwd" size="50" maxlength="20"
-									value="${param.askPwd}">
+									value="${askPwd}">
 							</dd>
 
 							<dd>
@@ -494,7 +494,7 @@ select {
 									/* 비밀번호 대답 */
 								%>
 								<input type="text" name="ansPwd" size="50" maxlength="20"
-									value="${param.ansPwd}">
+									value="${ansPwd}">
 							</dd>
 
 							<dd style="border-bottom: 1px solid silver;"></dd>
@@ -505,7 +505,7 @@ select {
 									/* 사장성명 */
 								%>
 								<input type="text" name="ceoName" size="28"
-									value="${param.ceoName}">
+									value="${ceoName}">
 							</dd>
 
 							<dd>
@@ -521,8 +521,8 @@ select {
 									<option value="018">018</option>
 									<option value="019">019</option>
 								</select>&nbsp; <input type="text" name="ceoTel2"
-									value="${param.ceoTel2}" size="11" maxlength="4">&nbsp;
-								<input type="text" name="ceoTel3" value="${param.ceoTel3}"
+									value="${ceoTel2}" size="11" maxlength="4">&nbsp;
+								<input type="text" name="ceoTel3" value="${ceoTel3}"
 									size="11" maxlength="4">&nbsp;
 
 							</dd>
@@ -554,7 +554,7 @@ select {
 									/* 이메일 */
 								%>
 
-								<input type="text" name="ceoEmail1" value="${param.ceoEmail1}">&nbsp;@&nbsp;
+								<input type="text" name="ceoEmail1" value="${ceoEmail1}">&nbsp;@&nbsp;
 								<input type="text" name="ceoEmail2"> <select
 									name="getEmail" onchange="setEmail();">
 									<option value="direct" selected="selected">직접입력&nbsp;&nbsp;</option>
@@ -575,7 +575,7 @@ select {
 								<%
 									/* 업소명 */
 								%>
-								<input type="text" name="storeName" value="${param.storeName}"
+								<input type="text" name="storeName" value="${storeName}"
 									size="40">&nbsp;
 							</dd>
 
@@ -584,7 +584,7 @@ select {
 									/* 사업자등록번호 */
 								%>
 								<input type="text" name="ceoCodeNum" size="40"
-									value="${param.ceoCodeNum}">&nbsp; <input type="button"
+									value="${ceoCodeNum}">&nbsp; <input type="button"
 									name="check_bNum" class="chBtn" value="중복확인 "
 									onclick="chkceoCodeNum();"><span style="color: blue;">${message1}</span>
 
@@ -596,10 +596,10 @@ select {
 								%>
 								<select name="storeAddr1">
 									<option value="" selected="selected">선택&nbsp;&nbsp;</option>
-									<option value="서울">서울</option>
-									<option value="경기">경기</option>
-									<option value="인천">인천</option>
-								</select> <input type="text" name="storeAddr2" value="${param.storeAddr}"
+									<option value="Seoul">서울</option>
+									<option value="Gyeonggi">경기</option>
+									<option value="Incheon">인천</option>
+								</select> <input type="text" name="storeAddr2" value="${storeAddr}"
 									size="60">
 							</dd>
 
@@ -607,7 +607,7 @@ select {
 								<%
 									/* 점포 전화번호 */
 								%>
-								<input type="text" name="storeTel" value="${param.storeTel}"
+								<input type="text" name="storeTel" value="${storeTel}"
 									size="40">&nbsp;
 							</dd>
 
@@ -617,10 +617,12 @@ select {
 								%>
 								<select name="storeType">
 									<option value="" selected="selected">선택&nbsp;&nbsp;</option>
-									<option value="chinese">중식</option>
+									<option value="chinese">중국집</option>
 									<option value="chicken">치킨</option>
-									<option value="snank">분식</option>
+									<option value="bunsik">분식</option>
 									<option value="pizza">피자</option>
+									<option value="jokbal">족발,보쌈</option>
+									<option value="hansik">한식</option>
 								</select>
 							</dd>
 

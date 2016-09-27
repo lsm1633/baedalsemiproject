@@ -39,7 +39,9 @@ public class CeoMemberServlet extends MyServlet{
 	    	forward(req, resp, "/WEB-INF/views/ceomember/ceojoin.jsp");
 	    }else if(uri.indexOf("join_idchk.do")!=-1){
 	    	//id중복 확인
-	    	String pathname="c:/"+File.separator+"storePhoto";
+	    	String root=session.getServletContext().getRealPath("/"); // 진짜주소위치 C:\web\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\baedalsemiproject\
+	    	String pathname=root+File.separator+"uploads"+File.separator+"store"; 
+	    	
 	    	File f=new File(pathname);
 	    	if(! f.exists()){ // 폴더가 존재하지 않으면
 	    		f.mkdirs(); // 모든폴더를 만든다.
@@ -51,6 +53,16 @@ public class CeoMemberServlet extends MyServlet{
 	    	mreq=new MultipartRequest(req,pathname,maxFilesize,encType,new DefaultFileRenamePolicy());
 	    	
 	    	String ceoId = mreq.getParameter("ceoId");
+	    	String askPwd = mreq.getParameter("askPwd");
+	    	String ansPwd = mreq.getParameter("ansPwd");
+	    	String ceoName = mreq.getParameter("ceoName");
+	    	String ceoTel2 = mreq.getParameter("ceoTel2");
+	    	String ceoTel3 = mreq.getParameter("ceoTel3");
+	    	String ceoEmail1 = mreq.getParameter("ceoEmail1");
+	    	String storeName = mreq.getParameter("storeName");
+	    	String ceoCodeNum = mreq.getParameter("ceoCodeNum");
+	    	String storeAddr = mreq.getParameter("storeAddr2");
+	    	String storeTel = mreq.getParameter("storeTel");
 	    	
 	    	CeoMemberDTO dto = dao.readMemberid(ceoId); 
 	    	StringBuffer sb=new StringBuffer();
@@ -62,13 +74,31 @@ public class CeoMemberServlet extends MyServlet{
 	    	
 	    	req.setAttribute("mode", "created");
 	    	req.setAttribute("title", "회원가입");
+	    	
+	    	req.setAttribute("ceoId", ceoId);
+	    	req.setAttribute("askPwd", askPwd);
+	    	req.setAttribute("ansPwd", ansPwd);
+	    	req.setAttribute("ceoName", ceoName);
+	    	req.setAttribute("ceoTel2", ceoTel2);
+	    	req.setAttribute("ceoTel3", ceoTel3);
+	    	req.setAttribute("ceoEmail1", ceoEmail1);
+	    	req.setAttribute("storeName", storeName);
+	    	req.setAttribute("ceoCodeNum", ceoCodeNum);
+	    	req.setAttribute("storeAddr", storeAddr);
+	    	req.setAttribute("storeTel", storeTel);	    	  	
+	    	
+	    		    	
+	    	
 	    	req.setAttribute("message2", sb.toString());
 	    	
 	    	forward(req, resp, "/WEB-INF/views/ceomember/ceojoin.jsp");
 	    	
 	    }else if(uri.indexOf("join_numchk.do")!=-1){
 	    	//사업자번호 중복 확인
-	    	String pathname="c:/"+File.separator+"storePhoto";
+	    	String root=session.getServletContext().getRealPath("/"); // 진짜주소위치 C:\web\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\baedalsemiproject\
+	    	String pathname=root+File.separator+"uploads"+File.separator+"store"; 
+	    	
+	    	
 	    	File f=new File(pathname);
 	    	if(! f.exists()){ // 폴더가 존재하지 않으면
 	    		f.mkdirs(); // 모든폴더를 만든다.
@@ -82,6 +112,17 @@ public class CeoMemberServlet extends MyServlet{
 	    	
 	    	String ceoCodeNum = mreq.getParameter("ceoCodeNum");
 	    	
+	    	String ceoId = mreq.getParameter("ceoId");
+	    	String askPwd = mreq.getParameter("askPwd");
+	    	String ansPwd = mreq.getParameter("ansPwd");
+	    	String ceoName = mreq.getParameter("ceoName");
+	    	String ceoTel2 = mreq.getParameter("ceoTel2");
+	    	String ceoTel3 = mreq.getParameter("ceoTel3");
+	    	String ceoEmail1 = mreq.getParameter("ceoEmail1");
+	    	String storeName = mreq.getParameter("storeName");	    	
+	    	String storeAddr = mreq.getParameter("storeAddr2");
+	    	String storeTel = mreq.getParameter("storeTel");
+	    	
 	    	CeoMemberDTO dto = dao.readMembernum(ceoCodeNum); 
 	    	StringBuffer sb=new StringBuffer();
 	    	
@@ -92,13 +133,27 @@ public class CeoMemberServlet extends MyServlet{
 	    		    	
 	    	req.setAttribute("mode", "created");
 	    	req.setAttribute("title", "회원가입");
+	    	
+	    	req.setAttribute("ceoId", ceoId);
+	    	req.setAttribute("askPwd", askPwd);
+	    	req.setAttribute("ansPwd", ansPwd);
+	    	req.setAttribute("ceoName", ceoName);
+	    	req.setAttribute("ceoTel2", ceoTel2);
+	    	req.setAttribute("ceoTel3", ceoTel3);
+	    	req.setAttribute("ceoEmail1", ceoEmail1);
+	    	req.setAttribute("storeName", storeName);
+	    	req.setAttribute("ceoCodeNum", ceoCodeNum);
+	    	req.setAttribute("storeAddr", storeAddr);
+	    	req.setAttribute("storeTel", storeTel);	    
+	    	
 	    	req.setAttribute("message1", sb.toString());
 	    	
 	    	forward(req, resp, "/WEB-INF/views/ceomember/ceojoin.jsp");
 	    	
 	    }else if(uri.indexOf("join_ok.do")!=-1){
+	    	String root=session.getServletContext().getRealPath("/"); // 진짜주소위치 C:\web\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\baedalsemiproject\
+	    	String pathname=root+File.separator+"uploads"+File.separator+"store"; 
 	    	
-	    	String pathname="c:/"+File.separator+"storePhoto";
 	    	File f=new File(pathname);
 	    	if(! f.exists()){ // 폴더가 존재하지 않으면
 	    		f.mkdirs(); // 모든폴더를 만든다.
@@ -201,7 +256,14 @@ public class CeoMemberServlet extends MyServlet{
 	    		return;
 	    	}	
 	    	
-	    	req.setAttribute("dto", dto);
+	    	String ceoBirth[]={};
+	    	ceoBirth=dto.getCeoBirth().split("-");
+	    	
+	    	dto.setCeoBirth1(ceoBirth[0]); 
+	    	dto.setCeoBirth2(ceoBirth[1]); 
+	    	dto.setCeoBirth3(ceoBirth[2]);    	
+	    	
+	    	req.setAttribute("dto", dto);    	
 	    	req.setAttribute("mode", "ceoinfo");
 	    	forward(req, resp, "/WEB-INF/views/ceomember/ceoinfo.jsp");
 	    	
@@ -209,7 +271,16 @@ public class CeoMemberServlet extends MyServlet{
 		    	SessionInfo info=(SessionInfo)session.getAttribute("ceomember");
 		    	String ceoId=info.getCeoId();
 		    	CeoMemberDTO dto=dao.readMemberid(ceoId);
-		       	   	
+		       	
+		    	
+		    	String ceoTel[]={}, ceoEmail[]={};
+		    	ceoTel=dto.getCeoTel().split("-");
+		    	ceoEmail=dto.getCeoEmail().split("@");
+		    	
+		    	dto.setCeoTel2(ceoTel[1]);  
+		    	dto.setCeoTel3(ceoTel[2]);  
+		    	
+		    	dto.setCeoEmail1(ceoEmail[0]);		    	
 		    	
 		    	req.setAttribute("dto", dto);
 		    	req.setAttribute("mode", "ceoinfo_update");
@@ -261,13 +332,17 @@ public class CeoMemberServlet extends MyServlet{
  	 
 	
 	    	 if(dto.getStoreType().equals("chinese")){
-	    		 dto.setStoreType("중식");
+	    		 dto.setStoreType("중국집");
 	    	 } else if(dto.getStoreType().equals("chicken")) {
 	    		 dto.setStoreType("치킨");
-	    	 } else if(dto.getStoreType().equals("snack")) {
+	    	 } else if(dto.getStoreType().equals("bunsik")) {
 	    		 dto.setStoreType("분식");
 	    	 } else if(dto.getStoreType().equals("pizza")) {
 	    		 dto.setStoreType("피자");
+	    	 } else if(dto.getStoreType().equals("jokbal")) {
+	    		 dto.setStoreType("족발,보쌈");
+	    	 } else if(dto.getStoreType().equals("hansik")) {
+	    		 dto.setStoreType("한식");
 	    	 }
 
 	    	 req.setAttribute("dto", dto);	    
@@ -292,7 +367,10 @@ public class CeoMemberServlet extends MyServlet{
 	    	 
 	     } else if(uri.indexOf("update_numchk.do")!=-1){
 	    	//사업자번호 중복 확인
-		    	String pathname="c:/"+File.separator+"storePhoto";
+	    	 String root=session.getServletContext().getRealPath("/"); // 진짜주소위치 C:\web\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\baedalsemiproject\
+		    String pathname=root+File.separator+"uploads"+File.separator+"store"; 
+	    	 
+	    	 
 		    	File f=new File(pathname);
 		    	if(! f.exists()){
 		    		f.mkdirs();
@@ -303,25 +381,31 @@ public class CeoMemberServlet extends MyServlet{
 		    	MultipartRequest mreq=null;
 		    	mreq=new MultipartRequest(req,pathname,maxFilesize,encType,new DefaultFileRenamePolicy());		    	
 		    	
-		    	String ceoCodeNum = mreq.getParameter("ceoCodeNum");
+		    	String ceoCodeNum = mreq.getParameter("ceoCodeNum"); 
+		    	String ceoId= mreq.getParameter("ceoId"); 	
 		    	
 		    	CeoMemberDTO dto = dao.readMembernum(ceoCodeNum); 
 		    	StringBuffer sb=new StringBuffer();
 		    	
 		    	if(dto==null)
-				   	sb.append("중복입니다.");
+				   	sb.append("사용가능");
 				else
-				  	sb.append("중복이 아닙니다.");
-		    		    	
-		    	req.setAttribute("mode", "created");
-		    	req.setAttribute("title", "회원가입");
-		    	req.setAttribute("message1", sb.toString());
+				  	sb.append("중복된 번호");
+		    			    	
+		    	
+		    	CeoMemberDTO dto2=dao.readMemberid(ceoId);
+		    	
+		    	req.setAttribute("dto", dto2);
+		    	req.setAttribute("mode", "storeUpdate");		    	
+		    	req.setAttribute("message1", sb.toString());		    	
 		    	
 		    	forward(req, resp, "/WEB-INF/views/ceomember/storeUpdate.jsp");
 	    
 	     } else if(uri.indexOf("storeUpdate_ok.do")!=-1) {
-	    	 
-	    	 String pathname="c:/"+File.separator+"storePhoto";
+	    	 String root=session.getServletContext().getRealPath("/"); // 진짜주소위치 C:\web\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\baedalsemiproject\
+		    String pathname=root+File.separator+"uploads"+File.separator+"store";
+		    
+		    
 	    	 File f=new File(pathname);
 	    	 if(! f.exists()){
 	    		 f.mkdirs();
@@ -340,7 +424,7 @@ public class CeoMemberServlet extends MyServlet{
 	    	 dto.setStoreTel(mreq.getParameter("storeTel"));
 	    	 dto.setStoreType(mreq.getParameter("storeType"));
 	    	 dto.setStoreAddr(mreq.getParameter("storeAddr"));
-	    	 dto.setStorePhoto(mreq.getParameter("storePhoto"));
+	    	 dto.setStorePhoto(mreq.getFilesystemName("storePhoto"));
 	    	 dto.setRegion(mreq.getParameter("region"));
 	    	 
 	    	 dao.updateStoreInfo(dto);

@@ -47,9 +47,9 @@ function searchList(cate) {
 					<form name="searchForm" method="post" class="form-inline">
 					<select name = "searchKey" style="height: 30px; width: 100px">
 						<option value="all">전체</option>
-						<option value="seoul">서울</option>
-						<option value="gyeonggi">경기</option>
-						<option value="incheon">인천</option>
+						<option value="Seoul">서울</option>
+						<option value="Gyeonggi">경기</option>
+						<option value="Incheon">인천</option>
 					</select>
 					
 					<div class="input-group" style="width: 600px">

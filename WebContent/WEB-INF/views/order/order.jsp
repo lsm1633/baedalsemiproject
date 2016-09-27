@@ -34,6 +34,7 @@
 	</div>
 	
 	<div class="container" role = "main">
+	<form name="orderForm" role="form">
 		<div class="form-group" style="line-height: 60px; border-bottom: 1px solid black; margin: 15px 0px 15px"><h1 style="font-weight: bold;">배달 / 결제정보</h1> </div>
 		<h3 style="line-height: 50px; border-bottom: 1px solid black;">01. 배달정보</h3>
 		<div class= "col-md-6">
@@ -53,12 +54,31 @@
             	<input type="text" value="" class="form-control" 
              	  name="addr1" placeholder="예) 벨 누르시기전에 전화해 주세요."> 
        		</div>
+			<h3 style="line-height: 50px; min-width:1140px; border-bottom: 1px solid black;">02. 결제정보 및 결제방법 선택</h3>
+			<div class="form-group">
+            	<label> 주문내역 </label> 
+            	<div style="border-bottom: 1px solid #ccc; clear: both;" align="left">
+         			<label style="width: 200px">메뉴</label>
+        			<label style="width: 150px">(가격)원</label>
+         			<label style="width: 80px">(갯수)개</label>
+      			</div>
+      			<div>총 가격</div>
+       		</div>
+       		<div class="form-group" style="line-height: 50px">
+       			<label style="margin-right: 50px"> 결제방법 </label>
+       			<select style="width: 300px" name="paymeny">
+					<option value="cash">만나서 결제 - 현금</option>
+					<option value="card">만나서 결제 - 카드</option>
+				</select>
+       		</div>
+       		
 		</div>
-		<div class="form-group">
-			<h3 style="line-height: 50px; min-width :800px; border-bottom: 1px solid black;">02. 결제정보 및 결제방법 선택</h3>
+       		<div class="col-md-6 col-md-offset-5" style="line-height: 100px;">
+       			<input type="button" value=" 주문완료하기  " class ="btn btn-info" onclick="">
+       		</div>
+		</form>
 		</div>
 
-	</div>
 	
 	<div style="clear: both;">
 		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>

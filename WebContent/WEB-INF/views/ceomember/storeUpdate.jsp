@@ -167,7 +167,7 @@
 	text-align: center;
 	background: #FFFFFF;
 	cursor: pointer;
-	text-align: cetner;
+	
 }
 
 .chBtn:hover {
@@ -262,7 +262,7 @@ select {
 								<select name="region">
 									<option value="" selected="selected">선택&nbsp;&nbsp;</option>
 									<option value="Seoul">서울</option>
-									<option value="-">경기</option>
+									<option value="Gyeonggi">경기</option>
 									<option value="Incheon">인천</option>
 								</select> <input type="text" name="storeAddr" value="${dto.storeAddr}"
 									size="40">
@@ -284,8 +284,10 @@ select {
 									<option value="" selected="selected">선택&nbsp;&nbsp;</option>
 									<option value="chinese">중식</option>
 									<option value="chicken">치킨</option>
-									<option value="snack">분식</option>
+									<option value="bunsik">분식</option>
 									<option value="pizza">피자</option>
+									<option value="jokbal">족발,보쌈</option>
+									<option value="hansik">한식</option>
 								</select>
 							</dd>
 

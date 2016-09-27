@@ -249,7 +249,7 @@ select {
 								<%
 									/* 생년월일 */
 								%>
-								${dto.ceoBirth}
+								${dto.ceoBirth1}년&nbsp;${dto.ceoBirth2}월&nbsp;${dto.ceoBirth3}일
 							</dd>
 
 							<dd>

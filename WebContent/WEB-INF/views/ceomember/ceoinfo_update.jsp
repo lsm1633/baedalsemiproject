@@ -146,8 +146,7 @@ function ceomemberok() {
   
     var mode="${mode}";
     if(mode=="ceoinfo_update") {
-    	f.action = "<%=cp%>
-	/ceomember/ceoinfo_update_ok.do";
+    	f.action = "<%=cp%>/ceomember/ceoinfo_update_ok.do";
 		}
 
 		f.submit();
@@ -405,9 +404,9 @@ select {
 									<option value="017">017</option>
 									<option value="018">018</option>
 									<option value="019">019</option>
-								</select>&nbsp; <input type="text" name="ceoTel2" value="${tel2}"
+								</select>&nbsp; <input type="text" name="ceoTel2" value="${dto.ceoTel2}"
 									size="11" maxlength="4">&nbsp; <input type="text"
-									name="ceoTel3" value="${tel3}" size="11" maxlength="4">&nbsp;
+									name="ceoTel3" value="${dto.ceoTel3}" size="11" maxlength="4">&nbsp;
 
 							</dd>
 
@@ -438,7 +437,7 @@ select {
 									/* 이메일 */
 								%>
 
-								<input type="text" name="ceoEmail1" value="${email1}">&nbsp;@&nbsp;
+								<input type="text" name="ceoEmail1" value="${dto.ceoEmail1}">&nbsp;@&nbsp;
 								<input type="text" name="ceoEmail2"> <select
 									name="getEmail" onchange="setEmail();">
 									<option value="direct" selected="selected">직접입력&nbsp;&nbsp;</option>
