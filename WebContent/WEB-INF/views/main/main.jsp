@@ -94,7 +94,7 @@
 					<img class="img-responsive img-circle" src="<%=cp%>/res/images/jungkukzip.png"
 						alt="">
 					<div class="overlay img-circle">
-						<a class="info" onclick="searchList('jungkukzip');">중국집</a>
+						<a class="info" onclick="searchList('chinese');">중국집</a>
 					</div>
 				</div>
 			</div>

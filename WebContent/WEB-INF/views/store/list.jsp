@@ -40,7 +40,7 @@
     <div style="line-height: 150px; background-color: black;" align="center">
       <label><a onclick="searchList('chicken');"><img src="<%=cp%>/res/images/chicken.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
       <label><a onclick="searchList('pizza');"><img src="<%=cp%>/res/images/pizza.png" class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
-      <label><a onclick="searchList('jungkukzip');"><img src="<%=cp%>/res/images/jungkukzip.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('chinese');"><img src="<%=cp%>/res/images/jungkukzip.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
       <label><a onclick="searchList('bunsik');"><img src="<%=cp%>/res/images/bunsik.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
       <label><a onclick="searchList('jokbal');"><img src="<%=cp%>/res/images/jokbal.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
       <label><a onclick="searchList('hansik');"><img src="<%=cp%>/res/images/hansik.jpg"class="img-circle" width="120px" height="90"></a></label> 
@@ -56,7 +56,12 @@
          <div class="row1">
           <div class="col-sm-5 col-md-4">
            <div class="thumbnail">
+           <c:if test="${empty dto.storePhoto}">
+           	<img src="<%=cp%>/res/images/storedefault.png" style="float: left" width="150px" height="150" border="1px solid #ccc" > 
+           </c:if>
+           <c:if test="${not empty dto.storePhoto}">
             <img src="<%=cp%>/uploads/store/${dto.storePhoto}" style="float: left" width="150px" height="150" border="1px solid #ccc" > 
+            </c:if>
              <div class="caption">
              <h3>${dto.storeName}</h3>
              <p>주소: ${dto.storeAddr} <br> 전화번호: ${dto.storeTel}</p>   

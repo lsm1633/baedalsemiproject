@@ -15,9 +15,9 @@
             <li>&middot;</li>
             <li><a href="<%=cp%>/faq/faq.do">고객센터</a>
             <li>&middot;</li>
-            <li><a href="#">제휴문의</a></li>
+            <li><a href="<%=cp%>/qna/createdAlliance.do">제휴문의</a></li>
             <li>&middot;</li>
-            <li><a href="#">가맹문의</a></li>
+            <li><a href="<%=cp%>/qna/createdJoin.do">가맹문의</a></li>
             <li>&middot;</li>
             <li>© 배달의나라 Corp.</li>
         </ul>

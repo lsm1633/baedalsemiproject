@@ -64,7 +64,7 @@ function searchList(cate) {
 			<div class="category">
 				<div align="center" style="margin: 10px">
 					카테고리 : <a onclick="searchList('chicken');"> 치킨 </a> |
-					<a onclick="searchList('jungkukzip');"> 중국집 </a> |
+					<a onclick="searchList('chinese');"> 중국집 </a> |
 					<a onclick="searchList('pizza');"> 피자 </a> |
 					<a onclick="searchList('bunsik');"> 분식,떡볶이 </a> |
 					<a onclick="searchList('jokbal');"> 족발,보쌈 </a> |

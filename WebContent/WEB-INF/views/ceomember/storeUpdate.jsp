@@ -80,8 +80,7 @@
 	    	  
 	    var mode="${mode}";
 	    if(mode=="storeUpdate") {
-	    	f.action = "<%=cp%>
-	/ceomember/storeUpdate_ok.do";
+	    	f.action = "<%=cp%>/ceomember/storeUpdate_ok.do";
 		}
 
 		f.submit();
