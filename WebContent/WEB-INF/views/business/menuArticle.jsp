@@ -1,9 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page trimDirectiveWhitespaces="true" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-   String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 
 <!DOCTYPE html>
@@ -14,43 +14,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>메뉴</title>
 
-<link rel="stylesheet" href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
-<link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap.min.css" type="text/css"/>
-<link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap-theme.min.css" type="text/css"/>
+<link rel="stylesheet"
+	href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css"
+	type="text/css" />
+<link rel="stylesheet"
+	href="<%=cp%>/res/bootstrap/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet"
+	href="<%=cp%>/res/bootstrap/css/bootstrap-theme.min.css"
+	type="text/css" />
 
-<link rel="stylesheet" href="<%=cp%>/res/css/style.css" type="text/css"/>
-<link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/res/css/style.css" type="text/css" />
+<link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css"
+	type="text/css" />
 <style type="text/css">
 .bbs-article .table {
-    margin-top: 15px;
+	margin-top: 15px;
 }
+
 .bbs-article .table thead tr, .bbs-article .table tbody tr {
-    height: 30px;
+	height: 30px;
 }
+
 .bbs-article .table thead tr th, .bbs-article .table tbody tr td {
-    font-weight: normal;
-    border-top: none;
-    border-bottom: none;
+	font-weight: normal;
+	border-top: none;
+	border-bottom: none;
 }
+
 .bbs-article .table thead tr {
-    border-top: #d5d5d5 solid 1px;
-    border-bottom: #dfdfdf solid 1px;
-} 
-.bbs-article .table tbody tr {
-    border-bottom: #dfdfdf solid 1px;
+	border-top: #d5d5d5 solid 1px;
+	border-bottom: #dfdfdf solid 1px;
 }
+
+.bbs-article .table tbody tr {
+	border-bottom: #dfdfdf solid 1px;
+}
+
 .bbs-article .table i {
-    background: #424951;
-    display: inline-block;
-    margin: 0 7px 0 7px;
-    position: relative;
-    top: 2px;
-    width: 1px;
-    height: 13px;    
+	background: #424951;
+	display: inline-block;
+	margin: 0 7px 0 7px;
+	position: relative;
+	top: 2px;
+	width: 1px;
+	height: 13px;
 }
 </style>
 
-<script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript"
+	src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript">
 function updatePhoto(num) {
 	<c:if test="${sessionScope.ceomember.ceoId==dto.ceoId}">
@@ -71,91 +83,79 @@ function deletePhoto(num) {
 </head>
 <body>
 
-<div>
-	<dl style="height: 150px">
-		<dd>
-			<jsp:include page="/WEB-INF/views/ceolayout/ceoTop.jsp" />
-		</dd>
-	</dl>
-</div>
+	<div>
+		<jsp:include page="/WEB-INF/views/ceolayout/ceoTop.jsp"></jsp:include>
+	</div>
 
-<div class="container" role="main">
-
+	<div class="container" role="main">
+		<div class="bodyFrame col-sm-10"
+         style="float: none; margin-left: auto; margin-right: auto;">
 		<ul class="nav nav-tabs nav-justified">
 			<li><a href="<%=cp%>/storeMenu/menu.do">메뉴관리</a></li>
 			<li><a href="<%=cp%>/#">점포정보수정</a></li>
 		</ul>
-		
+
 		<div class="page-header">
-		<h1>메뉴추가</h1>
+			<h1>메뉴추가</h1>
 		</div>
-	    
-	    <div class="table-responsive" style="clear: both;">
-	        <div class="bbs-article">
-	            <table class="table">
-	                 <thead>
-	                     <tr>
-	                         <th colspan="2" style="text-align: center;">
-	                                 ${dto.name}
-	                         </th>
-	                     </tr>
-	                <thead>
-	                 <tbody>
-	                     <tr>
-	                         <td style="text-align: left;">
-	                             카테고리 : ${dto.cate}
-	                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                             가격 : ${dto.price}원
-	                         </td>
-	                         
-	                         <td style="text-align: right;">
-	                          ${dto.created}
-	                         </td>
-	                     </tr>
-                         <tr style="border-bottom:none;">
-                             <td colspan="2">
-                                 <img src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}" style="max-width:100%; height:auto; resize:both;">
-                             </td>
-                         </tr>
-	                     <tr>
-	                         <td colspan="2" style="min-height: 30px;">
-	                              ${dto.content}
-	                         </td>
-	                     </tr>
-	                </tbody>
-	                <tfoot>
-	                	<tr>
-	                		<td>
-		                        <c:if test="${sessionScope.ceomember.ceoId==dto.ceoId}">		                		
-	                		        <button type="button" class="btn btn-default btn-sm wbtn" onclick="updatePhoto(${dto.num});">수정</button>
-	                		    </c:if>
-		                        <c:if test="${sessionScope.ceomember.ceoId==dto.ceoId || sessionScope.ceomember.ceoId=='admin'}">    
-	                		        <button type="button" class="btn btn-default btn-sm wbtn" onclick="deletePhoto(${dto.num});">삭제</button>
-	                		    </c:if>
-	                		</td>
-	                		<td align="right">
-	                		    <button type="button" class="btn btn-default btn-sm wbtn"
-	                		                onclick="javascript:location.href='<%=cp%>/storeMenu/menu.do?page=${page}';"> 목록으로 </button>
-	                		</td>
-	                	</tr>
-	                </tfoot>
-	            </table>
-	       </div>
-	   </div>
 
-    </div>
-</div>
+		<div class="table-responsive" style="clear: both;">
+			<div class="bbs-article">
+				<table class="table">
+					<thead>
+						<tr>
+							<th colspan="2" style="text-align: center;">${dto.name}</th>
+						</tr>
+					<thead>
+					<tbody>
+						<tr>
+							<td style="text-align: left;">카테고리 : ${dto.cate}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 가격 : ${dto.price}원</td>
 
-<div align="center">
-		<dl style="height: 140px">
-			<dd>
-				<jsp:include page="/WEB-INF/views/ceolayout/ceoBottom.jsp" />
-			</dd>
-		</dl>
-</div>
+							<td style="text-align: right;">${dto.created}</td>
+						</tr>
+						<tr style="border-bottom: none;">
+							<td colspan="2"><img
+								src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
+								style="max-width: 100%; height: auto; resize: both;"></td>
+						</tr>
+						<tr>
+							<td colspan="2" style="min-height: 30px;">${dto.content}</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td><c:if test="${sessionScope.ceomember.ceoId==dto.ceoId}">
+									<button type="button" class="btn btn-default btn-sm wbtn"
+										onclick="updatePhoto(${dto.num});">수정</button>
+								</c:if> <c:if
+									test="${sessionScope.ceomember.ceoId==dto.ceoId || sessionScope.ceomember.ceoId=='admin'}">
+									<button type="button" class="btn btn-default btn-sm wbtn"
+										onclick="deletePhoto(${dto.num});">삭제</button>
+								</c:if></td>
+							<td align="right">
+								<button type="button" class="btn btn-default btn-sm wbtn"
+									onclick="javascript:location.href='<%=cp%>/storeMenu/menu.do?page=${page}';">
+									목록으로</button>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+	</div>
 
-<script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery.ui.datepicker-ko.js"></script>
-<script type="text/javascript" src="<%=cp%>/res/bootstrap/js/bootstrap.min.js"></script>
+
+	<div>
+		<jsp:include page="/WEB-INF/views/ceolayout/ceoBottom.jsp"></jsp:include>
+	</div>
+
+	<script type="text/javascript"
+		src="<%=cp%>/res/jquery/js/jquery-ui.min.js"></script>
+	<script type="text/javascript"
+		src="<%=cp%>/res/jquery/js/jquery.ui.datepicker-ko.js"></script>
+	<script type="text/javascript"
+		src="<%=cp%>/res/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

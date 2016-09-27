@@ -73,7 +73,8 @@ function check(){
 	  if(mode=="created")
 		f.action="<%=cp%>/storeMenu/menuCreated_ok.do";
 	  else if(mode=="update")
-		f.action="<%=cp%>/storeMenu/update_ok.do";
+		f.action="<%=cp%>
+	/storeMenu/update_ok.do";
 
 		return true;
 	}
@@ -82,18 +83,15 @@ function check(){
 <body>
 
 	<div>
-		<dl style="height: 150px">
-			<dd>
-				<jsp:include page="/WEB-INF/views/ceolayout/ceoTop.jsp" />
-			</dd>
-		</dl>
+		<jsp:include page="/WEB-INF/views/ceolayout/ceoTop.jsp"></jsp:include>
 	</div>
 
 	<div class="container" role="main">
-
+		<div class="bodyFrame col-sm-10"
+         style="float: none; margin-left: auto; margin-right: auto;">
 		<ul class="nav nav-tabs nav-justified">
 			<li><a href="<%=cp%>/storeMenu/menu.do">메뉴관리</a></li>
-			<li><a href="<%=cp%>/business/storeUpdate.do">점포정보수정</a></li>
+			<li><a href="<%=cp%>/ceomain/storeUpdate.do">점포정보수정</a></li>
 		</ul>
 
 		<div class="page-header">
@@ -149,8 +147,8 @@ function check(){
 							<tr>
 								<td class="td1">등록이미지</td>
 								<td colspan="3" class="td3"><img
-									src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}" width="30"
-									height="30" border="0"
+									src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
+									width="30" height="30" border="0"
 									onclick="imageViewer('<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}');"
 									style="cursor: pointer;"></td>
 							</tr>
@@ -165,9 +163,7 @@ function check(){
 								</button>
 								<button type="button" class="btn btn-danger"
 									onclick="javascript:location.href='<%=cp%>/storeMenu/menu.do';">
-									취소</button>
-									
-								<c:if test="${mode=='update'}">
+									취소</button> <c:if test="${mode=='update'}">
 									<input type="hidden" name="num" value="${dto.num}">
 									<input type="hidden" name="ceoId" value="${dto.ceoId}">
 									<input type="hidden" name="imageFilename"
@@ -182,18 +178,14 @@ function check(){
 
 
 		</form>
-
+	</div>
 	</div>
 
 
 
 
-	<div align="center">
-		<dl style="height: 140px">
-			<dd>
-				<jsp:include page="/WEB-INF/views/ceolayout/ceoBottom.jsp" />
-			</dd>
-		</dl>
+	<div>
+		<jsp:include page="/WEB-INF/views/ceolayout/ceoBottom.jsp"></jsp:include>
 	</div>
 
 

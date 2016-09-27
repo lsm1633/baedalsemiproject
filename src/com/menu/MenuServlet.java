@@ -43,7 +43,12 @@ public class MenuServlet extends MyServlet{
 				current_page = Integer.parseInt(page);
 			
 			String ceoId = req.getParameter("ceoId");
-			String userId = info.getUserId();
+			String userId;
+			if(info == null) {
+				userId = "";
+			} else {
+				userId = info.getUserId();
+			}
 			
 			int numPerPage=9;
 			int dataCount, total_page;
@@ -91,7 +96,7 @@ public class MenuServlet extends MyServlet{
 			
 			String ceoId = req.getParameter("ceoId");
 			String userId = info.getUserId();
-			String menuName = req.getParameter("menuName");
+			String menuName = req.getParameter("name");
 			int price = Integer.parseInt(req.getParameter("price"));
 			
 			

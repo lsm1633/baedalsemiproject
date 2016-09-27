@@ -32,7 +32,7 @@
 <script type="text/javascript"
 	src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
 
-<style type="text/css">
+<!-- <style type="text/css">
 #mainbox {
 	width: 1000px;
 	height: 500px;
@@ -44,7 +44,7 @@
 	float: left;
 }
 </style>
-
+ -->
 
 </head>
 <body>
@@ -56,7 +56,7 @@
 	<div class="container" role="main">
 		<c:if test="${empty sessionScope.ceomember}">
 			<div class="main-carousel"
-				style="width: 450px; height: 220px; margin-left: 100px">
+				style="width: 450px; height: 220px; margin-left: 100px; margin-right: 50px;">
 				<div id="carousel-example-generic" class="carousel slide"
 					data-ride="carousel" data-interval="3000">
 					<!-- Indicators -->
@@ -92,19 +92,43 @@
 					</a>
 				</div>
 			</div>
-			<div style="float: right; margin: 50px 100px 50px 0px;">
-				<dd style="width: 250px;">
-					<a href="<%=cp%>/ceomember/join.do"> <input type="image"
-						src="<%=cp%>/res/images/ceomemberjoin.PNG" width="200"
-						height="100" />
-					</a>
-				</dd>
+			<div class="row" style="margin-top: 45px; margin-left: 50px;"
+				align="center">
 
-				<ul class="nav nav-pills">
-					<li role="presentation"
-						style="font-size: 45pt; font-family: 'Nanum Pen Script', serif;"><a
-						href="<%=cp%>/ceomember/login.do">&nbsp;&nbsp;로그인</a></li>
-				</ul>
+				<div class="col-lg-3 col-md-4 col-sm-5 col-xs-12"
+					style="width: 220px; height: 220px;">
+					<div class="hovereffect " style="height: 190px;">
+						<img class="img-responsive" src="<%=cp%>/res/images/loginCeo.png"
+							width="150px" style="margin: 20px 16px" alt="">
+						<div class="overlay img-circle">
+							<a class="info" href="<%=cp%>/ceomember/login.do"">로그인</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 margin"
+					style="width: 220px; height: 220px;">
+					<div class="hovereffect " style="height: 190px;">
+						<img class="img-responsive" width="150px"
+							style="margin: 20px 20px" src="<%=cp%>/res/images/joinCeo.png"
+							alt="">
+						<div class="overlay img-circle">
+							<a class="info" href="<%=cp%>/ceomember/join.do"">회원가입</a>
+						</div>
+					</div>
+				</div>
+
+				<%-- <dd style="width: 250px;">
+				<a href="<%=cp%>/ceomember/join.do"> <input type="image"
+					src="<%=cp%>/res/images/ceomemberjoin.PNG" width="200" height="100" />
+				</a>
+			</dd> --%>
+
+				<%-- <ul class="nav nav-pills">
+				<li role="presentation"
+					style="font-size: 45pt; font-family: 'Nanum Pen Script', serif;"><a
+					href="<%=cp%>/ceomember/login.do">&nbsp;&nbsp;로그인</a></li>
+			</ul> --%>
 			</div>
 		</c:if>
 		<c:if test="${not empty sessionScope.ceomember}">
@@ -149,14 +173,15 @@
 	</div>
 
 
-	<div class="container">
+
+	<div class="container" style="margin-top: 50px">
 
 		<div class="col-md-4 quick" style="background-color: #96CEB4;">
 			<a class=" info" href="<%=cp%>/storeMenu/menu.do"><span
 				class="glyphicon glyphicon-home"> 가게관리</span></a>
 		</div>
 		<div class="col-md-4 quick" style="background-color: #96CEB4">
-			<a class="info" href="#"><span class="glyphicon glyphicon-user">
+			<a class="info" href="<%=cp%>/ceomember/ceoinfo.do"><span class="glyphicon glyphicon-user">
 					개인정보수정</span></a>
 		</div>
 		<div class="col-md-4 quick" style="background-color: #96CEB4">
@@ -165,7 +190,7 @@
 		</div>
 	</div>
 
-	<div class="container" style="margin-top: 30px">
+	<div class="container" style="margin-top: 50px">
 		<div class="col-md-8">
 			<div align="center">
 				<iframe width="500" height="350"
@@ -174,12 +199,9 @@
 		</div>
 
 		<div class=" col-md-4" style="margin-top: 10px">
-				<img class="img-responsive"
-					src="<%=cp%>/res/images/sajang.PNG" alt="">
-			</div>
-		
-
-
+			<img class="img-responsive" src="<%=cp%>/res/images/sajang.PNG"
+				alt="">
+		</div>
 
 	</div>
 
@@ -193,6 +215,7 @@
 		src="<%=cp%>/res/jquery/js/jquery.ui.datepicker-ko.js"></script>
 	<script type="text/javascript"
 		src="<%=cp%>/res/bootstrap/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

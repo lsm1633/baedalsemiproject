@@ -29,8 +29,12 @@
 	src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/res/js/util.js"></script>
 <script type="text/javascript">
-function basketadd() {
+function basketadd(ceoId, price, name) {
 	var f = document.jangForm;
+	
+	f.ceoId.value=ceoId;
+	f.price.value=price;
+	f.name.value=name;
 	
 	
 	f.action = "<%=cp%>/menu/menuadd_ok.do";
@@ -45,7 +49,7 @@ function basketadd() {
 	</div>
 
 	<div class="container">
-	<form name="jangForm" method="post" class="form-inline">
+
 		<div style="font-size: 20pt">주문 하기</div>
 		<div style="width: 300px; border: 1px solid #ccc; margin: 30px auto 5px; float: right;" ><h5 align="center">장바구니</h5>
 		<c:if test="${empty list2}">
@@ -54,7 +58,7 @@ function basketadd() {
 		<c:if test="${not empty list2}">
 		<c:forEach var="dto" items="${list2}">
 		<div style="width: 300px; border-bottom: 1px solid #ccc; clear: both;" align="left">
-			<label style="width: 150px">${dto.menuName }</label>
+			<label style="width: 150px">${dto.menuName}</label>
 			<label style="width: 80px">${dto.price}원</label>
 			<label style="width: 30px">${dto.num}개</label>
 			<a onclick="">X</a>
@@ -85,15 +89,13 @@ function basketadd() {
 												<img alt="" src="<%=cp%>/res/images/nomenu.png">
 											</div>
 										</c:if>
-										<a onclick="basketadd()" class="btn btn-default" role="button" style="width: 350px; height: 160px"> <img
+										<a onclick="basketadd('${dto.ceoId}', '${dto.price}', '${dto.name}')" class="btn btn-default" role="button" style="width: 350px; height: 160px"> <img
 											src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
 											style="float: left" width="150px" height="130px"> 
 											<b style="font-size: 15pt">${dto.name}</b> <br> 
 											<b style="font-size: 10pt">${dto.price} </b> <br>
 											<b style="font-size: 10pt">${dto.content} </b> 
-											<input name="ceoId" type="hidden" value="${dto.ceoId}">
-											<input name="price" type="hidden" value="${dto.price}">
-											<input name="menuName" type="hidden" value="${dto.name}">
+											
 										</a>
 									</div>
 								</div>
@@ -101,13 +103,18 @@ function basketadd() {
 						</c:if>
 						</c:forEach>
 
-
-
+<form name="jangForm" method="post" class="form-inline">
+<input name="ceoId" type="hidden">
+<input name="price" type="hidden">
+<input name="name" type="hidden">
+</form>
 
 
 					</div>
 				</div>
 			</div>
+
+
 
 			<div class="panel panel-default">
 				<div class="panel-heading" role="tab" id="headingTwo">
@@ -125,7 +132,7 @@ function basketadd() {
 							<div class="row1">
 								<div class="col-sm-5 col-md-6">
 									<div class="thumbnail" style="border-color: white;">
-										<a onclick="basketadd()" class="btn btn-default" role="button" style="width: 350px; height: 160px" > <img
+										<a onclick="basketadd('${dto.ceoId}', '${dto.price}', '${dto.name}')" class="btn btn-default" role="button" style="width: 350px; height: 160px" > <img
 											src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
 											style="float: left" width="150px" height="130px"> <b
 											style="font-size: 15pt;">${dto.name}</b> <br> <b
@@ -163,7 +170,7 @@ function basketadd() {
 							<div class="row1">
 								<div class="scol-sm-5 col-md-6">
 									<div class="thumbnail" style="border-color: white;">
-										<a onclick="basketadd()" class="btn btn-default" role="button" style="width: 350px; height: 160px"> <img
+										<a onclick="basketadd('${dto.ceoId}', '${dto.price}', '${dto.name}')" class="btn btn-default" role="button" style="width: 350px; height: 160px"> <img
 											src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
 											style="float: left" width="150px" height="130px"> <b
 											style="font-size: 15pt">${dto.name}</b> <br> <b
@@ -183,7 +190,7 @@ function basketadd() {
 				</div>
 			</div>
 		</div>
-		</form>
+
 	
 		</div>
 

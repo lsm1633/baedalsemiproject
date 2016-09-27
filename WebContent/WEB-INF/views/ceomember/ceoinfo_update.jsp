@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사장님 회원 가입</title>
+<title>사장님 정보 수정</title>
 <link rel="stylesheet"
 	href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css"
 	type="text/css" />
@@ -30,48 +30,11 @@
 	src="<%=cp%>/res/jquery/js/jquery-1.12.3.min.js"></script>
 
 <script type="text/javascript">
-function chkceoId() {
-	var f = document.ceomemberForm;
-	var str;
-	
-	str=f.ceoId.value;
-	
-	f.action = "<%=cp%>/ceomember/join_idchk.do";
-	
-	f.submit();
-	
-}
-
-function chkceoCodeNum() {
-	var f = document.ceomemberForm;
-	var str;
-	
-	str = f.ceoCodeNum.value;
-	
-	f.action = "<%=cp%>/ceomember/join_numchk.do";
-	
-	f.submit();
-}
-
 
 function ceomemberok() {
 	var f = document.ceomemberForm;
 	var str;
-	
-	str=f.ceoId.value;
-	if(!str) {
-		alert("아이디를 입력하세요. ");
-		f.ceoId.focus();
-		return;
-	}
-	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
-		alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
-		f.userId.focus();
-		return;
-	}
-	f.ceoId.value = str;
-	
-	
+		
 	str = f.ceoPwd.value;
 	if(!str) {
 		alert("패스워드를 입력하세요. ");
@@ -132,8 +95,7 @@ function ceomemberok() {
         f.ceoTel2.focus();
         return;
     }
-    
-    
+        
 
     str = f.ceoTel3.value;
     if(!str) {
@@ -180,59 +142,18 @@ function ceomemberok() {
         alert("이메일을 입력하세요. ");
         f.ceoEmail2.focus();
         return;
-    }      
-	
-    str = f.storeName.value;
-    if(!str) {
-        alert("가게이름을 입력하세요. ");
-        f.storeName.focus();
-        return;
-    }
-    
-    str = f.ceoCodeNum.value;
-    if(!str) {
-        alert("사업자등록번호를 입력하세요. ");
-        f.ceoCodeNum.focus();
-        return;
-    }
-    
-    str = f.storeAddr1.value;
-    if(!str) {
-        alert("가게주소를 입력하세요. ");
-        f.storeAddr1.focus();
-        return;
-    }
-    
-    str = f.storeAddr2.value;
-    if(!str) {
-        alert("가게주소를 입력하세요. ");
-        f.storeAddr2.focus();
-        return;
-    }
-    
-    str = f.storeTel.value;
-    if(!str) {
-        alert("가게 전화번호를 입력하세요. ");
-        f.storeTel.focus();
-        return;
-    }
-    
-    str = f.storeType.value;
-    if(!str) {
-        alert("가게 종류를 선택하세요. ");
-        f.storeType.focus();
-        return;
-    }
-	    
-    
+    }          
   
     var mode="${mode}";
-    if(mode=="created") 
-    	f.action = "<%=cp%>/ceomember/join_ok.do";
-    
-	f.submit();
+    if(mode=="ceoinfo_update") {
+    	f.action = "<%=cp%>
+	/ceomember/ceoinfo_update_ok.do";
+		}
+
+		f.submit();
 
 	}
+
 	function setEmail() {
 		var f = document.ceomemberForm;
 
@@ -272,8 +193,6 @@ function ceomemberok() {
 #category {
 	float: left;
 	width: 200px;
-	/*height: 1055px;*/
-	/*background: #DCDCDC;*/
 	font-size: 13pt;
 	font-weight: 500;
 	text-align: center;
@@ -282,7 +201,6 @@ function ceomemberok() {
 #item {
 	float: left;
 	width: 200px;
-	/*height: 900px;*/
 	font-size: 10pt;
 	font-weight: 500;
 	text-align: center;
@@ -291,20 +209,19 @@ function ceomemberok() {
 #input {
 	float: left;
 	width: 600px;
-	/*height: 900px;*/
 	font-size: 10pt;
 }
 
 #footer {
 	clear: both;
 	width: 1000px;
-	height: 200px;
+	height: 100px;
 	text-align: center;
 }
 
 #accountInfo {
-	height: 350px;
-	line-height: 350px;
+	height: 300px;
+	line-height: 300px;
 	background: #DCDCDC;
 	margin: 0px;
 	padding: 0px;
@@ -313,14 +230,6 @@ function ceomemberok() {
 #personal {
 	height: 300px;
 	line-height: 300px;
-	background: #DCDCDC;
-	margin: 0px;
-	padding: 0px;
-}
-
-#myStore {
-	height: 400px;
-	line-height: 400px;
 	background: #DCDCDC;
 	margin: 0px;
 	padding: 0px;
@@ -343,7 +252,7 @@ function ceomemberok() {
 }
 
 .cbtn {
-	padding: 0px auto;
+	padding: 0px;
 	width: 250px;
 	height: 50px;
 	font-size: 13pt;
@@ -364,8 +273,7 @@ function ceomemberok() {
 	width: 70px;
 	height: 35px;
 	line-height: 35px;
-	text-align: center;
-	padding: 0px auto;
+	padding: 0px;
 	border: 1px solid SlateGray;
 	outline: 0;
 	color: SlateGray;
@@ -399,9 +307,9 @@ select {
 	</div>
 
 	<div class="container">
-		<form name="ceomemberForm" method="post" enctype="multipart/form-data">
+		<form name="ceomemberForm" method="post">
 			<div>
-				<div id=header>사장님 회원가입</div>
+				<div id=header>사장님 정보 수정</div>
 				<div id=formbody>
 					<div id=category>
 						<%
@@ -410,7 +318,6 @@ select {
 						<dl class=row01 style="border-top: 3px solid DarkSlateGrey;">
 							<dd id=accountInfo>계정 정보</dd>
 							<dd id=personal>사장님 정보</dd>
-							<dd id=myStore>내 업소 정보</dd>
 						</dl>
 					</div>
 
@@ -420,7 +327,6 @@ select {
 						%>
 						<dl class=row02 style="border-top: 3px solid DarkSlateGrey;">
 							<dd></dd>
-							<dd>아이디</dd>
 							<dd>비밀번호 입력</dd>
 							<dd>비밀번호 확인</dd>
 							<dd>비밀번호 질문</dd>
@@ -434,16 +340,6 @@ select {
 							<dd>이메일 주소</dd>
 							<dd style="border-bottom: 1px solid silver;"></dd>
 
-							<dd></dd>
-							<dd>점포명</dd>
-							<dd>사업자 등록번호</dd>
-							<dd>점포 주소</dd>
-							<dd>점포 전화번호</dd>
-							<dd>카테고리</dd>
-							<dd>점포사진</dd>
-							<dd style="border-bottom: 1px solid silver;"></dd>
-
-
 						</dl>
 					</div>
 
@@ -456,21 +352,10 @@ select {
 							<dd></dd>
 							<dd>
 								<%
-									/* 아이디 */
-								%>
-								<input type="text" name="ceoId" size="50" maxlength="20"
-									value="${params.ceoId}" placeholder="영문자와 숫자합쳐 5~10자 첫글자는 영문자">&nbsp;
-								<input type="button" name="check_bNum" class="chBtn"
-									value="중복확인 " onclick="chkceoId();"><span
-									style="color: blue;">${message2}</span>
-							</dd>
-
-							<dd>
-								<%
 									/* 비밀번호 */
 								%>
 								<input type="password" name="ceoPwd" size="50" maxlength="20"
-									placeholder="5~10자이며 하나 이상의 숫자나 특수문자가 포함">
+									placeholder="5~10자이며 하나 이상의 숫자나 특수문자가 포함" >
 							</dd>
 
 							<dd>
@@ -478,7 +363,7 @@ select {
 									/* 비밀번호 확인 */
 								%>
 								<input type="password" name="ceoPwd1" size="50" maxlength="20"
-									placeholder="위 비밀번호를 한번 더 입력해 주세요">
+									placeholder="위 비밀번호를 한번 더 입력해 주세요" >
 							</dd>
 
 							<dd>
@@ -486,7 +371,7 @@ select {
 									/* 비밀번호 질문 */
 								%>
 								<input type="text" name="askPwd" size="50" maxlength="20"
-									value="${param.askPwd}">
+									value="${dto.askPwd}">
 							</dd>
 
 							<dd>
@@ -494,7 +379,7 @@ select {
 									/* 비밀번호 대답 */
 								%>
 								<input type="text" name="ansPwd" size="50" maxlength="20"
-									value="${param.ansPwd}">
+									value="${dto.ansPwd}">
 							</dd>
 
 							<dd style="border-bottom: 1px solid silver;"></dd>
@@ -505,7 +390,7 @@ select {
 									/* 사장성명 */
 								%>
 								<input type="text" name="ceoName" size="28"
-									value="${param.ceoName}">
+									value="${dto.ceoName}">
 							</dd>
 
 							<dd>
@@ -520,10 +405,9 @@ select {
 									<option value="017">017</option>
 									<option value="018">018</option>
 									<option value="019">019</option>
-								</select>&nbsp; <input type="text" name="ceoTel2"
-									value="${param.ceoTel2}" size="11" maxlength="4">&nbsp;
-								<input type="text" name="ceoTel3" value="${param.ceoTel3}"
-									size="11" maxlength="4">&nbsp;
+								</select>&nbsp; <input type="text" name="ceoTel2" value="${tel2}"
+									size="11" maxlength="4">&nbsp; <input type="text"
+									name="ceoTel3" value="${tel3}" size="11" maxlength="4">&nbsp;
 
 							</dd>
 
@@ -554,7 +438,7 @@ select {
 									/* 이메일 */
 								%>
 
-								<input type="text" name="ceoEmail1" value="${param.ceoEmail1}">&nbsp;@&nbsp;
+								<input type="text" name="ceoEmail1" value="${email1}">&nbsp;@&nbsp;
 								<input type="text" name="ceoEmail2"> <select
 									name="getEmail" onchange="setEmail();">
 									<option value="direct" selected="selected">직접입력&nbsp;&nbsp;</option>
@@ -568,86 +452,20 @@ select {
 
 							<dd style="border-bottom: 1px solid silver;"></dd>
 
-
-							<dd></dd>
-
-							<dd>
-								<%
-									/* 업소명 */
-								%>
-								<input type="text" name="storeName" value="${param.storeName}"
-									size="40">&nbsp;
-							</dd>
-
-							<dd>
-								<%
-									/* 사업자등록번호 */
-								%>
-								<input type="text" name="ceoCodeNum" size="40"
-									value="${param.ceoCodeNum}">&nbsp; <input type="button"
-									name="check_bNum" class="chBtn" value="중복확인 "
-									onclick="chkceoCodeNum();"><span style="color: blue;">${message1}</span>
-
-							</dd>
-
-							<dd>
-								<%
-									/* 점포 주소 */
-								%>
-								<select name="storeAddr1">
-									<option value="" selected="selected">선택&nbsp;&nbsp;</option>
-									<option value="서울">서울</option>
-									<option value="경기">경기</option>
-									<option value="인천">인천</option>
-								</select> <input type="text" name="storeAddr2" value="${param.storeAddr}"
-									size="60">
-							</dd>
-
-							<dd>
-								<%
-									/* 점포 전화번호 */
-								%>
-								<input type="text" name="storeTel" value="${param.storeTel}"
-									size="40">&nbsp;
-							</dd>
-
-							<dd>
-								<%
-									/* 카테고리 */
-								%>
-								<select name="storeType">
-									<option value="" selected="selected">선택&nbsp;&nbsp;</option>
-									<option value="chinese">중식</option>
-									<option value="chicken">치킨</option>
-									<option value="snank">분식</option>
-									<option value="pizza">피자</option>
-								</select>
-							</dd>
-
-							<dd>
-								<%
-									/* 가게사진등록  */
-								%>
-								<input type="file" name="storePhoto"
-									style="height: 35px; border: 0px solid silver; padding: 0px 0px 0px 0px;">
-							</dd>
-
-							<dd style="border-bottom: 1px solid silver;"></dd>
-
 						</dl>
 					</div>
 
 
 					<div id=footer>
 						<br> <input type="button" name="complete_btn" class="cbtn"
-							value="가입완료 " onclick="ceomemberok();"> <input
-							type="reset" class="cbtn" value="다시하기 "> <input
-							type="button" name="complete_btn" class="cbtn" value="가입취소 "
-							onclick="javascript:location.href='<%=cp%>/ceomain/ceomain.do';">
+							value="수정완료 " onclick="ceomemberok();"> &nbsp; <input
+							type="reset" class="cbtn" value="다시하기 "> &nbsp; <input
+							type="button" name="complete_btn" class="cbtn" value="수정취소 "
+							onclick="javascript:location.href='<%=cp%>/ceomember/ceoinfo.do';">
+						<input type="hidden" name="ceoId" value="${dto.ceoId}">
 					</div>
 				</div>
 			</div>
-
 		</form>
 	</div>
 
@@ -660,7 +478,6 @@ select {
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
-
 
 </body>
 </html>

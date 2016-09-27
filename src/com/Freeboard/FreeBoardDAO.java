@@ -3,9 +3,11 @@ package com.Freeboard;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.Freeboard.ReplyDTO;
 import com.util.DBConn;
 
 public class FreeBoardDAO {
@@ -479,6 +481,152 @@ public class FreeBoardDAO {
 		return result;
 	}
 	
-}
+	// 리플 ==========================
+		// 데이터 추가
+		public int insertReply(ReplyDTO dto) {
+			int result=0;
+			PreparedStatement pstmt=null;
+			StringBuffer sb=new StringBuffer();
+			
+			try {
+				sb.append("INSERT INTO bbsReply(replyNum, boardNum, userId, userName, content) ");
+				sb.append(" VALUES (bbsReply_seq.NEXTVAL, ?, ?, ?, ?)");
+				
+				pstmt=conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, dto.getBoardNum());
+				pstmt.setString(2, dto.getUserId());
+				pstmt.setString(3, dto.getUserName());
+				pstmt.setString(4, dto.getContent());
+				
+				result=pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			} finally {
+				if(pstmt!=null)
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+					}
+			}
+			
+			return result;
+		}
+		
+		public int dataCountReply(int boardNum) {
+			int result=0;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			String sql;
+			
+			try {
+				sql="SELECT NVL(COUNT(*), 0) FROM bbsReply WHERE boardNum=?";
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, boardNum);
+				
+				rs=pstmt.executeQuery();
+				if(rs.next())
+					result=rs.getInt(1);
+				
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			} finally {
+				if(rs!=null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+					}
+				}
+					
+				if(pstmt!=null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+					}
+				}
+			}
+			
+			return result;
+		}
 
+		public List<ReplyDTO> listReply(int boardNum, int start, int end) {
+			List<ReplyDTO> list=new ArrayList<>();
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			StringBuffer sb=new StringBuffer();
+			
+			try {
+				sb.append("SELECT * FROM (");
+				sb.append("    SELECT ROWNUM rnum, tb.* FROM (");
+				sb.append("        SELECT replyNum, boardNum, b.userId, b.userName, content");
+				sb.append("            ,TO_CHAR(created, 'YYYY-MM-DD') created");
+				sb.append("            FROM bbsReply b JOIN member1 m ON b.userId=m.userId  ");
+				sb.append("            WHERE boardNum=?");
+				sb.append("	       ORDER BY replyNum DESC");
+				sb.append("    ) tb WHERE ROWNUM <= ? ");
+				sb.append(") WHERE rnum >= ? ");
 
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, boardNum);
+				pstmt.setInt(2, end);
+				pstmt.setInt(3, start);
+
+				rs=pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ReplyDTO dto=new ReplyDTO();
+					
+					dto.setReplyNum(rs.getInt("replyNum"));
+					dto.setBoardNum(rs.getInt("boardNum"));
+					dto.setUserId(rs.getString("userId"));
+					dto.setUserName(rs.getString("userName"));
+					dto.setContent(rs.getString("content"));
+					dto.setCreated(rs.getString("created"));
+					
+					list.add(dto);
+				}
+				
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			} finally {
+				if(rs!=null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+					}
+				}
+					
+				if(pstmt!=null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+					}
+				}
+			}
+			return list;
+		}
+
+		public int deleteReply(int replyNum) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql;
+			
+			sql="DELETE FROM bbsReply WHERE replyNum=?";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, replyNum);
+				result = pstmt.executeUpdate();
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			} finally {
+				if(pstmt!=null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+					}
+				}
+			}		
+			return result;
+		}
+		
+	}

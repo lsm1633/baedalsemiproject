@@ -30,11 +30,7 @@
 <body>
 
 	<div>
-		<dl style="height: 150px">
-			<dd>
-				<jsp:include page="/WEB-INF/views/ceolayout/ceoTop.jsp" />
-			</dd>
-		</dl>
+		<jsp:include page="/WEB-INF/views/ceolayout/ceoTop.jsp"></jsp:include>
 	</div>
 
 	<div class="container" role="main">
@@ -50,12 +46,8 @@
 		<hr>
 	</div>
 
-	<div align="center">
-		<dl style="height: 140px">
-			<dd>
-				<jsp:include page="/WEB-INF/views/ceolayout/ceoBottom.jsp" />
-			</dd>
-		</dl>
+	<div>
+		<jsp:include page="/WEB-INF/views/ceolayout/ceoBottom.jsp"></jsp:include>
 	</div>
 
 	<script type="text/javascript"
