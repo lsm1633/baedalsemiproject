@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>정산관리</title>
 <style>
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
@@ -154,7 +154,7 @@
 
 
 	</div>
-
+</div>
 	<div style="clear: both;">
 		<jsp:include page="/WEB-INF/views/ceolayout/ceoBottom.jsp" />
 	</div>

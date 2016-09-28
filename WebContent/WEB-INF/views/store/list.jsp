@@ -50,7 +50,6 @@
 <div style="background-color: #FFE6D9; min-height: 800px;" >
 <div style="height: 50px"></div>
 <div id="store"  align="center">
-
       <div style="padding: 30px auto 30px;">
       <c:forEach var="dto" items="${list}">
          <div class="row1">

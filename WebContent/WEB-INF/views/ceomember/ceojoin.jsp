@@ -342,23 +342,6 @@ function ceomemberok() {
 	line-height: 50px;
 }
 
-.cbtn {
-	padding: 0px auto;
-	width: 250px;
-	height: 50px;
-	font-size: 13pt;
-	line-height: 50px;
-	border: 0;
-	outline: 0;
-	color: #FFFFFF;
-	background: DarkTurquoise;
-	cursor: pointer;
-}
-
-.cbtn:hover {
-	background: tomato;
-	color: #FFFFFF;
-}
 
 .chBtn {
 	width: 70px;

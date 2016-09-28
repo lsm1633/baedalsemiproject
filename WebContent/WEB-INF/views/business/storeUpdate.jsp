@@ -37,7 +37,7 @@
 
 		<ul class="nav nav-tabs nav-justified">
 			<li><a href="<%=cp%>/business/menu.do">메뉴관리</a></li>
-			<li><a href="<%=cp%>/business/storeUpdate.do">점포정보수정</a></li>
+			<li class="active"><a href="<%=cp%>/ceomember/storeInfo.do">점포정보</a></li>
 		</ul>
 
 		<div class="body-title">

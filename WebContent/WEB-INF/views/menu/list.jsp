@@ -71,12 +71,20 @@ function sendOrder() {
 	<div>
 		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	</div>
-
-	<div class="container">
-
-		<div style="font-size: 20pt">주문 하기</div>
+	<div style="line-height: 150px; background-color: black;" align="center">
+      <label><a onclick="searchList('chicken');"><img src="<%=cp%>/res/images/chicken.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('pizza');"><img src="<%=cp%>/res/images/pizza.png" class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('chinese');"><img src="<%=cp%>/res/images/jungkukzip.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('bunsik');"><img src="<%=cp%>/res/images/bunsik.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('jokbal');"><img src="<%=cp%>/res/images/jokbal.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('hansik');"><img src="<%=cp%>/res/images/hansik.jpg"class="img-circle" width="120px" height="90"></a></label> 
+    </div>
+    
+    <div style="background-color: #FFE6D9; min-height: 800px;" >
+	<div class="container" >
+		<div style="font-size: 20pt; margin: 15px 0px 15px"><span class="glyphicon glyphicon-phone-alt"></span> 주문하기</div>
 		<div style="width: 300px;  margin: 30px auto 5px; float: right;" >
-      <div style="border: 1px solid #ccc; margin: 30px auto 5px;"><h5 align="center">장바구니</h5>
+      <div style="border: 1px solid #ccc; margin: 30px auto 5px; background-color: white;"><h5 align="center">장바구니</h5>
       <c:if test="${empty list2}">
          <label>장바구니가 비어있습니다</label>
       </c:if>
@@ -137,10 +145,9 @@ function sendOrder() {
 										<a onclick="basketadd('${dto.ceoId}', '${dto.price}', '${dto.name}')" class="btn btn-default" role="button" style="width: 350px; height: 160px"> <img
 											src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
 											style="float: left" width="150px" height="130px"> 
-											<b style="font-size: 15pt">${dto.name}</b> <br> 
-											<b style="font-size: 10pt">${dto.price} </b> <br>
-											<b style="font-size: 10pt">${dto.content} </b> 
-											
+											<b style="font-size: 15pt; ">${dto.name}</b> <br><br>
+											<b style="font-size: 10pt;">${dto.price}원</b> <br><br><br>
+											<label style="font-size: 10pt; width: 200px;">${dto.content}</label>
 										</a>
 									</div>
 								</div>
@@ -180,9 +187,9 @@ function sendOrder() {
 										<a onclick="basketadd('${dto.ceoId}', '${dto.price}', '${dto.name}')" class="btn btn-default" role="button" style="width: 350px; height: 160px" > <img
 											src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
 											style="float: left" width="150px" height="130px"> <b
-											style="font-size: 15pt;">${dto.name}</b> <br> <b
-											style="font-size: 10pt;">${dto.price} </b> <br> <b
-											style="font-size: 10pt; ">${dto.content} </b> 
+											style="font-size: 15pt;">${dto.name}</b> <br><br> <b
+											style="font-size: 10pt;">${dto.price}원 </b><br><br><br>
+											<label style="font-size: 10pt; width: 200px;">${dto.content}</label>
 											<input name="ceoId" type="hidden" value="${dto.ceoId}">
 											<input name="price" type="hidden" value="${dto.price}">
 											<input name="menuName" type="hidden" value="${dto.name}">
@@ -218,9 +225,9 @@ function sendOrder() {
 										<a onclick="basketadd('${dto.ceoId}', '${dto.price}', '${dto.name}')" class="btn btn-default" role="button" style="width: 350px; height: 160px"> <img
 											src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
 											style="float: left" width="150px" height="130px"> <b
-											style="font-size: 15pt">${dto.name}</b> <br> <b
-											style="font-size: 10pt">${dto.price} </b> <br> <b
-											style="font-size: 10pt">${dto.content} </b> 
+											style="font-size: 15pt">${dto.name}</b> <br><br>
+											<b style="font-size: 10pt">${dto.price}원</b> <br><br><br>
+											<label style="font-size: 10pt; width: 200px;">${dto.content}</label> 
 											<input name="ceoId" type="hidden" value="${dto.ceoId}">
 											<input name="price" type="hidden" value="${dto.price}">
 											<input name="menuName" type="hidden" value="${dto.name}">
@@ -235,10 +242,8 @@ function sendOrder() {
 				</div>
 			</div>
 		</div>
-
-	
-		</div>
-
+	</div>
+</div>
 	<div style="clear: both;">
 		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 	</div>

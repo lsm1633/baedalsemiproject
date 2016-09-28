@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사장님 사이트</title>
+<title>점주 사이트</title>
 <style>
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 </style>
@@ -70,24 +70,22 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox" align="center">
 						<div class="item active">
-							<a href="<%=cp%>/notice/article.do?${params}&num=5"> <img
+							<a href="#"> <img
 								src="<%=cp%>/res/images/banner1.PNG"></a>
 							<div class="carousel-caption"></div>
 						</div>
 						<div class="item">
-							<a href="<%=cp%>/notice/article.do?${params}&num=8"> <img
+							<a href="#"> <img
 								src="<%=cp%>/res/images/banner2.PNG" alt="배너2"></a>
 						</div>
 					</div>
 
 					<!-- Controls -->
-					<a class="left carousel-control" href="#carousel-example-generic"
-						role="button" data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#carousel-example-generic"
-						role="button" data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"> 
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span></a>
+					 <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"> 
+					 	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 						<span class="sr-only">Next</span>
 					</a>
 				</div>
@@ -101,7 +99,7 @@
 						<img class="img-responsive" src="<%=cp%>/res/images/loginCeo.png"
 							width="150px" style="margin: 20px 16px" alt="">
 						<div class="overlay img-circle">
-							<a class="info" href="<%=cp%>/ceomember/login.do"">로그인</a>
+							<a class="info" href="<%=cp%>/ceomember/login.do">로그인</a>
 						</div>
 					</div>
 				</div>
@@ -113,7 +111,7 @@
 							style="margin: 20px 20px" src="<%=cp%>/res/images/joinCeo.png"
 							alt="">
 						<div class="overlay img-circle">
-							<a class="info" href="<%=cp%>/ceomember/join.do"">회원가입</a>
+							<a class="info" href="<%=cp%>/ceomember/join.do">회원가입</a>
 						</div>
 					</div>
 				</div>
@@ -147,13 +145,13 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox" align="center">
 						<div class="item active">
-							<a href="<%=cp%>/notice/article.do?${params}&num=5"> <img
-								src="<%=cp%>/res/images/banner1.PNG"></a>
+							<a href="#"> 
+							<img src="<%=cp%>/res/images/banner1.PNG"></a>
 							<div class="carousel-caption"></div>
 						</div>
 						<div class="item">
-							<a href="<%=cp%>/notice/article.do?${params}&num=8"> <img
-								src="<%=cp%>/res/images/banner2.PNG" alt="배너2"></a>
+							<a href="#"> 
+							<img src="<%=cp%>/res/images/banner2.PNG" alt="배너2"></a>
 						</div>
 					</div>
 

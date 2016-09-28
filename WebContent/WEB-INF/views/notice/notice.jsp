@@ -47,7 +47,7 @@ function searchList() {
 			<div class="tab-pane active" id="notice">
 				<div class="bodyFrame col-sm-10" style="float: none; margin: 30px auto;">
 					<div class="body-title">
-						<h3><span class="glyphicon glyphicon-book"></span>공지사항</h3>
+						<h3><span class="glyphicon glyphicon-bullhorn"></span>공지사항</h3>
 					</div>
 					
 					<div class="alert alert-info">

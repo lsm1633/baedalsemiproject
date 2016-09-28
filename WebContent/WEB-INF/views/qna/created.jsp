@@ -150,8 +150,12 @@ dd {
      <li class="active"><a href="<%=cp%>/qna/qna.do">질문과답변</a></li>
      <li><a href="<%=cp%>/faq/faq.do">자주묻는질문</a></li>
    </ul>
-   
-<div id=header>질문과 답변</div>
+ <div class="bodyFrame col-sm-10"
+					style="float: none; margin: 30px auto;">  
+<div class="body-title">
+	<h3>
+	<span class="glyphicon glyphicon-question-sign"></span>질문과 답변</h3>
+</div>
 <div id=formbody>
 <form name="boardForm" method="post" onsubmit="return check();">
 <div id=category>
@@ -177,10 +181,10 @@ dd {
 
 
 <div id=footer>
-	<input type="submit" name="btn" class="btn_created" value=" 확인 " >
+	<input type="submit" name="btn" class="btn btn-default btn-sm wbtn" value=" 확인 " >&nbsp;&nbsp;
 		
 	<a href="javascript:location.href='<%=cp%>/qna/qna.do';">
-		<input type="button" name="btn" class="btn_created" value=" 취소 " ></a>
+		<input type="button" name="btn" class="btn btn-default btn-sm wbtn" value=" 취소 " ></a>
 							
 	<c:if test="${mode=='update'}">
 		<input type="hidden" name="boardNum" value="${dto.boardNum}">
@@ -198,6 +202,7 @@ dd {
 </div> 
 </form>  
 </div> 
+</div>
 </div>
 <div>
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>

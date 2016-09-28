@@ -362,9 +362,12 @@ function regame() {
     out.innerHTML=s;    
 }
 
-
-
 </script>
+
+<style>
+	@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+</style>
+
 </head>
 <body>
 
@@ -382,7 +385,7 @@ function regame() {
    <form name="gameForm">
     <div id="myTabContent" class="tab-content">
       <div role="tabpanel" class="tab-pane fade in active" id="sadari" aria-labelledBy="sadari-tab">
-        <div id="div_step1" style="font-size:12px; width: 800px; margin: 30px auto 30px;">
+        <div id="div_step1" style="font-family:hanna; font-size:20px; width: 800px; margin: 30px auto 30px;">
 			<label><mark>인원 선택</mark></label> 
 			<select id="sel_num">
  			<option value="2">2</option>
@@ -396,7 +399,7 @@ function regame() {
  			<option value="10">10</option>
 			</select>
 			개
-			<input type="button" class="btn btn-default btn-sm wbtn" value="만들기" onclick="Yl.init();">
+			<input type="button" style="padding: 10px"  class="btn btn-default btn-sm wbtn" value="만들기" onclick="Yl.init();">
 			
 		</div>
 
@@ -405,7 +408,7 @@ function regame() {
 		</div>
  
 		<div id="div_body" style=" width:1000px; height:450px; border:1px solid #CCCCCC; position:relative;"></div>
-			<br><button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/game/sadari.do';">다시하기</button>
+			<br><button type="button" style="padding: 10px"  class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/game/sadari.do';">다시하기</button>
       	</div>
       <div role="tabpanel" class="tab-pane fade" id="cal" aria-labelledBy="cal-tab" style="height: 500px">
        
@@ -431,7 +434,7 @@ function regame() {
         <div id="output" style="font-size: 12pt"></div> 
 
       <br>
-      <button type="reset" class="btn btn-default btn-sm wbtn" onclick="regame()" >다시하기</button>
+      <button type="reset" style="padding: 10px"  class="btn btn-default btn-sm wbtn" onclick="regame()" >다시하기</button>
       </div>
     </div>
       </form>

@@ -28,6 +28,21 @@
 <script type="text/javascript">
 function orderOk() {
 	var f = document.orderForm;
+	var str;
+	str = f.addr1.value;
+	 
+    if(!str){
+       alert("주소를 입력하세요 ");
+       f.addr1.focus();
+       return;
+    }
+    str = f.addr2.value;
+    
+    if(!str){
+       alert("나머지주소를 입력하세요  ");
+       f.addr2.focus();
+       return;
+    }
 	
 	f.action = "<%=cp%>/order/order_ok.do";
 	f.submit();
@@ -40,8 +55,16 @@ function orderOk() {
 	<div>
 		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	</div>
-	
-	<div class="container" role = "main">
+	<div style="line-height: 150px; background-color: black;" align="center">
+      <label><a onclick="searchList('chicken');"><img src="<%=cp%>/res/images/chicken.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('pizza');"><img src="<%=cp%>/res/images/pizza.png" class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('chinese');"><img src="<%=cp%>/res/images/jungkukzip.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('bunsik');"><img src="<%=cp%>/res/images/bunsik.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('jokbal');"><img src="<%=cp%>/res/images/jokbal.png"class="img-circle" width="120px" height="90"></a></label>&emsp;&emsp;&emsp;
+      <label><a onclick="searchList('hansik');"><img src="<%=cp%>/res/images/hansik.jpg"class="img-circle" width="120px" height="90"></a></label> 
+    </div>
+	<div style="background-color: #FFE6D9; min-height: 800px; padding: 15px" >
+	<div class="container" style="background-color: white;" role = "main">
 	<form name="orderForm" role="form">
 		<div class="form-group" style="line-height: 60px; border-bottom: 1px solid black; margin: 15px 0px 15px"><h1 style="font-weight: bold;">배달 / 결제정보</h1> </div>
 		<h3 style="line-height: 50px; border-bottom: 1px solid black;">01. 배달정보</h3>
@@ -76,8 +99,9 @@ function orderOk() {
       			<c:set var="total" value="${total+(dto.price*dto.num)}"/>
       			<c:set var="totalmenu" value="${dto.menuName}+${totalmenu}"/>
       			</c:forEach>
-      			<div class="form-group">총 가격 
-      				<input type="text" value="${total}" name="price" readonly="readonly">원
+      			<div class="form-group" style="margin: 15px 0px;" align="right">
+      				<label>총 가격</label>
+      				<input style="margin: 0px auto;" type="text" value="${total}" name="price" readonly="readonly">원
       				<input type="hidden" name="menuName" value="${totalmenu}">
       			</div>
       			
@@ -99,7 +123,7 @@ function orderOk() {
        		</div>
 		</form>
 		</div>
-
+</div>
 	
 	<div style="clear: both;">
 		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>

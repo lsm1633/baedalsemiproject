@@ -70,7 +70,7 @@
 			<!-- 16:9 aspect ratio -->
 			<div align="center" class="embed-responsive embed-responsive-16by9">
 				<iframe class="embed-responsive-item"
-					src="https://www.youtube.com/embed/pLbNcnU4gkc" width="300px"></iframe>
+					src="https://www.youtube.com/embed/s4TatKe4nL0" width="300px"></iframe>
 			</div>
 		</div>
 	</div>

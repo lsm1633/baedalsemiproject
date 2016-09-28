@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.notice.NoticeDTO;
 import com.util.MyServlet;
 import com.util.MyUtil;
 

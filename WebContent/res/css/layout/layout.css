@@ -210,3 +210,24 @@
   font-size: 25px;
 }
 
+
+/* 모든 버튼색*/
+.cbtn {
+	padding: 5px 10px 5px 10px ;
+    font-size : 15px;
+	border: 0;
+	outline: 0;
+	color: #FFFFFF;
+	background: #105B63;
+	cursor: pointer;
+	text-align: center;
+	margin-top:15px;
+	margin-right: 15px;
+}
+
+.cbtn:hover {
+	background: #FF7F66;
+	color: #FFFFFF;
+}
+
+

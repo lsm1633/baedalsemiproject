@@ -83,13 +83,13 @@
 		<div class="bodyFrame col-sm-10"
 			style="float: none; margin-left: auto; margin-right: auto;">
 			<ul class="nav nav-tabs nav-justified">
-				<li><a href="<%=cp%>/storeMenu/menu.do">메뉴관리</a></li>
+				<li class="active"><a href="<%=cp%>/storeMenu/menu.do">메뉴관리</a></li>
 				<li><a href="<%=cp%>/ceomember/storeInfo.do">점포정보</a></li>
 			</ul>
 
 
 			<div class="body-title">
-				<h3 align="left">메뉴관리</h3>
+				<h3 align="left"><span class="glyphicon glyphicon-th"></span> 메뉴관리</h3>
 			</div>
 			<hr>
 
@@ -154,7 +154,7 @@
 						&nbsp;</div>
 					<div
 						style="float: left; width: 20%; min-width: 85px; text-align: right;">
-						<button type="button" class="btn btn-primary btn-sm bbtn"
+						<button type="button" class="btn btn-primary btn-sm bbtn cbtn"
 							onclick="javascript:location.href='<%=cp%>/storeMenu/menuCreated.do';">
 							<span class="glyphicon glyphicon-th-list"></span> 등록하기
 						</button>
