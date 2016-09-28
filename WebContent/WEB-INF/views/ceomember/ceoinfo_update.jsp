@@ -250,41 +250,6 @@ function ceomemberok() {
 	line-height: 50px;
 }
 
-.cbtn {
-	padding: 0px;
-	width: 250px;
-	height: 50px;
-	font-size: 13pt;
-	line-height: 50px;
-	border: 0;
-	outline: 0;
-	color: #FFFFFF;
-	background: DarkTurquoise;
-	cursor: pointer;
-}
-
-.cbtn:hover {
-	background: tomato;
-	color: #FFFFFF;
-}
-
-.chBtn {
-	width: 70px;
-	height: 35px;
-	line-height: 35px;
-	padding: 0px;
-	border: 1px solid SlateGray;
-	outline: 0;
-	color: SlateGray;
-	background: #FFFFFF;
-	cursor: pointer;
-}
-
-.chBtn:hover {
-	background: royalblue;
-	color: #FFFFFF;
-}
-
 input {
 	height: 35px;
 	border: 1px solid silver;

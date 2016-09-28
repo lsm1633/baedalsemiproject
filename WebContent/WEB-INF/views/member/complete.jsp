@@ -60,7 +60,7 @@
             <c:if test= "${title=='주문 완료'}">
             	<div style="height: 50px; text-align: center;">
                	<input type="button" value=" 주문내역으로 이동 >> " class="moveButton"
-                  onclick="javascript:location.href='<%=cp%>/';">
+                  onclick="javascript:location.href='<%=cp%>/orderlist/orderlist.do';">
             	</div>
             </c:if>
          </div>

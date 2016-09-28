@@ -26,7 +26,7 @@
 			</c:if>
 			<div class="header-brand" align="center">
 				<a href="<%=cp%>/ceomain/ceomain.do"> <span class="logo"><img alt="배달의 나라"
-						src="<%=cp%>/res/images/logo.png" class=" img-responsive"
+						src="<%=cp%>/res/images/ceologo.png" class=" img-responsive"
 						alt="Responsive image"></span></a>
 			</div>
 			

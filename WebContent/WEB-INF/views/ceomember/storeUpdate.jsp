@@ -137,24 +137,6 @@
 	line-height: 50px;
 }
 
-.cbtn {
-	padding: 0px auto;
-	width: 65px;
-	height: 25px;
-	line-height: 25px;
-	border: 0;
-	outline: 0;
-	color: #FFFFFF;
-	text-align: center;
-	background: DarkTurquoise;
-	cursor: pointer;
-	text-align: cetner;
-}
-
-.cbtn:hover {
-	background: tomato;
-	color: #FFFFFF;
-}
 
 .chBtn {
 	width: 65px;
@@ -200,7 +182,7 @@ select {
 			style="float: none; margin-left: auto; margin-right: auto;">
 			<ul class="nav nav-tabs nav-justified">
 				<li><a href="<%=cp%>/storeMenu/menu.do">메뉴관리</a></li>
-				<li><a href="<%=cp%>/ceomember/storeUpdate.do">점포정보</a></li>
+				<li class="active"><a href="<%=cp%>/ceomember/storeInfo.do">점포정보</a></li>
 			</ul>
 
 			<div class="body-title">
@@ -304,10 +286,10 @@ select {
 
 
 					<div id=footer>
-						<input type="button" name="complete_btn" class="cbtn"
+						<input type="button" name="complete_btn" class="cbtn" style="height:30px;"
 							value="수정완료 " onclick="ceomemberok();"> &nbsp;<input
-							type="reset" class="cbtn" value="다시하기 "> &nbsp;<input
-							type="button" name="complete_btn" class="cbtn" value="수정취소 "
+							type="reset" class="cbtn" style="height:30px;" value="다시하기 "> &nbsp;<input
+							type="button" name="complete_btn" class="cbtn" style="height:30px;" value="수정취소 "
 							onclick="javascript:location.href='<%=cp%>/ceomember/storeInfo.do';">
 						<input type="hidden" name="ceoId" value="${dto.ceoId}">
 					</div>

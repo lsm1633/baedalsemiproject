@@ -263,14 +263,14 @@ function updatepwd(){
 
 
 
-						<div class="form-group">
+						<div class="form-group text-center">
 							<span class='text-center'> <a
 								href="<%=cp%>/ceomember/findid.do" class="text-sm">ID 찾기</a></span>
-							&nbsp;|&nbsp; <span class='text-center'> <a
+							&nbsp;&nbsp;|&nbsp;&nbsp; <span class='text-center'> <a
 								href="<%=cp%>/ceomember/findpwd1.do" class="text-sm">비밀번호 찾기</a></span>
 						</div>
 
-						<span style="color: blue;">${message}</span>
+						<div class="text-center"><span style="color: blue;">${message}</span></div>
 
 					</form>
 				</div>
