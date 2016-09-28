@@ -21,8 +21,7 @@ function searchList(cate) {
 			<c:if test="${empty sessionScope.member}">
 				<a href="<%=cp%>/member/login.do"><span class="glyphicon glyphicon-log-in">로그인  </span></a> | <i></i>
 				<a href="<%=cp%>/member/join.do"><span class="glyphicon glyphicon-user"></span>회원가입 </a> | <i></i>
-				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-volume-down"></span>고객센터 </a> |
-				<a href="<%=cp%>/intro/intro.do"><span class="glyphicon glyphicon-volume-down"></span>서비스소개 </a> |<i></i>
+				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-volume-down"></span>고객센터 </a> |				
 				<a href="<%=cp%>/ceomain/ceomain.do"><span class="glyphicon glyphicon-piggy-bank"></span>점주페이지 </a>
 
 			</c:if>
@@ -32,10 +31,10 @@ function searchList(cate) {
 					<a href="<%=cp%>/admin/main.do">관리자</a> | <i></i>
 					<i></i>
 				</c:if>
-				<a href="<%=cp%>/member/pwdChk.do"><span class="glyphicon glyphicon-hand-right"></span>정보수정 </a> | <i></i>
-				<a href="<%=cp%>/member/logout.do"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a> | <i></i>
-				<a href="<%=cp%>/intro/intro.do"><span class="glyphicon glyphicon-volume-down"></span>서비스소개 </a> |<i></i>
-				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-bbs"></span>고객센터</a>
+				<a href="<%=cp%>/member/pwdChk.do"><span class="glyphicon glyphicon-hand-right"></span>개인정보수정 </a> | <i></i>
+				<a href="<%=cp%>/orderlist/orderlist.do"><span class="glyphicon glyphicon-volume-down"></span>나의주문내역 </a> |<i></i>
+				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-volume-down"></span>고객센터</a> | <i></i>
+				<a href="<%=cp%>/member/logout.do"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a>
 			</c:if>
 			<div class="header-brand" align="center">
 				<a href="<%=cp%>"> <span class="logo"><img alt="배달의 나라"

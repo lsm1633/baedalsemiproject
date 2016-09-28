@@ -342,6 +342,23 @@ function ceomemberok() {
 	line-height: 50px;
 }
 
+.cbtn {
+	padding: 0px auto;
+	width: 250px;
+	height: 50px;
+	font-size: 13pt;
+	line-height: 50px;
+	border: 0;
+	outline: 0;
+	color: #FFFFFF;
+	background: DarkTurquoise;
+	cursor: pointer;
+}
+
+.cbtn:hover {
+	background: tomato;
+	color: #FFFFFF;
+}
 
 .chBtn {
 	width: 70px;
@@ -579,9 +596,9 @@ select {
 								%>
 								<select name="storeAddr1">
 									<option value="" selected="selected">선택&nbsp;&nbsp;</option>
-									<option value="Seoul">서울</option>
-									<option value="Gyeonggi">경기</option>
-									<option value="Incheon">인천</option>
+									<option value="서울">서울</option>
+									<option value="경기">경기</option>
+									<option value="인천">인천</option>
 								</select> <input type="text" name="storeAddr2" value="${storeAddr}"
 									size="60">
 							</dd>

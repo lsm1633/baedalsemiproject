@@ -56,7 +56,7 @@
 #footer {
 	clear: both;
 	width: 650px;
-	height: 100px;
+	height: 50px;
 	text-align: center;
 }
 
@@ -74,6 +74,25 @@
 	padding: 0px 0px 0px 20px;
 	border-bottom: 1px solid silver;
 	line-height: 50px;
+}
+
+.cbtn {
+	padding: 0px auto;
+	width: 65px;
+	height: 25px;
+	line-height: 25px;
+	border: 0;
+	outline: 0;
+	color: #FFFFFF;
+	text-align: center;
+	background: DarkTurquoise;
+	cursor: pointer;
+	text-align: cetner;
+}
+
+.cbtn:hover {
+	background: tomato;
+	color: #FFFFFF;
 }
 
 .chBtn {
@@ -96,6 +115,7 @@
 
 input {
 	border: 1px solid silver;
+	height: 25px;
 	padding: 0px 0px 0px 5px;
 	border-radius: 3px;
 	outline-color: SlateGray;
@@ -118,11 +138,11 @@ select {
 			style="float: none; margin-left: auto; margin-right: auto;">
 		<ul class="nav nav-tabs nav-justified">
 			<li><a href="<%=cp%>/storeMenu/menu.do">메뉴관리</a></li>
-			<li class="active"><a href="<%=cp%>/ceomember/storeInfo.do">점포정보</a></li>
+			<li><a href="<%=cp%>/ceomember/storeInfo.do">점포정보</a></li>
 		</ul>
 
 		<div class="body-title">
-			<h3 align="left"><span class="glyphicon glyphicon-home"></span> 점포정보</h3>
+			<h3 align="left">점포정보</h3>
 		</div>
 		<hr>
 

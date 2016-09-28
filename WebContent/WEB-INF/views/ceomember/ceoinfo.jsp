@@ -109,6 +109,41 @@
 	line-height: 50px;
 }
 
+.cbtn {
+	padding: 0px;
+	width: 250px;
+	height: 50px;
+	font-size: 13pt;
+	line-height: 50px;
+	border: 0;
+	outline: 0;
+	color: #FFFFFF;
+	background: DarkTurquoise;
+	cursor: pointer;
+}
+
+.cbtn:hover {
+	background: tomato;
+	color: #FFFFFF;
+}
+
+.chBtn {
+	width: 70px;
+	height: 35px;
+	line-height: 35px;
+	padding: 0px;
+	border: 1px solid SlateGray;
+	outline: 0;
+	color: SlateGray;
+	background: #FFFFFF;
+	cursor: pointer;
+}
+
+.chBtn:hover {
+	background: royalblue;
+	color: #FFFFFF;
+}
+
 input {
 	height: 35px;
 	border: 1px solid silver;
@@ -128,7 +163,7 @@ select {
 	<div>
 		<jsp:include page="/WEB-INF/views/ceolayout/ceoTop.jsp"></jsp:include>
 	</div>
-
+	
 	<div class="container">
 		<form name="ceomemberForm" method="post">
 			<div>
@@ -150,7 +185,7 @@ select {
 						%>
 						<dl class=row02 style="border-top: 3px solid DarkSlateGrey;">
 							<dd></dd>
-							<dd>아이디</dd>
+							<dd> 아이디</dd>
 							<dd>비밀번호 질문</dd>
 							<dd>비밀번호 대답</dd>
 							<dd style="border-bottom: 1px solid silver;"></dd>
@@ -237,12 +272,10 @@ select {
 						&nbsp; <input type="button" name="complete_btn" class="cbtn"
 							value=" 돌아가기 "
 							onclick="javascript:location.href='<%=cp%>/ceomain/ceomain.do';">
-						
-							
-						<div class="form-group text-right">
-							<a href="<%=cp%>/ceomember/quit.do" style="color: orange; border-bottom: 1px solid orange">배달의 나라 사장님 탈퇴하기</a>
-						</div>
-
+						&nbsp;
+						<input type="button" name="complete_btn" class="chBtn"
+							value=" 회원탈퇴 " 
+							onclick="javascript:location.href='<%=cp%>/ceomember/quit.do';">
 					</div>
 
 				</div>

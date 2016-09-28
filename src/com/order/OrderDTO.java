@@ -1,7 +1,15 @@
 package com.order;
 
 public class OrderDTO {
-	private String userId, ceoId, menuName, adrress, coment, tel, payment;
+	private String userId, ceoId, menuName, adrress, coment, tel, payment,created;
+	
+	
+	public String getCreated() {
+		return created;
+	}
+	public void setCreated(String created) {
+		this.created = created;
+	}
 	public String getPayment() {
 		return payment;
 	}

@@ -12,17 +12,17 @@
 			<c:if test="${empty sessionScope.ceomember}">
 				<a href="<%=cp%>/ceomember/login.do"><span class="glyphicon glyphicon-log-in">로그인  </span></a> | <i></i>
 				<a href="<%=cp%>/ceomember/join.do"><span class="glyphicon glyphicon-user"></span>회원가입 </a> | <i></i>
-				
+				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-volume-down"></span>고객센터 </a> |
 				<a href="<%=cp%>"><span class="glyphicon glyphicon-piggy-bank"></span>고객사이트 </a>
 
 			</c:if>
 			<c:if test="${not empty sessionScope.ceomember}">
 				<span style="color: green;">${sessionScope.ceomember.ceoName}</span>님 | <i></i>
 				
-				<a href="<%=cp%>/ceoMember/pwdChk.do"><span class="glyphicon glyphicon-hand-right"></span>점포메뉴관리 </a> | <i></i>
-				<a href="<%=cp%>/ceoMember/pwdChk.do"><span class="glyphicon glyphicon-hand-right"></span>점포정보수정 </a> | <i></i>
-				<a href="<%=cp%>/ceomember/logout.do"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a> | <i></i>
-				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-bbs"></span>고객센터</a>
+				<a href="#"><span class="glyphicon glyphicon-hand-right"></span>가게주문관리 </a> | <i></i>				
+				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-volume-down"></span>고객센터 </a> |
+				<a href="<%=cp%>/ceomember/logout.do"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a>
+				
 			</c:if>
 			<div class="header-brand" align="center">
 				<a href="<%=cp%>/ceomain/ceomain.do"> <span class="logo"><img alt="배달의 나라"
