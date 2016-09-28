@@ -29,7 +29,6 @@
 function orderOk() {
 	var f = document.orderForm;
 	
-	alert();
 	f.action = "<%=cp%>/order/order_ok.do";
 	f.submit();
 }

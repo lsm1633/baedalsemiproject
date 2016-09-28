@@ -136,10 +136,7 @@ public class MenuServlet extends MyServlet{
 			String userId = req.getParameter("userId");
 			String ceoId = req.getParameter("ceoId");
 			String menuName = req.getParameter("menuName");
-			
-			System.out.println(userId);
-			System.out.println(ceoId);
-			System.out.println(menuName);
+		
 			
 			dao2.deleteBasket(userId, ceoId, menuName);
 			resp.sendRedirect(cp+"/menu/list.do?ceoId="+ceoId);
