@@ -14,6 +14,7 @@ import com.basket.BasketDTO;
 import com.member.MemberDAO;
 import com.member.MemberDTO;
 import com.member.SessionInfo;
+
 import com.util.MyServlet;
 @WebServlet("/order/*")
 public class OrderServlet extends MyServlet{
@@ -50,6 +51,7 @@ public class OrderServlet extends MyServlet{
          req.setAttribute("userId", userId);
          req.setAttribute("tel", tel);
          forward(req, resp, "/WEB-INF/views/order/order.jsp");
+         
       } else if(uri.indexOf("order_ok.do")!=-1) {
          OrderDTO dto = new OrderDTO();
          OrderDAO dao = new OrderDAO();
@@ -77,8 +79,7 @@ public class OrderServlet extends MyServlet{
             req.setAttribute("message", message);
             forward(req, resp, "/WEB-INF/views/order/order.jsp");
             return;
-         }
-         
+         }         
          
          dao2.deleteBasket(userId, ceoId);
          
@@ -89,7 +90,7 @@ public class OrderServlet extends MyServlet{
          req.setAttribute("message", sb.toString());
          
          forward(req, resp, "/WEB-INF/views/member/complete.jsp");
+         
       }
-   } 
-   
+   }   
 }

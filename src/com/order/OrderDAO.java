@@ -42,6 +42,28 @@ public class OrderDAO {
       return result;
    }
    
+   public int maxBoardNum() {
+		int result=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql;
+		
+		try {
+			sql="SELECT NVL(MAX(boardNum),0) FROM orderinfo";
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+				result=rs.getInt(1);
+			rs.close();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+   
    public int dataCount(){
       int result=0;
       PreparedStatement pstmt=null;
@@ -63,6 +85,29 @@ public class OrderDAO {
       
       return result;
    }
+   
+   public int dataCount(String ceoId) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql;
+		
+		try {
+			sql="SELECT NVL(COUNT(*), 0) FROM orderinfo WHERE ceoId=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, ceoId);				
+
+			rs=pstmt.executeQuery();
+			if(rs.next())
+				result=rs.getInt(1);
+			rs.close();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}		
+		return result;
+	}
    
    public List<OrderDTO> listOrder(int start,int end){
       List<OrderDTO> list = new ArrayList<>();
@@ -143,6 +188,55 @@ public class OrderDAO {
       }
       
       return dto;
+   }
+   
+   public List<OrderDTO> listOrder(int start, int end, String ceoId) {
+	   List<OrderDTO> list=new ArrayList<>();
+	   PreparedStatement pstmt=null;
+	   ResultSet rs=null;
+	   String sql;
+
+	   try {
+		   sql="SELECT * FROM ("
+		   		+ "SELECT ROWNUM rnum, tb.* FROM ("
+		   		+ "SELECT menuName, price, payment, "
+		   		+ "TO_CHAR(created, 'YYYY-MM-DD HH24:MI:SS') created, ordernum"
+		   		+ " FROM orderinfo WHERE ceoId=?"
+		   		+ "	) tb WHERE ROWNUM<=?"
+				+ ") WHERE rnum>=?";
+		   
+		   pstmt=conn.prepareStatement(sql);
+		   pstmt.setString(1, ceoId);
+		   pstmt.setInt(2, end);
+		   pstmt.setInt(3, start);
+			
+		   rs=pstmt.executeQuery();
+		   
+		   while(rs.next()){
+			   OrderDTO dto=new OrderDTO();
+
+			   dto.setMenuName(rs.getString("menuName")); 
+			   dto.setPrice(rs.getInt("price"));
+			   dto.setPayment(rs.getString("payment")); 
+			   if(dto.getPayment().equals("card")){
+				   dto.setPayment("카드");
+			   } else if(dto.getPayment().equals("cash")) {
+				   dto.setPayment("현금");
+			   }
+			   dto.setCreated(rs.getString("created"));
+			   dto.setOrdernum(rs.getInt("ordernum"));
+
+			   list.add(dto);
+		   }
+		   rs.close();
+		   pstmt.close();
+		   
+
+	   } catch (Exception e) {
+		   System.out.println(e.toString());
+	   }
+
+	   return list;
    }
    
    public List<OrderDTO> listOrder(String ceoId,String today){
