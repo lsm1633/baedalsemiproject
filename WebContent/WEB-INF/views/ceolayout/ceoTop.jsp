@@ -19,7 +19,7 @@
 			<c:if test="${not empty sessionScope.ceomember}">
 				<span style="color: green;">${sessionScope.ceomember.ceoName}</span>님 | <i></i>
 				
-				<a href="#"><span class="glyphicon glyphicon-hand-right"></span>가게주문관리 </a> | <i></i>				
+				<a href="<%=cp%>/ceomoney/orderConfirm.do"><span class="glyphicon glyphicon-hand-right"></span>가게주문관리 </a> | <i></i>				
 				<a href="<%=cp%>/faq/faq.do"><span class="glyphicon glyphicon-volume-down"></span>고객센터 </a> |
 				<a href="<%=cp%>/ceomember/logout.do"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a>
 				

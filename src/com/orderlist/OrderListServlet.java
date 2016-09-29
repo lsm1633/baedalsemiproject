@@ -1,7 +1,6 @@
 package com.orderlist;
 
 import java.io.IOException;
-import java.net.URLDecoder;
 
 import java.util.Iterator;
 import java.util.List;
@@ -91,15 +90,7 @@ public class OrderListServlet extends MyServlet{
 			// 글보기
 			
 			int orderNum = Integer.parseInt(req.getParameter("num"));
-			String page = req.getParameter("page");
-			
-			String searchKey = req.getParameter("searchKey");
-			String searchValue = req.getParameter("searchValue");
-			if(searchKey==null) {
-				searchKey="subject";
-				searchValue="";
-			}
-			searchValue=URLDecoder.decode(searchValue, "utf-8");			
+			String page = req.getParameter("page");			
 		 
 			
 			// 게시물 가져오기
@@ -107,8 +98,17 @@ public class OrderListServlet extends MyServlet{
 			if(dto==null) {
 				resp.sendRedirect(cp+"/orderlist/orderlist.do?page=" + page);
 				return;
-			}		    			
-						
+			}	
+			
+			if(dto.getRegion().equals("Seoul")){
+	    		 dto.setRegion("서울");
+	    	 } else if(dto.getRegion().equals("Gyeonggi")) {
+	    		 dto.setRegion("경기");
+	    	 } else if(dto.getRegion().equals("Incheon")) {
+	    		 dto.setRegion("인천");
+	    	 }
+			
+			
 			String params = "page=" + page;			
 			
 			// 전송값 포워딩

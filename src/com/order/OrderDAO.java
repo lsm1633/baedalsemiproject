@@ -110,85 +110,92 @@ public class OrderDAO {
 	}
    
    public List<OrderDTO> listOrder(int start,int end){
-      List<OrderDTO> list = new ArrayList<>();
-      PreparedStatement pstmt=null;
-      ResultSet rs=null;
-      StringBuffer sb=new StringBuffer();
-      
-      try {
-         sb.append("SELECT * FROM (");
-         sb.append("   SELECT ROWNUM rnum, tb.* FROM (");
-         sb.append("      SELECT ordernum,o.userId,ceoId");
-         sb.append("          ,menuname,price,adrress,m.tel");
-         sb.append("          ,coment,payment");
-         sb.append("      FROM orderinfo o JOIN member2 m ON o.userId=m.userId");
-         sb.append("     ORDER BY ordernum DESC");
-         sb.append("  )tb WHERE ROWNUM <= ? ");
-         sb.append(") WHERE rnum >=? ");
-         
-         pstmt= conn.prepareStatement(sb.toString());
-         pstmt.setInt(1, end);
-         pstmt.setInt(2, start);
-         
-         rs=pstmt.executeQuery();
-         
-         while(rs.next()){
-            OrderDTO dto=new OrderDTO();
-            dto.setAdrress(rs.getString("adrress"));
-            dto.setCeoId(rs.getString("ceoId")); 
-            dto.setComent(rs.getString("coment")); 
-            dto.setMenuName(rs.getString("menuName")); 
-            dto.setOrdernum(rs.getInt("ordernum")); 
-            dto.setPayment(rs.getString("payment")); 
-            dto.setPrice(rs.getInt("price")); 
-            dto.setTel(rs.getString("tel")); 
-            dto.setUserId(rs.getString("userId")); 
-            
-            list.add(dto);
-         }
-         rs.close();
-         pstmt.close();
-      } catch (Exception e) {
-         System.out.println(e.toString());
-      }
-      
-      return list;
-   }
+	      List<OrderDTO> list = new ArrayList<>();
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      StringBuffer sb=new StringBuffer();
+	      
+	      try {
+	         sb.append("SELECT * FROM (");
+	         sb.append("   SELECT ROWNUM rnum, tb.* FROM (");
+	         sb.append("      SELECT ordernum,o.userId,ceoId");
+	         sb.append("          ,menuname,price,adrress,m.tel");
+	         sb.append("          ,coment,payment");
+	         sb.append("      FROM orderinfo o JOIN member2 m ON o.userId=m.userId");
+	         sb.append("     ORDER BY ordernum DESC");
+	         sb.append("  )tb WHERE ROWNUM <= ? ");
+	         sb.append(") WHERE rnum >=? ");
+	         
+	         pstmt= conn.prepareStatement(sb.toString());
+	         pstmt.setInt(1, end);
+	         pstmt.setInt(2, start);
+	         
+	         rs=pstmt.executeQuery();
+	         
+	         while(rs.next()){
+	            OrderDTO dto=new OrderDTO();
+	            dto.setAdrress(rs.getString("adrress"));
+	            dto.setCeoId(rs.getString("ceoId")); 
+	            dto.setComent(rs.getString("coment")); 
+	            dto.setMenuName(rs.getString("menuName")); 
+	            dto.setOrdernum(rs.getInt("ordernum")); 
+	            dto.setPayment(rs.getString("payment")); 
+	            dto.setPrice(rs.getInt("price")); 
+	            dto.setTel(rs.getString("tel")); 
+	            dto.setUserId(rs.getString("userId")); 
+	            
+	            list.add(dto);
+	         }
+	         rs.close();
+	         pstmt.close();
+	         
+	      } catch (Exception e) {
+	         System.out.println(e.toString());
+	      }
+	      
+	      return list;
+	   }
    
    public OrderDTO readOrder(int num){
-      OrderDTO dto =null;
-      PreparedStatement pstmt=null;
-      ResultSet rs=null;
-      StringBuffer sb=new StringBuffer();
-      
-      try {
-         sb.append("SELECT ordernum,o.userId,ceoId,menuname,price,adrress,coment,payment ");
-         sb.append(" FROM orderinfo o JOIN member2 m ON o.userId=m.userId WHERE ordernum=?");
-         
-         pstmt=conn.prepareStatement(sb.toString());
-         pstmt.setInt(1, num);
-         
-         rs=pstmt.executeQuery();
-         
-         if(rs.next()){
-            dto=new OrderDTO();
-            
-            dto.setAdrress(rs.getString("adrress"));
-            dto.setCeoId(rs.getString("ceoId")); 
-            dto.setComent(rs.getString("coment")); 
-            dto.setMenuName(rs.getString("menuName")); 
-            dto.setOrdernum(rs.getInt("ordernum")); 
-            dto.setPayment(rs.getString("payment")); 
-            dto.setPrice(rs.getInt("price")); 
-            dto.setTel(rs.getString("tel")); 
-            dto.setUserId(rs.getString("userId")); 
-         }
-      } catch (Exception e) {
-         System.out.println(e.toString());
-      }
-      
-      return dto;
-   }
+	      OrderDTO dto =null;
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      StringBuffer sb=new StringBuffer();
+	      
+	      try {
+	    	 sb.append("SELECT ordernum, o.userId, ceoId, menuName, price, o.tel, adrress, coment, payment,");
+	         sb.append(" TO_CHAR(created, 'YYYY-MM-DD HH24:MI:SS') created");
+	         sb.append(" FROM orderinfo o JOIN member2 m ON o.userId=m.userId WHERE ordernum=?");
+	         
+	         pstmt=conn.prepareStatement(sb.toString());
+	         pstmt.setInt(1, num);
+	         
+	         rs=pstmt.executeQuery();
+	         
+	         if(rs.next()){
+	            dto=new OrderDTO();
+	            
+	            dto.setOrdernum(rs.getInt("ordernum")); 
+	            dto.setUserId(rs.getString("userId")); 
+	            dto.setCeoId(rs.getString("ceoId")); 
+	            dto.setMenuName(rs.getString("menuName")); 
+	            dto.setPrice(rs.getInt("price")); 
+	            dto.setTel(rs.getString("tel")); 
+	            dto.setAdrress(rs.getString("adrress"));
+	            dto.setComent(rs.getString("coment")); 
+	            dto.setPayment(rs.getString("payment"));
+	            dto.setCreated(rs.getString("created"));
+	         }
+	         
+	         rs.close();
+	         pstmt.close();
+	         
+	      } catch (Exception e) {
+	         System.out.println(e.toString());
+	      }
+	      
+	      return dto;
+	   }   
    
    public List<OrderDTO> listOrder(int start, int end, String ceoId) {
 	   List<OrderDTO> list=new ArrayList<>();
@@ -320,7 +327,7 @@ public class OrderDAO {
 	      
 	      return list;
 	   }
-   
+  
    
    
    

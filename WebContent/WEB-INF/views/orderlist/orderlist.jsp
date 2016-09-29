@@ -38,8 +38,7 @@
 					
 					<div>
 						<div style="clear: both; height: 25px; line-height: 25px">
-							<div style="float: left;">${dataCount}개(${page}/${total_page} 페이지)</div>
-							<div style="float: right;">&nbsp;</div>
+							<div style="float: left;">${dataCount}개(${page}/${total_page} 페이지)</div>							
 						</div>
 						
 						<div class="table-responsive" style="clear: both;">
@@ -64,7 +63,7 @@
 							<td>
 								<a href='${articleUrl}&num=${dto.orderNum}'>${dto.menuName}</a>							
 							</td>
-							<td class="text-center">${dto.price}</td>
+							<td class="text-center">${dto.price}원</td>
 							<td class="text-center">${dto.payment}</td>							
 						</tr>
     			  </c:forEach>

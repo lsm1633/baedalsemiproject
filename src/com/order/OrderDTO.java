@@ -1,17 +1,42 @@
 package com.order;
 
+
+/* 추가된 변수(주문확인 관련)
+ 	int ordernum, listnum, created
+ 	long gap 
+ */
+
 public class OrderDTO {
-	private String userId, ceoId, menuName, adrress, coment, tel, payment,created;
-	
+	private int ordernum,listNum, price;
+	private String userId, ceoId, menuName, adrress, coment, tel, payment, created;
+	private long gap;		
+		
+	public long getGap() {
+		return gap;
+	}
+
+	public void setGap(long gap) {
+		this.gap = gap;
+	}
+
+	public int getListNum() {
+		return listNum;
+	}
+
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
+
+	public String getPayment() {
+		return payment;
+	}
 	
 	public String getCreated() {
 		return created;
 	}
+
 	public void setCreated(String created) {
 		this.created = created;
-	}
-	public String getPayment() {
-		return payment;
 	}
 	public void setPayment(String payment) {
 		this.payment = payment;
@@ -22,7 +47,6 @@ public class OrderDTO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	private int ordernum, price;
 	public String getUserId() {
 		return userId;
 	}
@@ -64,7 +88,7 @@ public class OrderDTO {
 	}
 	public void setPrice(int price) {
 		this.price = price;
-	}
-	
+	}	
 	
 }
+
