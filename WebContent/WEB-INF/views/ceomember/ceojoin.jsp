@@ -578,12 +578,12 @@ select {
 									/* 점포 주소 */
 								%>
 								<select name="storeAddr1">
-									<option value="" selected="selected">선택&nbsp;&nbsp;</option>
-									<option value="Seoul">서울</option>
-									<option value="Gyeonggi">경기</option>
-									<option value="Incheon">인천</option>
-								</select> <input type="text" name="storeAddr2" value="${storeAddr}"
-									size="60">
+                           <option value="" selected="selected">선택&nbsp;&nbsp;</option>
+                           <option value="서울">서울</option>
+                           <option value="경기">경기</option>
+                           <option value="인천">인천</option>
+                        </select> <input type="text" name="storeAddr2" value="${storeAddr}"
+                           size="60">
 							</dd>
 
 							<dd>

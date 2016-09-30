@@ -49,7 +49,7 @@ public class MenuServlet extends MyServlet{
 				userId = info.getUserId();
 			}
 			
-			int numPerPage=9;
+			int numPerPage=100;
 			int dataCount, total_page;
 			
 		

@@ -183,7 +183,7 @@
 					개인정보수정</span></a>
 		</div>
 		<div class="col-md-4 quick" style="background-color: #96CEB4">
-			<a class="info" href="<%=cp%>/ceomoney/ceomoney.do"><span
+			<a class="info" href="<%=cp%>/ceomoney/money.do"><span
 				class="glyphicon glyphicon-signal"> 정산확인</span></a>
 		</div>
 	</div>

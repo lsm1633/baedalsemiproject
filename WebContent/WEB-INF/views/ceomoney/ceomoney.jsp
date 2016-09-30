@@ -86,6 +86,14 @@
 
 </style>
 
+<script type="text/javascript">
+function dateSelect() {
+	var f = document.moneyForm;
+	
+	f.action = "<%=cp%>/ceomoney/money.do";
+	f.submit();
+}
+</script>
 </head>
 <body>
 	<div>
@@ -100,11 +108,9 @@
 			<li class="active"><a href="<%=cp%>/ceomoney/ceomoney.do">정산내역</a></li>
 		</ul>
 
-		<div class="body-title">
-			<h3 align="left">정산내역</h3>
-		</div>
-		<hr>
-	
+		<form name="moneyForm" role="form" method="post">
+	<div style="font-family: 'Jeju Hallasan', serif; font-size: 20pt;">정산
+		확인</div>
 	<div align="center" style="height: 600px">
 		<table class="dayselect">
 			<tr>
@@ -112,7 +118,7 @@
 						부터 <input type="date" name="last"> 까지
 				</label> <br>
 				<br>
-					<button type="button" class="btn btn-default">기간 검색</button>
+					<button type="button" class="btn btn-default" onclick="dateSelect();">기간 검색</button>
 				</td>
 
 			</tr>
@@ -127,43 +133,62 @@
 				<td>일자</td>
 				<td>카드 매출</td>
 				<td>현금 매출</td>
-				<td>일일 총 매출</td>
+	
 			</tr>
-			<%--  기간 선택시 해당되는 기간 매출액을 반복문으로 출력 
-<c:forEach var="#" items="${#}>  
-  <tr class="row2">
-    <td>${날짜}</td>
-    <td>${카드매출}</td>
-    <td>${현금매출}</td>
-    <td>${하루 총 매출}</td>
-  </tr>
-</c:forEach>
- --%>
-
-			<tr class="row2">
-				<td></td>
-				<td>2016-09-13</td>
-				<td>38,000</td>
-				<td>99,000</td>
-				<td>137,000</td>
-
-			</tr>
-
-
-
+			
+		
+			
+			
+		
+		<c:set var="daytotal" value="0"/>	
+		<c:set var="cardtotal" value="0"/>	
+		<c:set var="cashtotal" value="0"/>		
+		<c:forEach var="dto" items="${list}">  
+		  <tr class="row2" >
+		  <td></td>
+		    <td style="padding: 10px 10px">${dto.created}</td>
+		   <c:if test="${dto.payment!='card'}">
+		    <td style="padding: 10px 10px">-</td>
+		   </c:if>
+		   <c:if test="${dto.payment=='card'}">
+		    <td style="padding: 10px 10px">${dto.price}원</td>
+		     <c:set var="cardtotal" value="${cardtotal+(dto.price)}"/>  
+		   </c:if>
+		   <c:if test="${dto.payment!='cash'}">
+		    <td style="padding: 10px 10px">-</td>
+		   </c:if>
+		   <c:if test="${dto.payment=='cash'}">
+		    <td style="padding: 10px 10px">${dto.price}원</td>
+		    <c:set var="cashtotal" value="${cashtotal+(dto.price)}"/>  
+		     </c:if>
+		   <c:set var="daytotal" value="${daytotal+(dto.price)}"/>  
+	
+		   </tr>
+		</c:forEach>		  
 		</table>
+		
 
 		<div style="font-size: 200px"></div>
-
+		
 		<table>
+		   <tr class="row3">
+				<td>카드 총 매출</td>
+				<td>${cardtotal}원</td>
+			</tr>
+			<tr class="row3">
+				<td>현금 총 매출</td>
+				<td>${cashtotal}원</td>
+			</tr>
 			<tr class="row3">
 				<td>총 매출</td>
-				<td>137,000</td>
+				<td>${daytotal}원</td>
 			</tr>
 		</table>
 
-
-	</div>	</div>	</div>
+	</div>
+</form>
+</div>
+</div>
 
 	<div style="clear: both;">
 		<jsp:include page="/WEB-INF/views/ceolayout/ceoBottom.jsp" />

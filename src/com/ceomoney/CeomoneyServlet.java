@@ -33,42 +33,42 @@ public class CeomoneyServlet extends MyServlet{
 		MyUtil util=new MyUtil();	
 		
 		Date dd=new Date();
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:MM:SS"); 
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
 		String today=sdf.format(dd);
 		
 		HttpSession session = req.getSession();
 		SessionInfo info= (SessionInfo)session.getAttribute("ceomember");
 		
 		if(uri.indexOf("money.do")!=-1){			
-		       
+	        SessionInfo info2= (SessionInfo)session.getAttribute("ceomember");
 	        if (info == null) {
 	        	req.setAttribute("mode", "login");
 				forward(req, resp, "/WEB-INF/views/ceomember/ceologin.jsp");
 				return;
 			}
-	        String ceoId=info.getCeoId();	        	        
+	        String ceoId=info2.getCeoId();	        	        
 	        String start=req.getParameter("start");
 	        String last=req.getParameter("last");
-   
+	
 	        
 	        if(start==null){
 	        	start=today;
 	        }
 	        if(last==null){
 	        	last=today;
-	        }               
+	        }
 	        
 	        
+	        
+	        dao = new OrderDAO();
 	        List<OrderDTO> list=null;
-	        if(start.equals(today) && last.equals(today))
-	            list = dao.listOrder(ceoId,today);
-	        else
-	        	list = dao.listOrder(ceoId,start,last);	        
+	       
+	        list = dao.listOrder(ceoId,start,last);
 	        
-	        
-	        req.setAttribute("list", list);	         
+	         
+	         req.setAttribute("list", list);
+	         
 	    	forward(req, resp, "/WEB-INF/views/ceomoney/ceomoney.jsp");
-	    	
 	    } else if (uri.indexOf("orderConfirm.do")!=-1) {	    	
 	    	// 주문 리스트
 	    	String page=req.getParameter("page");
@@ -124,8 +124,7 @@ public class CeomoneyServlet extends MyServlet{
 	    			dto.setGap(gap);
 	    		} catch(Exception e) {
 
-	    		}	            
-	    		dto.setCreated(dto.getCreated().substring(0, 10));
+	    		}  
 	    		n++;
 	    	}
 

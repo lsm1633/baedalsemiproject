@@ -49,7 +49,7 @@ public class StoreServlet extends MyServlet{
 			if(req.getMethod().equalsIgnoreCase("GET")) {
 				searchValue=URLDecoder.decode(searchValue, "utf-8");
 			}
-			int numPerPage=9;
+			int numPerPage=100;
 			int dataCount, total_page;
 			
 			if(searchValue.length()!=0) {

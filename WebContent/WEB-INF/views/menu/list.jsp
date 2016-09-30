@@ -130,7 +130,7 @@ function sendOrder() {
 					</h4>
 				</div>
 				<div id="collapseOne" class="panel-collapse collapse in"
-					role="tabpanel" aria-labelledby="headingOne">
+					role="tabpanel" aria-labelledby="headingOne" >
 					<div class="panel-body" align="center">
 					<c:forEach var="dto" items="${list}">
 						<c:if test="${dto.cate == 'set'}">
@@ -220,14 +220,14 @@ function sendOrder() {
 						<c:forEach var="dto" items="${list}">
 						<c:if test="${dto.cate == 'side'}">
 							<div class="row1">
-								<div class="scol-sm-5 col-md-6">
+								<div class="col-sm-5 col-md-6">
 									<div class="thumbnail" style="border-color: white;">
-										<a onclick="basketadd('${dto.ceoId}', '${dto.price}', '${dto.name}')" class="btn btn-default" role="button" style="width: 350px; height: 160px"> <img
+										<a onclick="basketadd('${dto.ceoId}', '${dto.price}', '${dto.name}')" class="btn btn-default" role="button" style="width: 350px; height: 160px" > <img
 											src="<%=cp%>/uploads/${dto.ceoId}/menu/${dto.imageFilename}"
 											style="float: left" width="150px" height="130px"> <b
-											style="font-size: 15pt">${dto.name}</b> <br><br>
-											<b style="font-size: 10pt">${dto.price}원</b> <br><br><br>
-											<label style="font-size: 10pt; width: 200px;">${dto.content}</label> 
+											style="font-size: 15pt;">${dto.name}</b> <br><br> <b
+											style="font-size: 10pt;">${dto.price}원 </b><br><br><br>
+											<label style="font-size: 10pt; width: 200px;">${dto.content}</label>
 											<input name="ceoId" type="hidden" value="${dto.ceoId}">
 											<input name="price" type="hidden" value="${dto.price}">
 											<input name="menuName" type="hidden" value="${dto.name}">
@@ -237,7 +237,6 @@ function sendOrder() {
 							</div>
 						</c:if>
 						</c:forEach>
-					
 					</div>
 				</div>
 			</div>

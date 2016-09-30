@@ -246,44 +246,7 @@ public class OrderDAO {
 	   return list;
    }
    
-   public List<OrderDTO> listOrder(String ceoId,String today){
-	      List<OrderDTO> list = new ArrayList<>();
-	      PreparedStatement pstmt=null;
-	      ResultSet rs=null;
-	      StringBuffer sb=new StringBuffer();
-	      
-	      try {
-	         sb.append("SELECT ROWNUM rnum, tb.* FROM (");
-	         sb.append("   SELECT ordernum,ceoId,payment,price,created");
-	         sb.append("      FROM orderinfo ORDER BY ordernum DESC");
-	         sb.append(")tb where ceoid=? and  to_char(created,'yyyy-mm-dd')=?");
-	         
-	         
-	         pstmt= conn.prepareStatement(sb.toString());
-	
-	         pstmt.setString(1, ceoId);
-	         pstmt.setString(2, today);
-	         
-	         rs=pstmt.executeQuery();
-	         
-	         while(rs.next()){
-	            OrderDTO dto=new OrderDTO();
-	            dto.setCeoId(rs.getString("ceoId")); 
-	            dto.setOrdernum(rs.getInt("ordernum")); 
-	            dto.setPayment(rs.getString("payment")); 
-	            dto.setPrice(rs.getInt("price")); 
-	            dto.setCreated(rs.getString("created"));
-	            
-	            list.add(dto);
-	         }
-	         rs.close();
-	         pstmt.close();
-	      } catch (Exception e) {
-	         System.out.println(e.toString());
-	      }
-	      
-	      return list;
-	   }
+   
    
    
    public List<OrderDTO> listOrder(String ceoId,String start,String last){
